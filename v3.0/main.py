@@ -11,7 +11,7 @@ pidfile = "/tmp/mydaemon.pid"
 logfile = open(pidfile, "w").write(pid)
 
 # Send startup text
-# send_text('Script booted sir.\n\n-M.O.R.G.')
+send_text('Script booted sir.\n\n-M.O.R.G.')
 
 
 # Initiate last_motion time
