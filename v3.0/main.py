@@ -54,7 +54,7 @@ while True:
               + str(motion) + ",  switchstatus: " + str(switch) + ",  secondsaway: " + str(seconds_away) +
               ",  lastmotion: " + str(last_motion_date) + " | " + str(last_motion_time))
         
-        logfile = open("/home/pi/Documents/MORG/logs/MORG.log","a+") 
+        logfile = open("/home/pi/M.O.R.G./logs/MORG.log","a+") 
         logfile.write(str(now_date) +
               " | " +
               str(now_time) +
@@ -64,12 +64,12 @@ while True:
         logfile.write("\n")
         logfile.close()
         
-        a_file = open("/home/pi/Documents/MORG/logs/MORG.log", "r")
+        a_file = open("/home/pi/M.O.R.G./logs/MORG.log", "r")
         lines = a_file.readlines()
         a_file.close()
         del lines[6] 
         
-        new_file = open("/home/pi/Documents/MORG/logs/MORG.log", "w+")
+        new_file = open("/home/pi/M.O.R.G./logs/MORG.log", "w+")
         for line in lines:
             new_file.write(line)
         new_file.close()
@@ -104,7 +104,7 @@ while True:
                 last_motion = dt.datetime.now()
                 
                 linecount = 0
-                fname = "/home/pi/Documents/MORG/logs/MORG.log"
+                fname = "/home/pi/M.O.R.G./logs/MORG.log"
                 with open(fname, 'r') as f:
                     for line in f:
                         linecount += 1
@@ -113,7 +113,7 @@ while True:
                 linetoread2 = linecount - 201
                 linetoread3 = linecount - 202
                 
-                a_file = open("/home/pi/Documents/MORG/logs/MORG.log")
+                a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
                 lines_to_read = [linetoread1,
                                  linetoread2,
                                  linetoread3]
@@ -330,7 +330,7 @@ while True:
     except:
         e = sys.exc_info()
         send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/Documents/MORG/logs/MORG.log","a+") 
+        logfile = open("/home/pi/M.O.R.G./logs/MORG.log","a+") 
         logfile.write(str(e))
         logfile.write("\n")
         logfile.close()

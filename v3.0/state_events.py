@@ -21,7 +21,7 @@ def get_motion_state():
         e = sys.exc_info()
         send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
 
-        logfile = open("/home/pi/Documents/Other files/MORG.log","a+") 
+        logfile = open("/home/pi/M.O.R.G./logs/MORG.log","a+") 
         logfile.write("\n")
         logfile.write("\n")
         logfile.write("\n")
@@ -52,7 +52,7 @@ def get_switch_state():
         e = sys.exc_info()
         send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
                  
-        logfile = open("/home/pi/Documents/Other files/MORG.log","a+") 
+        logfile = open("/home/pi/M.O.R.G./logs/MORG.log","a+") 
         logfile.write("\n")
         logfile.write("\n")
         logfile.write("\n")
@@ -67,7 +67,7 @@ def get_switch_state():
     
 def grab_last_motion_line():
     lcount = 0
-    fname = "/home/pi/Documents/MORG/logs/MORG.log"
+    fname = "/home/pi/M.O.R.G./logs/MORG.log"
     with open(fname, 'r') as f:
         for line in f:
             lcount += 1
