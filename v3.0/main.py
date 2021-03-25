@@ -1,6 +1,6 @@
 import os
 import random
-
+import time
 from constants_sound import *
 from constants_time import *
 from state_events import *
