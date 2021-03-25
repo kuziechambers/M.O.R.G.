@@ -8,7 +8,7 @@ client = Client(account_sid, auth_token)
 
 def send_text(body):
     try:
-        message = client.messages \
+        client.messages \
             .create(
                  messaging_service_sid='MG604a957ab382c1215ad46d9444c5101c',
                  body=str(body),
