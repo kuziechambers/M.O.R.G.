@@ -1,8 +1,5 @@
 import json
 import requests
-import sys
-import time
-import datetime as dt
 from datetime import time as ti
 
 # away times

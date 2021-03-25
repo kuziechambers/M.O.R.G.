@@ -2,9 +2,7 @@ import json
 import requests
 import sys
 import re
-import time
 import datetime as dt
-from datetime import time as ti
 from text_service import send_text
 
 
@@ -69,7 +67,7 @@ def grab_last_motion_line():
     lcount = 0
     fname = "/home/pi/M.O.R.G./logs/MORG.log"
     with open(fname, 'r') as f:
-        for line in f:
+        for _ in f:
             lcount += 1
 
     l_file = open(fname, "r")
