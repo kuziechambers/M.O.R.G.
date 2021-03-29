@@ -4,6 +4,7 @@ import time
 from constants_sound import *
 from constants_time import *
 from state_events import *
+from smartthings import *
 
 # Grab and write pid to .pid file
 pid = str(os.getpid())
@@ -112,6 +113,8 @@ while True:
 
                 if ready is True:  # Time to trigger greeting
 
+                    turnon_outlet()
+
                     if morning_start <= now_time <= morning_end:  # MORNING
 
                         send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
@@ -122,6 +125,7 @@ while True:
                         play_sound(s_brightlightseq)
                         bright_lights_on()
                         play_sound(s_sequencecomplete)
+                        turnoff_outlet()
 
 
                     elif afternoon_start <= now_time <= afternoon_end:  # AFTERNOON
@@ -135,6 +139,7 @@ while True:
                             play_sound(s_brightlightseq)
                             bright_lights_on()
                             play_sound(s_sequencecomplete)
+                            turnoff_outlet()
 
                         elif seconds_away > 3600:  # longer than 60min
                             afternoon_text_phrases = ["Good afternoon sir.",
@@ -159,6 +164,7 @@ while True:
                                 bright_lights_on()
                                 play_sound(s_sequencecomplete)
                                 play_sound(path)
+                                turnoff_outlet()
 
                             else:
                                 if seconds_away < 9000:  # between 60min - 150min
@@ -177,6 +183,7 @@ while True:
                                     play_sound(s_brightlightseq)
                                     bright_lights_on()
                                     play_sound(s_sequencecomplete)
+                                    turnoff_outlet()
 
                                 if seconds_away > 9000:  # longer than 150min
 
@@ -195,6 +202,7 @@ while True:
                                     bright_lights_on()
                                     play_sound(s_sequencecomplete)
                                     play_sound(path)
+                                    turnoff_outlet()
 
                     elif evening_start <= now_time <= evening_end:  # EVENING
 
@@ -222,6 +230,7 @@ while True:
                                 bright_lights_on()
                                 play_sound(s_sequencecomplete)
                                 play_sound(path)
+                                turnoff_outlet()
 
                             else:
 
@@ -231,6 +240,7 @@ while True:
                                 bright_lights_on()
                                 play_sound(s_sequencecomplete)
                                 play_sound(s_goodevening)
+                                turnoff_outlet()
 
                         if 3600 < seconds_away < 9000:  # between 60min - 150min
 
@@ -249,6 +259,7 @@ while True:
                             bright_lights_on()
                             play_sound(s_sequencecomplete)
                             play_sound(path)
+                            turnoff_outlet()
 
                         if seconds_away > 9000:  # longer than 150min
                             if 4 <= weekday <= 5:  # between friday - saturday
@@ -268,6 +279,7 @@ while True:
                                 bright_lights_on()
                                 play_sound(s_sequencecomplete)
                                 play_sound(path)
+                                turnoff_outlet()
 
                             if 0 <= weekday <= 3 or weekday == 6:  # between sunday - thursday
 
@@ -288,6 +300,7 @@ while True:
                                 bright_lights_on()
                                 play_sound(s_sequencecomplete)
                                 play_sound(path)
+                                turnoff_outlet()
 
                     elif latenight_start <= now_time <= latenight_end:  # LATE NIGHT
 
@@ -306,6 +319,7 @@ while True:
                             play_sound(s_dimmedlightseq)
                             dim_lights_on()
                             play_sound(s_sequencecomplete)
+                            turnoff_outlet()
 
                     time.sleep(420.0)
 
