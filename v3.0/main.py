@@ -1,4 +1,3 @@
-import os
 import random
 import time
 from constants_sound import *
@@ -13,10 +12,11 @@ logfile = open(pidfile, "w").write(pid)
 
 # Send startup text
 send_text('Script booted sir.\n\n-M.O.R.G.')
+print("Script booted sir.")
 
-
-# Initiate last_motion time
+# Initiate last_motion times
 last_motion = grab_last_motion_line()
+since_office_motion_init()
 
 
 while True:
@@ -34,13 +34,6 @@ while True:
         weekday = dt.datetime.now().weekday()
 
         # Log constantly
-        print(str(now_date) +
-              " | " +
-              str(now_time) +
-              " ----- motionstatus: "
-              + str(motion) + ",  switchstatus: " + str(switch) + ",  secondsaway: " + str(seconds_away) +
-              ",  lastmotion: " + str(last_motion_date) + " | " + str(last_motion_time))
-
         logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
         logfile.write(str(now_date) +
                       " | " +
@@ -64,8 +57,9 @@ while True:
         # Inside
         if switch == "inside":
             if motion is False:  # Inside - False
+                if morning_start_away <= now_time <= morning_end_away:
+                    since_office_motion_update()
                 time.sleep(2.0)
-
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()
                 time.sleep(30.0)
@@ -122,10 +116,10 @@ while True:
 
                         time.sleep(1.0)
                         play_sound(s_wake2)
-                        play_sound(s_goodmorning)
                         play_sound(s_brightlightseq)
                         bright_lights_on()
                         play_sound(s_sequencecomplete)
+                        play_sound(s_goodmorning)
                         turnoff_outlet()
 
 

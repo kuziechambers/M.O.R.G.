@@ -3,7 +3,7 @@ import requests
 from datetime import time as ti
 
 # away times
-morning_start_away = ti(7, 30, 00, 000000)
+morning_start_away = ti(7, 00, 00, 000000)
 morning_end_away = ti(10, 59, 59, 000000)
 
 afternoon_start_away = ti(11, 00, 00, 000000)
