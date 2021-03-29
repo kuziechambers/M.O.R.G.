@@ -1,7 +1,15 @@
+from text_service import send_text
+from state_events import since_office_motion_init
+from state_events import since_office_motion_update
+from constants_time import *
 from constants_sound import *
+import time
 
-play_sound(s_wake2)
-play_sound(s_goodevening)
-play_sound(s_brightlightseq)
-bright_lights_on()
-play_sound(s_sequencecomplete)
+since_office_motion_init()
+
+while True:
+    since_office_motion_update()
+
+
+
+

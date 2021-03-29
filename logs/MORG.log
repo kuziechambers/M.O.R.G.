@@ -10011,3 +10011,234 @@ MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG 
 (<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0xb5d8b760>)
 2021-03-29 | 12:27:12.527710 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 14493.940465,  lastmotion: 2021-03-29 | 08:25:38.587245
 (<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0xb5678f80>)
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9174b88>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f0a08>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f7a48>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95fdb48>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9604908>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95fd048>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f2548>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f0388>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba96048c8>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9609588>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9611208>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba960d108>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95e6788>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba91b0d48>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f7f48>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95ef848>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95fda08>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95fff48>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f7a08>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f2448>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f0e88>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95efd08>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9617e88>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9609948>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba96114c8>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba96096c8>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95ef888>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f27c8>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9611648>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba95f79c8>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9618648>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba9617e88>)
+
+
+
+
+
+
+(<class 'TypeError'>, TypeError("'>' not supported between instances of 'builtin_function_or_method' and 'int'"), <traceback object at 0x7f8ba96170c8>)
+
+
