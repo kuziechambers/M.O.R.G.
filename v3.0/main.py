@@ -18,6 +18,7 @@ send_text('Script booted sir.\n\n-M.O.R.G.')
 # Initiate last_motion time
 last_motion = grab_last_motion_line()
 
+
 while True:
     try:
         # Get sensor states
