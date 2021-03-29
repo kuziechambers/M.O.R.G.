@@ -4,16 +4,6 @@ MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG 
 MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG
 
 
-2021-03-29 | 10:55:32.532350 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 8993.945105,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:34.673413 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 8996.086168,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:36.828723 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 8998.241478,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:38.961816 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9000.374571,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:41.102339 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9002.515094,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:43.245465 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9004.65822,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:45.360483 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9006.773238,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:47.498365 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9008.91112,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:49.631268 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9011.044023,  lastmotion: 2021-03-29 | 08:25:38.587245
-2021-03-29 | 10:55:51.760275 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9013.17303,  lastmotion: 2021-03-29 | 08:25:38.587245
 2021-03-29 | 10:55:53.889921 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9015.302676,  lastmotion: 2021-03-29 | 08:25:38.587245
 2021-03-29 | 10:55:56.025484 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9017.438239,  lastmotion: 2021-03-29 | 08:25:38.587245
 2021-03-29 | 10:55:58.168100 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 9019.580855,  lastmotion: 2021-03-29 | 08:25:38.587245
@@ -10011,3 +10001,13 @@ MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG MORG 
 2021-03-29 | 17:07:51.103393 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31332.516148,  lastmotion: 2021-03-29 | 08:25:38.587245
 2021-03-29 | 17:07:53.243540 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31334.656295,  lastmotion: 2021-03-29 | 08:25:38.587245
 2021-03-29 | 17:07:55.373679 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31336.786434,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:07:57.492830 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31338.905585,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:07:59.584784 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31340.997539,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:01.711541 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31343.124296,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:03.922595 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31345.33535,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:06.074150 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31347.486905,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:08.211084 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31349.623839,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:10.339391 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31351.752146,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:12.449440 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31353.862195,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:14.580318 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31355.993073,  lastmotion: 2021-03-29 | 08:25:38.587245
+2021-03-29 | 17:08:16.705779 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 31358.118534,  lastmotion: 2021-03-29 | 08:25:38.587245
