@@ -116,10 +116,10 @@ while True:
 
                         time.sleep(1.0)
                         play_sound(s_wake2)
-                        play_sound(s_goodmorning)
                         play_sound(s_brightlightseq)
                         bright_lights_on()
                         play_sound(s_sequencecomplete)
+                        play_sound(s_goodmorning)
                         turnoff_outlet()
 
 

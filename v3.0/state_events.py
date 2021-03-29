@@ -5,8 +5,7 @@ import re
 import datetime as dt
 from text_service import send_text
 from smartthings import *
-from constants_sound import s_onlygoodmorning
-from constants_sound import play_sound
+from constants_sound import *
 
 
 PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
@@ -140,13 +139,17 @@ def since_office_motion_update():
         if str(last_motion_update) != line:
             line = dt.datetime.strptime(line, '%Y-%m-%d %H:%M:%S')
             seconds_away = (last_motion_update - line).total_seconds()
-            if seconds_away > 600:
+            if seconds_away > 60:
                 log = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
                 log.write("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
                 log.write("\n")
                 log.close()
 
                 turnon_outlet()
+                play_sound(s_wake2)
+                play_sound(s_brightlightseq)
+                bright_lights_on()
+                play_sound(s_sequencecomplete)
                 play_sound(s_onlygoodmorning)
                 turnoff_outlet()
 
