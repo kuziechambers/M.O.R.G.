@@ -1,5 +1,3 @@
-import json
-import requests
 import sys
 import re
 import datetime as dt
@@ -7,6 +5,7 @@ from text_service import send_text
 from smartthings import *
 from constants_sound import *
 from constants_time import *
+from logger import morg_log
 
 
 PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
@@ -20,12 +19,10 @@ def get_motion_state():
         response = requests.get(PIR_URL)
         json_data = json.loads(response.text)
         return json_data['state']['presence'] is True
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         return False
 
 
@@ -43,12 +40,10 @@ def get_switch_state():
             return "outside"
         if 4000 <= state <= 4010:
             return "outside"
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         return "outside"
 
 
@@ -58,12 +53,10 @@ def get_office_motion_state():
         response = requests.get(OFFICE_PIR_URL)
         json_data = json.loads(response.text)
         return json_data['state']['presence']
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         return False
 
 
@@ -81,12 +74,10 @@ def since_office_motion_init():
         file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
         file.write(str(last_motion_update))
         file.close()
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         os.remove("/tmp/mydaemon.pid")
         exit()
 
@@ -126,12 +117,10 @@ def since_office_motion_update():
                 file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
                 file.write(str(last_motion_update))
                 file.close()
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         os.remove("/tmp/mydaemon.pid")
         exit()
 
@@ -157,12 +146,10 @@ def grab_last_motion_line():
         last_chars = re.sub('\| ', '', last_chars)
         last_motion = dt.datetime.strptime(last_chars, '%Y-%m-%d %H:%M:%S.%f')
         return last_motion
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         os.remove("/tmp/mydaemon.pid")
         exit()
 

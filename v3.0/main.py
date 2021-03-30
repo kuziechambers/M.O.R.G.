@@ -1,9 +1,21 @@
+import datetime as dt
+import os
 import random
+import sys
 import time
+
+from state_events import (
+    get_motion_state,
+    get_switch_state,
+    since_office_motion_init,
+    since_office_motion_update,
+    grab_last_motion_line
+    )
+from smartthings import turnon_outlet, turnoff_outlet
 from constants_sound import *
 from constants_time import *
-from state_events import *
-from smartthings import *
+from text_service import send_text
+
 
 # Grab and write pid to .pid file
 pid = str(os.getpid())
@@ -13,6 +25,9 @@ logfile = open(pidfile, "w").write(pid)
 # Send startup text
 send_text('Script booted sir.\n\n-M.O.R.G.')
 print("Script booted sir.")
+
+# Import morg_log logger
+from logger import morg_log
 
 # Initiate last_motion times
 last_motion = grab_last_motion_line()
@@ -34,25 +49,12 @@ while True:
         weekday = dt.datetime.now().weekday()
 
         # Log constantly
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(now_date) +
+        morg_log.info(str(now_date) +
                       " | " +
                       str(now_time) +
                       " ----- motionstatus: "
                       + str(motion) + ",  switchstatus: " + str(switch) + ",  secondsaway: " + str(seconds_away) +
                       ",  lastmotion: " + str(last_motion_date) + " | " + str(last_motion_time))
-        logfile.write("\n")
-        logfile.close()
-
-        a_file = open("/home/pi/M.O.R.G./logs/MORG.log", "r")
-        lines = a_file.readlines()
-        a_file.close()
-        del lines[6]
-
-        new_file = open("/home/pi/M.O.R.G./logs/MORG.log", "w+")
-        for line in lines:
-            new_file.write(line)
-        new_file.close()
 
         # Inside
         if switch == "inside":
@@ -318,10 +320,8 @@ while True:
                     time.sleep(420.0)
 
 
-    except Exception as ex:
+    except:
+        ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(ex))
-        logfile.write("\n")
-        logfile.close()
+        morg_log.error(str(ex))
         os.remove("/tmp/mydaemon.pid")
