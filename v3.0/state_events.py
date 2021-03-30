@@ -140,7 +140,7 @@ def since_office_motion_update():
         if str(last_motion_update) != line:
             line = dt.datetime.strptime(line, '%Y-%m-%d %H:%M:%S')
             seconds_away = (last_motion_update - line).total_seconds()
-            if seconds_away > 5400 and morning_start_away <= last_motion_update <= morning_end_away:
+            if seconds_away > 5400 and morning_start_away <= last_motion_update.time() <= morning_end_away:
                 log = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
                 log.write("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
                 log.write("\n")
