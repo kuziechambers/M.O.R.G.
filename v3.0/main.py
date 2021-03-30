@@ -57,8 +57,7 @@ while True:
         # Inside
         if switch == "inside":
             if motion is False:  # Inside - False
-                if morning_start_away <= now_time <= morning_end_away:
-                    since_office_motion_update()
+                since_office_motion_update()
                 time.sleep(2.0)
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()
