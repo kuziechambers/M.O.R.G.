@@ -318,11 +318,10 @@ while True:
                     time.sleep(420.0)
 
 
-    except:
-        e = sys.exc_info()
-        send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+    except Exception as ex:
+        send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         logfile = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-        logfile.write(str(e))
+        logfile.write(str(ex))
         logfile.write("\n")
         logfile.close()
         os.remove("/tmp/mydaemon.pid")
