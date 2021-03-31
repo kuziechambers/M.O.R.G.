@@ -46,6 +46,7 @@ while True:
         last_motion_date = last_motion.date()
         last_motion_time = last_motion.time()
         seconds_away = (now - last_motion).total_seconds()
+        #seconds_away = 10000
         weekday = dt.datetime.now().weekday()
 
         # Log constantly
