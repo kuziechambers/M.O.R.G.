@@ -166,10 +166,11 @@ while True:
 
                                     afternoon_phrases = ["s_goodafternoon",
                                                          "s_welcomemrchambers1",
-                                                         "s_productiveday2"]
+                                                         "s_productiveday2",
+                                                         "s_freebird"]
 
                                     rint = 0
-                                    rint = random.randint(0, 2)
+                                    rint = random.randint(0, 3)
                                     path = afternoon_phrases[rint]
 
                                     play_sound(sounds['s_wake2'])
@@ -184,10 +185,11 @@ while True:
                                     afternoon_phrases = ["s_sevensummers",
                                                          "s_withoutyou",
                                                          "s_allyourn",
-                                                         "s_watermelonsugar"]
+                                                         "s_watermelonsugar",
+                                                         "s_freebird"]
 
                                     rint = 0
-                                    rint = random.randint(0, 3)
+                                    rint = random.randint(0, 4)
                                     path = afternoon_phrases[rint]
 
                                     play_sound(sounds['s_wake2'])
@@ -277,10 +279,11 @@ while True:
                                                    "s_wayout",
                                                    "s_watermelonsugar",
                                                    "s_sevensummers",
-                                                   "s_up"]
+                                                   "s_up",
+                                                   "s_freebird"]
 
                                 rint = 0
-                                rint = random.randint(0, 5)
+                                rint = random.randint(0, 6)
                                 path = evening_phrases[rint]
 
                                 play_sound(sounds['s_wake2'])
