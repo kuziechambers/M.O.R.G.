@@ -16,7 +16,7 @@ sounds = {
     's_echobackinblack': "/home/pi/M.O.R.G./sounds_wav/echobackinblack.wav",
     's_echoCFB': "/home/pi/M.O.R.G./sounds_wav/echoCFB.wav",
     's_echohighwaytohell': "/home/pi/M.O.R.G./sounds_wav/echohighwaytohell.wav",
-    's_freebird': "/home/pi/M.O.R.G./sounds_wav/freebird.wav",
+    's_freebird': "/home/pi/M.O.R.G./sounds_wav/freebird2.wav",
     's_goodafternoon': "/home/pi/M.O.R.G./sounds_wav/goodafternoon.wav",
     's_goodevening': "/home/pi/M.O.R.G./sounds_wav/goodevening.wav",
     's_goodmorning': "/home/pi/M.O.R.G./sounds_wav/goodmorning.wav",
