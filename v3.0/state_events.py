@@ -107,11 +107,11 @@ def since_office_motion_update():
                 log.close()
 
                 turnon_outlet()
-                play_sound(s_wake2)
-                play_sound(s_brightlightseq)
+                play_sound(sounds['s_wake2'])
+                play_sound(sounds['s_brightlightseq'])
                 bright_lights_on()
-                play_sound(s_sequencecomplete)
-                play_sound(s_onlygoodmorning)
+                play_sound(sounds['s_sequencecomplete'])
+                play_sound(sounds['s_onlygoodmorning'])
                 turnoff_outlet()
 
                 file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
