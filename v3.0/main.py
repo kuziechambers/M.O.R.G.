@@ -12,7 +12,7 @@ from state_events import (
     grab_last_motion_line
     )
 from smartthings import turnon_outlet, turnoff_outlet
-from constants_sound import *
+from constants_sound import sounds, play_sound, bright_lights_on, dim_lights_on
 from constants_time import *
 from text_service import send_text
 
@@ -68,7 +68,7 @@ while True:
         # Outside
         if switch == "outside":
             if motion is False:  # Outside - False
-                play_sound(s_ping)
+                play_sound(sounds['s_ping'])
 
                 if 36000 < seconds_away < 36007 and morning_start_away <= now_time <= morning_end_away:
                     send_text('Good morning sir.\nI slept quite well last night without your being here.\n\n-M.O.R.G.')
@@ -116,11 +116,11 @@ while True:
                         send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
 
                         time.sleep(1.0)
-                        play_sound(s_wake2)
-                        play_sound(s_brightlightseq)
+                        play_sound(sounds['s_wake2'])
+                        play_sound(sounds['s_brightlightseq'])
                         bright_lights_on()
-                        play_sound(s_sequencecomplete)
-                        play_sound(s_goodmorning)
+                        play_sound(sounds['s_sequencecomplete'])
+                        play_sound(sounds['s_goodmorning'])
                         turnoff_outlet()
 
 
@@ -130,11 +130,11 @@ while True:
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
-                            play_sound(s_wake2)
-                            play_sound(s_goodafternoon)
-                            play_sound(s_brightlightseq)
+                            play_sound(sounds['s_wake2'])
+                            play_sound(sounds['s_goodafternoon'])
+                            play_sound(sounds['s_brightlightseq'])
                             bright_lights_on()
-                            play_sound(s_sequencecomplete)
+                            play_sound(sounds['s_sequencecomplete'])
                             turnoff_outlet()
 
                         elif seconds_away > 3600:  # longer than 60min
@@ -147,57 +147,57 @@ while True:
 
                             if weekday == 5 and seconds_away > 6000:  # is it saturday?
 
-                                saturday_phrases = [s_saturdaybackinblack,
-                                                    s_saturdayhighwaytohell]
+                                saturday_phrases = ["s_saturdaybackinblack",
+                                                    "s_saturdayhighwaytohell"]
 
                                 rint = 0
                                 rint = random.randint(0, 1)
                                 path = saturday_phrases[rint]
 
                                 time.sleep(1.0)
-                                play_sound(s_wake2)
-                                play_sound(s_brightlightseq)
+                                play_sound(sounds['s_wake2'])
+                                play_sound(sounds['s_brightlightseq'])
                                 bright_lights_on()
-                                play_sound(s_sequencecomplete)
-                                play_sound(path)
+                                play_sound(sounds['s_sequencecomplete'])
+                                play_sound(sounds[path])
                                 turnoff_outlet()
 
                             else:
                                 if seconds_away < 9000:  # between 60min - 150min
 
-                                    afternoon_phrases = [s_goodafternoon,
-                                                         s_welcomemrchambers1,
-                                                         s_productiveday2]
+                                    afternoon_phrases = ["s_goodafternoon",
+                                                         "s_welcomemrchambers1",
+                                                         "s_productiveday2"]
 
                                     rint = 0
                                     rint = random.randint(0, 2)
                                     path = afternoon_phrases[rint]
 
                                     time.sleep(1.0)
-                                    play_sound(s_wake2)
-                                    play_sound(path)
-                                    play_sound(s_brightlightseq)
+                                    play_sound(sounds['s_wake2'])
+                                    play_sound(sounds[path])
+                                    play_sound(sounds['s_brightlightseq'])
                                     bright_lights_on()
-                                    play_sound(s_sequencecomplete)
+                                    play_sound(sounds['s_sequencecomplete'])
                                     turnoff_outlet()
 
                                 if seconds_away > 9000:  # longer than 150min
 
-                                    afternoon_phrases = [s_sevensummers,
-                                                         s_withoutyou,
-                                                         s_allyourn,
-                                                         s_watermelonsugar]
+                                    afternoon_phrases = ["s_sevensummers",
+                                                         "s_withoutyou",
+                                                         "s_allyourn",
+                                                         "s_watermelonsugar"]
 
                                     rint = 0
                                     rint = random.randint(0, 3)
                                     path = afternoon_phrases[rint]
 
                                     time.sleep(1.0)
-                                    play_sound(s_wake2)
-                                    play_sound(s_brightlightseq)
+                                    play_sound(sounds['s_wake2'])
+                                    play_sound(sounds['s_brightlightseq'])
                                     bright_lights_on()
-                                    play_sound(s_sequencecomplete)
-                                    play_sound(path)
+                                    play_sound(sounds['s_sequencecomplete'])
+                                    play_sound(sounds[path])
                                     turnoff_outlet()
 
                     elif evening_start <= now_time <= evening_end:  # EVENING
@@ -212,90 +212,90 @@ while True:
                         if 1500 < seconds_away < 3600:  # between 25min - 60min
                             if 4 <= weekday <= 6:  # between friday - saturday
 
-                                evening_back_weekend_phrases = [s_goodevening,
-                                                                s_anyplans,
-                                                                s_howwasyourafternoon]
+                                evening_back_weekend_phrases = ["s_goodevening",
+                                                                "s_anyplans",
+                                                                "s_howwasyourafternoon"]
 
                                 rint = 0
                                 rint = random.randint(0, 2)
                                 path = evening_back_weekend_phrases[rint]
 
                                 time.sleep(1.0)
-                                play_sound(s_wake2)
-                                play_sound(s_brightlightseq)
+                                play_sound(sounds['s_wake2'])
+                                play_sound(sounds['s_brightlightseq'])
                                 bright_lights_on()
-                                play_sound(s_sequencecomplete)
-                                play_sound(path)
+                                play_sound(sounds['s_sequencecomplete'])
+                                play_sound(sounds[path])
                                 turnoff_outlet()
 
                             else:
 
                                 time.sleep(1.0)
-                                play_sound(s_wake2)
-                                play_sound(s_brightlightseq)
+                                play_sound(sounds['s_wake2'])
+                                play_sound(sounds['s_brightlightseq'])
                                 bright_lights_on()
-                                play_sound(s_sequencecomplete)
-                                play_sound(s_goodevening)
+                                play_sound(sounds['s_sequencecomplete'])
+                                play_sound(sounds['s_goodevening'])
                                 turnoff_outlet()
 
                         if 3600 < seconds_away < 9000:  # between 60min - 150min
 
-                            evening_phrases = [s_welcomehomesir,
-                                               s_welcomemrchambers1,
-                                               s_anyplans,
-                                               s_productiveday2]
+                            evening_phrases = ["s_welcomehomesir",
+                                               "s_welcomemrchambers1",
+                                               "s_anyplans",
+                                               "s_productiveday2"]
 
                             rint = 0
                             rint = random.randint(0, 3)
                             path = evening_phrases[rint]
 
                             time.sleep(1.0)
-                            play_sound(s_wake2)
-                            play_sound(s_brightlightseq)
+                            play_sound(sounds['s_wake2'])
+                            play_sound(sounds['s_brightlightseq'])
                             bright_lights_on()
-                            play_sound(s_sequencecomplete)
-                            play_sound(path)
+                            play_sound(sounds['s_sequencecomplete'])
+                            play_sound(sounds[path])
                             turnoff_outlet()
 
                         if seconds_away > 9000:  # longer than 150min
                             if 4 <= weekday <= 5:  # between friday - saturday
 
-                                evening_phrases = [s_holidaylilnasx,
-                                                   s_whatspoppin,
-                                                   s_wayout,
-                                                   s_up]
+                                evening_phrases = ["s_holidaylilnasx",
+                                                   "s_whatspoppin",
+                                                   "s_wayout",
+                                                   "s_up"]
 
                                 rint = 0
                                 rint = random.randint(0, 3)
                                 path = evening_phrases[rint]
 
                                 time.sleep(1.0)
-                                play_sound(s_wake2)
-                                play_sound(s_brightlightseq)
+                                play_sound(sounds['s_wake2'])
+                                play_sound(sounds['s_brightlightseq'])
                                 bright_lights_on()
-                                play_sound(s_sequencecomplete)
-                                play_sound(path)
+                                play_sound(sounds['s_sequencecomplete'])
+                                play_sound(sounds[path])
                                 turnoff_outlet()
 
                             if 0 <= weekday <= 3 or weekday == 6:  # between sunday - thursday
 
-                                evening_phrases = [s_withoutyou,
-                                                   s_allyourn,
-                                                   s_wayout,
-                                                   s_watermelonsugar,
-                                                   s_sevensummers,
-                                                   s_up]
+                                evening_phrases = ["s_withoutyou",
+                                                   "s_allyourn",
+                                                   "s_wayout",
+                                                   "s_watermelonsugar",
+                                                   "s_sevensummers",
+                                                   "s_up"]
 
                                 rint = 0
                                 rint = random.randint(0, 5)
                                 path = evening_phrases[rint]
 
                                 time.sleep(1.0)
-                                play_sound(s_wake2)
-                                play_sound(s_brightlightseq)
+                                play_sound(sounds['s_wake2'])
+                                play_sound(sounds['s_brightlightseq'])
                                 bright_lights_on()
-                                play_sound(s_sequencecomplete)
-                                play_sound(path)
+                                play_sound(sounds['s_sequencecomplete'])
+                                play_sound(sounds[path])
                                 turnoff_outlet()
 
                     elif latenight_start <= now_time <= latenight_end:  # LATE NIGHT
@@ -310,11 +310,11 @@ while True:
                                     'sir.\n\n-M.O.R.G.')
 
                             time.sleep(1.0)
-                            play_sound(s_wake2)
-                            play_sound(s_welcomehomesir)
-                            play_sound(s_dimmedlightseq)
+                            play_sound(sounds['s_wake2'])
+                            play_sound(sounds['s_welcomehomesir'])
+                            play_sound(sounds['s_dimmedlightseq'])
                             dim_lights_on()
-                            play_sound(s_sequencecomplete)
+                            play_sound(sounds['s_sequencecomplete'])
                             turnoff_outlet()
 
                     time.sleep(420.0)
