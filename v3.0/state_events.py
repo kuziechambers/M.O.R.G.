@@ -101,10 +101,7 @@ def since_office_motion_update():
             line = dt.datetime.strptime(line, '%Y-%m-%d %H:%M:%S')
             seconds_away = (last_motion_update - line).total_seconds()
             if seconds_away > 5400 and morning_start_away <= last_motion_update.time() <= morning_end_away:
-                log = open("/home/pi/M.O.R.G./logs/MORG.log", "a+")
-                log.write("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
-                log.write("\n")
-                log.close()
+                morg_log.info("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
 
                 turnon_outlet()
                 play_sound(sounds['s_wake2'])
@@ -114,9 +111,7 @@ def since_office_motion_update():
                 play_sound(sounds['s_onlygoodmorning'])
                 turnoff_outlet()
 
-                file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
-                file.write(str(last_motion_update))
-                file.close()
+                morg_log.info(str(last_motion_update))
     except:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
