@@ -109,7 +109,7 @@ def since_office_motion_update():
                 turnon_outlet()
                 play_sound(sounds['s_wake2'])
                 play_sound(sounds['s_brightlightseq'])
-                bright_lights_on()
+                concentrate_lights_on()
                 play_sound(sounds['s_sequencecomplete'])
                 play_sound(sounds['s_onlygoodmorning'])
                 turnoff_outlet()

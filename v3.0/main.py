@@ -12,7 +12,7 @@ from state_events import (
     grab_last_motion_line
     )
 from smartthings import turnon_outlet, turnoff_outlet
-from constants_sound import sounds, play_sound, bright_lights_on, dim_lights_on
+from constants_sound import sounds, play_sound, bright_lights_on, dim_lights_on, concentrate_lights_on
 from constants_time import *
 from text_service import send_text
 
@@ -118,7 +118,7 @@ while True:
 
                         play_sound(sounds['s_wake2'])
                         play_sound(sounds['s_brightlightseq'])
-                        bright_lights_on()
+                        concentrate_lights_on()
                         play_sound(sounds['s_sequencecomplete'])
                         play_sound(sounds['s_goodmorning'])
                         turnoff_outlet()
@@ -132,7 +132,7 @@ while True:
 
                             play_sound(sounds['s_wake2'])
                             play_sound(sounds['s_brightlightseq'])
-                            bright_lights_on()
+                            concentrate_lights_on()
                             play_sound(sounds['s_sequencecomplete'])
                             play_sound(sounds['s_goodafternoon'])
                             turnoff_outlet()
@@ -156,7 +156,7 @@ while True:
 
                                 play_sound(sounds['s_wake2'])
                                 play_sound(sounds['s_brightlightseq'])
-                                bright_lights_on()
+                                concentrate_lights_on()
                                 play_sound(sounds['s_sequencecomplete'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -174,10 +174,10 @@ while True:
                                     path = afternoon_phrases[rint]
 
                                     play_sound(sounds['s_wake2'])
-                                    play_sound(sounds[path])
                                     play_sound(sounds['s_brightlightseq'])
-                                    bright_lights_on()
+                                    concentrate_lights_on()
                                     play_sound(sounds['s_sequencecomplete'])
+                                    play_sound(sounds[path])
                                     turnoff_outlet()
 
                                 if seconds_away > 9000:  # longer than 150min
@@ -194,7 +194,7 @@ while True:
 
                                     play_sound(sounds['s_wake2'])
                                     play_sound(sounds['s_brightlightseq'])
-                                    bright_lights_on()
+                                    concentrate_lights_on()
                                     play_sound(sounds['s_sequencecomplete'])
                                     play_sound(sounds[path])
                                     turnoff_outlet()
@@ -305,10 +305,10 @@ while True:
                                     'sir.\n\n-M.O.R.G.')
 
                             play_sound(sounds['s_wake2'])
-                            play_sound(sounds['s_welcomehomesir'])
                             play_sound(sounds['s_dimmedlightseq'])
                             dim_lights_on()
                             play_sound(sounds['s_sequencecomplete'])
+                            play_sound(sounds['s_welcomehomesir'])
                             turnoff_outlet()
 
                     time.sleep(420.0)
