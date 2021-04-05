@@ -12,6 +12,9 @@ evening_end_away = ti(22, 00, 00, 000000)
 
 
 # arriving times
+morning_start_office = ti(7, 15, 00, 000000)
+morning_end_office = ti(9, 45, 00, 000000)
+
 morning_start = ti(8, 00, 00, 000000)
 morning_end = ti(10, 59, 59, 000000)
 

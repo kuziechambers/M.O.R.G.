@@ -60,7 +60,8 @@ while True:
         # Inside
         if switch == "inside":
             if motion is False:  # Inside - False
-                since_office_motion_update()
+                if 0 <= weekday <= 4:
+                    since_office_motion_update()
                 time.sleep(2.0)
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()
