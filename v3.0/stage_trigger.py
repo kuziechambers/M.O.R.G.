@@ -13,7 +13,7 @@ from state_events import (
 from smartthings import turnon_outlet, turnoff_outlet
 from constants_sound import sounds, play_sound, bright_lights_on
 from constants_time import *
-from text_service import send_text
+from message_service import send_text
 
 
 time.sleep(30.0)
