@@ -1,7 +1,6 @@
 import json
 import requests
 import simpleaudio as audio
-from audioplayer import AudioPlayer
 
 
 # sound filenames dictionary
@@ -55,8 +54,8 @@ sounds = {
 }
 
 # play sound function
-def play_sound(path):
-    AudioPlayer(path).play(block=True)
+def play_sound(sound_file):
+    audio.WaveObject.from_wave_file(sound_file).play().wait_done()
 
 
 # light payloads
