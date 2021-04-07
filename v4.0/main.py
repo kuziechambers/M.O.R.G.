@@ -3,14 +3,15 @@ import os
 import random
 import sys
 import time
-
-from state_events import (
+from door_events import (
     get_motion_state,
     get_switch_state,
-    since_office_motion_init,
-    since_office_motion_update,
     grab_last_motion_line
     )
+from office_events import (
+    since_office_motion_init,
+    since_office_motion_update,
+)
 from smartthings import turnon_outlet, turnoff_outlet
 from constants_sound import sounds, play_sound, bright_lights_on, dim_lights_on, concentrate_lights_on
 from constants_time import *
@@ -115,23 +116,36 @@ while True:
 
                     if morning_start <= now_time <= morning_end:  # MORNING
 
-                        send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
+                        if 600 < seconds_away < 4800:  # between 10min - 80min
 
-                        morning_phrases = ["s_morninghadfun",
-                                           "s_morningproductiveday"]
+                            send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
-                        rint = 0
-                        rint = random.randint(0, 1)
-                        path = morning_phrases[rint]
+                            time.sleep(1.0)
+                            play_sound(sounds['s_wake'])
+                            play_sound(sounds['s_welcomeback_g'])
+                            concentrate_lights_on()
+                            time.sleep(1.0)
+                            play_sound(sounds['s_lightson'])
+                            turnoff_outlet()
 
-                        time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
-                        concentrate_lights_on()
-                        time.sleep(1.0)
-                        play_sound(sounds[path])
-                        turnoff_outlet()
+                        if seconds_away > 4800:  # longer than 80min
 
+                            send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
+
+                            morning_phrases = ["s_morninghadfun",
+                                               "s_morningproductiveday"]
+
+                            rint = 0
+                            rint = random.randint(0, 1)
+                            path = morning_phrases[rint]
+
+                            time.sleep(1.0)
+                            play_sound(sounds['s_wake'])
+                            play_sound(sounds['s_goodmorning_g'])
+                            concentrate_lights_on()
+                            time.sleep(1.0)
+                            play_sound(sounds[path])
+                            turnoff_outlet()
 
                     elif afternoon_start <= now_time <= afternoon_end:  # AFTERNOON
 
