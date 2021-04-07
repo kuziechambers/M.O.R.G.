@@ -128,6 +128,7 @@ while True:
                         play_sound(sounds['s_wake'])
                         play_sound(sounds['s_goodmorning_g'])
                         concentrate_lights_on()
+                        time.sleep(1.0)
                         play_sound(sounds[path])
                         turnoff_outlet()
 
@@ -142,6 +143,7 @@ while True:
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_welcomeback_g'])
                             concentrate_lights_on()
+                            time.sleep(1.0)
                             play_sound(sounds['s_lightson'])
                             turnoff_outlet()
 
@@ -153,6 +155,7 @@ while True:
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_mrchambers_g'])
                             concentrate_lights_on()
+                            time.sleep(1.0)
                             play_sound(sounds['s_anyplans'])
                             turnoff_outlet()
 
@@ -180,6 +183,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_fridayhowsmusic_m'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -197,6 +201,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds[path])
                                 turnoff_outlet()
 
@@ -217,6 +222,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_productiveday_m'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -236,6 +242,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_welcomeback_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_lightson'])
                                 turnoff_outlet()
 
@@ -254,6 +261,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds[path])
                                 turnoff_outlet()
 
@@ -269,6 +277,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds[path])
                                 turnoff_outlet()
 
@@ -288,6 +297,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_fridayheresmusic_m'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -307,6 +317,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_saturdaysequence_m'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -326,6 +337,7 @@ while True:
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
+                                time.sleep(1.0)
                                 play_sound(sounds['s_howssomemusic_m'])
                                 play_sound(sounds[path])
                                 turnoff_outlet()
@@ -345,6 +357,7 @@ while True:
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_dimlight'])
                             dim_lights_on()
+                            time.sleep(1.0)
                             play_sound(sounds['s_lightson'])
                             play_sound(sounds['s_welcomeback_g'])
                             turnoff_outlet()
