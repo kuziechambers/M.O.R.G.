@@ -1,0 +1,8 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on.
+    <break strength="medium"></break> I hope you slept wonderfully last night.
+  </prosody>
+  </prosody>
+</speak>

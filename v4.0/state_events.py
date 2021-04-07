@@ -1,6 +1,8 @@
 import sys
 import re
 import datetime as dt
+import random
+
 from message_service import send_text
 from smartthings import *
 from constants_sound import *
@@ -106,13 +108,68 @@ def since_office_motion_update():
                 file.write(str(last_motion_update))
                 file.close()
 
-                turnon_outlet()
-                play_sound(sounds['s_wake2'])
-                play_sound(sounds['s_brightlightseq'])
-                concentrate_lights_on()
-                play_sound(sounds['s_sequencecomplete'])
-                play_sound(sounds['s_onlygoodmorning'])
-                turnoff_outlet()
+                weekday = dt.datetime.now().weekday()
+
+                if weekday == 0:
+                    turnon_outlet()
+                    play_sound(sounds['s_wake'])
+                    play_sound(sounds['s_goodmorning_g'])
+                    concentrate_lights_on()
+                    play_sound(sounds['s_mondaymorning'])
+                    turnoff_outlet()
+
+                if weekday == 1:
+                    phrases = ["s_tuesdaymorning",
+                               "s_morningproductive"]
+
+                    rint = 0
+                    rint = random.randint(0, 1)
+                    path = phrases[rint]
+
+                    turnon_outlet()
+                    play_sound(sounds['s_wake'])
+                    play_sound(sounds['s_goodmorning_g'])
+                    concentrate_lights_on()
+                    play_sound(sounds[path])
+                    turnoff_outlet()
+
+                if weekday == 2:
+                    phrases = ["s_wednesdaymorning",
+                               "s_morningsleptwell"]
+
+                    rint = 0
+                    rint = random.randint(0, 1)
+                    path = phrases[rint]
+
+                    turnon_outlet()
+                    play_sound(sounds['s_wake'])
+                    play_sound(sounds['s_goodmorning_g'])
+                    concentrate_lights_on()
+                    play_sound(sounds[path])
+                    turnoff_outlet()
+
+                if weekday == 3:
+                    phrases = ["s_thursdaymorning",
+                               "s_morninggreat"]
+
+                    rint = 0
+                    rint = random.randint(0, 1)
+                    path = phrases[rint]
+
+                    turnon_outlet()
+                    play_sound(sounds['s_wake'])
+                    play_sound(sounds['s_goodmorning_g'])
+                    concentrate_lights_on()
+                    play_sound(sounds[path])
+                    turnoff_outlet()
+
+                if weekday == 4:
+                    turnon_outlet()
+                    play_sound(sounds['s_wake'])
+                    play_sound(sounds['s_goodmorning_g'])
+                    concentrate_lights_on()
+                    play_sound(sounds['s_fridaymorning'])
+                    turnoff_outlet()
 
     except:
         ex = sys.exc_info()

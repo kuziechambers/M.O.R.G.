@@ -36,11 +36,10 @@ while True:
 
     if motion is True:
         if seconds_away > 3600:
-            turnon_outlet()
-            play_sound(sounds['s_wake2'])
-            play_sound(sounds['s_brightlightseq'])
+            play_sound(sounds['s_wake'])
+            play_sound(sounds['s_goodevening_g'])
             bright_lights_on()
-            play_sound(sounds['s_sequencecomplete'])
+            play_sound(sounds['s_saturdaysequence_m'])
             play_sound(sounds['s_up'])
             turnoff_outlet()
 
