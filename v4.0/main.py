@@ -124,7 +124,7 @@ while True:
                         rint = random.randint(0, 1)
                         path = morning_phrases[rint]
 
-                        turnon_outlet()
+                        time.sleep(1.0)
                         play_sound(sounds['s_wake'])
                         play_sound(sounds['s_goodmorning_g'])
                         concentrate_lights_on()
@@ -138,7 +138,7 @@ while True:
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
-                            turnon_outlet()
+                            time.sleep(1.0)
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_welcomeback_g'])
                             concentrate_lights_on()
@@ -149,7 +149,7 @@ while True:
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
-                            turnon_outlet()
+                            time.sleep(1.0)
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_mrchambers_g'])
                             concentrate_lights_on()
@@ -176,6 +176,7 @@ while True:
                                 rint = random.randint(0, 1)
                                 path = friday_afternoon_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
@@ -192,6 +193,7 @@ while True:
                                 rint = random.randint(0, 1)
                                 path = saturday_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
@@ -211,6 +213,7 @@ while True:
                                 rint = random.randint(0, 4)
                                 path = afternoon_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodafternoon_g'])
                                 concentrate_lights_on()
@@ -229,6 +232,7 @@ while True:
 
                         if 1500 < seconds_away < 3600:  # between 25min - 60min
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_welcomeback_g'])
                                 bright_lights_on()
@@ -246,6 +250,7 @@ while True:
                                 rint = random.randint(0, 1)
                                 path = evening_back_weekend_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
@@ -260,6 +265,7 @@ while True:
                                 rint = random.randint(0, 1)
                                 path = evening_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
@@ -278,6 +284,7 @@ while True:
                                 rint = random.randint(0, 3)
                                 path = evening_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
@@ -296,6 +303,7 @@ while True:
                                 rint = random.randint(0, 3)
                                 path = evening_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
@@ -314,6 +322,7 @@ while True:
                                 rint = random.randint(0, 3)
                                 path = evening_phrases[rint]
 
+                                time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
                                 play_sound(sounds['s_goodevening_g'])
                                 bright_lights_on()
@@ -332,6 +341,7 @@ while True:
                                     'Front door has been opened.\n\nLate night I see? Get some rest for the morning '
                                     'sir.\n\n-M.O.R.G.')
 
+                            time.sleep(1.0)
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_dimlight'])
                             dim_lights_on()

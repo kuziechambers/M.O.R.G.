@@ -36,6 +36,8 @@ while True:
 
     if motion is True:
         if seconds_away > 3600:
+            turnon_outlet()
+            time.sleep(1.0)
             play_sound(sounds['s_wake'])
             play_sound(sounds['s_goodevening_g'])
             bright_lights_on()
