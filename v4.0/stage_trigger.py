@@ -41,6 +41,7 @@ while True:
             play_sound(sounds['s_wake'])
             play_sound(sounds['s_goodevening_g'])
             bright_lights_on()
+            time.sleep(1.0)
             play_sound(sounds['s_saturdaysequence_m'])
             play_sound(sounds['s_up'])
             turnoff_outlet()
