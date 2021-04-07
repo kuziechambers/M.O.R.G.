@@ -17,7 +17,7 @@ from message_service import send_text
 
 
 
-stage_time = "03-01-2021 12:00:00.000000"
+stage_time = "2021-03-01 12:00:00.000000"
 
 last_motion = dt.datetime.strptime(stage_time, '%Y-%m-%d %H:%M:%S.%f')
 
