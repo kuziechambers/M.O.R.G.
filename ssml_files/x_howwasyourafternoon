@@ -1,0 +1,9 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on.
+    <break strength="medium"></break>How was your afternoon?
+    <break strength="x-weak"></break>I hope it has been splendid.
+  </prosody>
+  </prosody>
+</speak>

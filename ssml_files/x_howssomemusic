@@ -1,0 +1,9 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on.
+    <break strength="medium"></break>I presume you're having a wonderful day.
+    <break strength="x-weak"></break>How's some music, to keep it going.
+  </prosody>
+  </prosody>
+</speak>

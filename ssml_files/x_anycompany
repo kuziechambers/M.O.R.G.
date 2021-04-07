@@ -1,0 +1,10 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <prosody rate="120">
+    <break strength="medium"></break>Are you joined by any company this evening?
+    <break strength="x-weak"></break>Shall I initiate the <prosody rate="115">"Blow the roof off this mother fucker"</prosody> sequence?</prosody>
+  </prosody>
+  </prosody>
+</speak>
