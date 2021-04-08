@@ -111,7 +111,7 @@ def since_office_motion_update():
 
                 if weekday == 3:
                     phrases = ["s_thursdaymorning",
-                               "s_morninggreat"]
+                               "s_morninggreatday"]
 
                     rint = 0
                     rint = random.randint(0, 1)
