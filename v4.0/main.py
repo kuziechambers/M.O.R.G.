@@ -194,7 +194,7 @@ while True:
 
                             time.sleep(1.0)
                             play_sound(sounds['s_wake'])
-                            play_sound(sounds['s_mrchambers_g'])
+                            play_sound(sounds['s_welcomemrchambers_g'])
                             concentrate_lights_on()
                             time.sleep(1.0)
                             play_sound(sounds[path])
