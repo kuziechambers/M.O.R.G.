@@ -2,7 +2,7 @@ import sys
 import re
 import datetime as dt
 import random
-
+import time
 from message_service import send_text
 from smartthings import *
 from constants_sound import *
@@ -73,9 +73,11 @@ def since_office_motion_update():
 
                 if weekday == 0:
                     turnon_outlet()
+                    time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    time.sleep(1.0)
                     play_sound(sounds['s_mondaymorning'])
                     turnoff_outlet()
 
@@ -88,9 +90,11 @@ def since_office_motion_update():
                     path = phrases[rint]
 
                     turnon_outlet()
+                    time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
 
@@ -103,9 +107,11 @@ def since_office_motion_update():
                     path = phrases[rint]
 
                     turnon_outlet()
+                    time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
 
@@ -118,17 +124,21 @@ def since_office_motion_update():
                     path = phrases[rint]
 
                     turnon_outlet()
+                    time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
 
                 if weekday == 4:
                     turnon_outlet()
+                    time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    time.sleep(1.0)
                     play_sound(sounds['s_fridaymorning'])
                     turnoff_outlet()
 

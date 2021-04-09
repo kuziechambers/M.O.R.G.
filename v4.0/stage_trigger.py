@@ -41,11 +41,11 @@ while True:
             turnon_outlet()
             time.sleep(1.0)
             play_sound(sounds['s_wake'])
-            play_sound(sounds['s_goodevening_g'])
+            play_sound(sounds['s_goodmorning_g'])
             bright_lights_on()
             time.sleep(1.0)
-            play_sound(sounds['s_saturdaysequence_m'])
-            play_sound(sounds['s_up'])
+            play_sound(sounds['s_fridaymorning'])
+            #play_sound(sounds['s_up'])
             turnoff_outlet()
 
 
