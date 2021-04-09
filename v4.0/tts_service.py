@@ -3,7 +3,6 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from constants_sound import play_sound
 
 
-
 #text = [line.replace('\n','') for line in text]
 #text = ''.join(str(line) for line in text)
 
@@ -37,10 +36,10 @@ def tts_play(ssml_file, filename):
                 accept='audio/wav'
             ).get_result().content)
 
-    play_sound(sound_path)
+    #play_sound(sound_path)
 
 
-tts_play('x_fridaymorning', 'fridaymorning')
+tts_play('x_afternoonwelcomeback1', 'afternoonwelcomeback1')
 #tts_play("x_morningproductiveday", "morningproductiveday")
 
 

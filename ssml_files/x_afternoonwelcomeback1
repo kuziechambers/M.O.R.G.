@@ -1,0 +1,9 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <break strength="weak"></break>Good afternoon, I've kept the apartment running in your absence.
+    <break strength="weak"></break>Have a lovely day.
+  </prosody>
+  </prosody>
+</speak>

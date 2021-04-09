@@ -1,0 +1,8 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <break strength="medium"></break>Good morning! I trust you're having a splendid start to the day.
+  </prosody>
+  </prosody>
+</speak>

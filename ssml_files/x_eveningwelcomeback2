@@ -1,0 +1,10 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <break strength="medium"></break>Try to relax your mind this evening sir.
+    <break strength="weak"></break>I recommend slowing your breathing.
+    <break strength="weak"></break>Have a wonderful day.
+  </prosody>
+  </prosody>
+</speak>

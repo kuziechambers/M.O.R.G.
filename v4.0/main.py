@@ -116,7 +116,7 @@ while True:
 
                     if morning_start <= now_time <= morning_end:  # MORNING
 
-                        if 600 < seconds_away < 4800:  # between 10min - 80min
+                        if 600 < seconds_away < 2400:  # between 10min - 40min
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
@@ -128,7 +128,26 @@ while True:
                             play_sound(sounds['s_lightson'])
                             turnoff_outlet()
 
-                        if seconds_away > 4800:  # longer than 80min
+                        if 2400 < seconds_away < 7200:  # between 40min - 120min
+
+                            send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
+
+                            morning_phrases = ["s_morningwelcomeback1",
+                                               "s_morningwelcomeback2"]
+
+                            rint = 0
+                            rint = random.randint(0, 1)
+                            path = morning_phrases[rint]
+
+                            time.sleep(1.0)
+                            play_sound(sounds['s_wake'])
+                            play_sound(sounds['s_weclomeback_g'])
+                            concentrate_lights_on()
+                            time.sleep(1.0)
+                            play_sound(sounds[path])
+                            turnoff_outlet()
+
+                        if seconds_away > 7200:  # longer than 120min
 
                             send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
 
@@ -149,7 +168,7 @@ while True:
 
                     elif afternoon_start <= now_time <= afternoon_end:  # AFTERNOON
 
-                        if 10 < seconds_away < 4800:  # between 10s - 80min
+                        if 600 < seconds_away < 2400:  # between 10min - 40min
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
@@ -161,16 +180,24 @@ while True:
                             play_sound(sounds['s_lightson'])
                             turnoff_outlet()
 
-                        if 4800 < seconds_away < 7200:  # between 80min - 120min
+                        if 2400 < seconds_away < 7200:  # between 40min - 120min
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
+
+                            afternoon_phrases = ["s_afternoonwelcomeback1",
+                                                 "s_afternoonwelcomeback2,"
+                                                 "s_anyplans"]
+
+                            rint = 0
+                            rint = random.randint(0, 1)
+                            path = afternoon_phrases[rint]
 
                             time.sleep(1.0)
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_mrchambers_g'])
                             concentrate_lights_on()
                             time.sleep(1.0)
-                            play_sound(sounds['s_anyplans'])
+                            play_sound(sounds[path])
                             turnoff_outlet()
 
                         elif seconds_away > 7200:  # longer than 120min
@@ -250,7 +277,7 @@ while True:
                         text_phrase = evening_text_phrases[rint]
                         send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
 
-                        if 1500 < seconds_away < 3600:  # between 25min - 60min
+                        if 600 < seconds_away < 2400:  # between 10min - 40min
 
                                 time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
@@ -260,7 +287,7 @@ while True:
                                 play_sound(sounds['s_lightson'])
                                 turnoff_outlet()
 
-                        if 3600 < seconds_away < 9000:  # between 60min - 150min
+                        if 2400 < seconds_away < 7200:  # between 40min - 120min
 
                             if 4 <= weekday <= 5:  # between friday - saturday
 
@@ -281,7 +308,8 @@ while True:
 
                             else:
                                 evening_phrases = ["s_howwasyourafternoon",
-                                                   "s_anyplans"]
+                                                   "s_eveningwelcomeback1",
+                                                   "s_eveningwelcomeback2"]
 
                                 rint = 0
                                 rint = random.randint(0, 1)
@@ -289,7 +317,7 @@ while True:
 
                                 time.sleep(1.0)
                                 play_sound(sounds['s_wake'])
-                                play_sound(sounds['s_goodevening_g'])
+                                play_sound(sounds['s_welcomeback_g'])
                                 bright_lights_on()
                                 time.sleep(1.0)
                                 play_sound(sounds[path])

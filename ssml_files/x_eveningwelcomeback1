@@ -1,0 +1,8 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <break strength="medium"></break>Enjoy the evening sir! Hopefully your mind is free of stress today.
+  </prosody>
+  </prosody>
+</speak>

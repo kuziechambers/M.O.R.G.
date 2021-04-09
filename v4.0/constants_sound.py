@@ -5,12 +5,16 @@ import simpleaudio as audio
 
 # sound filenames dictionary
 sounds = {
+    's_afternoonwelcomeback1': "/home/pi/M.O.R.G./sounds_IBM/afternoonwelcomeback1.wav",
+    's_afternoonwelcomeback2': "/home/pi/M.O.R.G./sounds_IBM/afternoonwelcomeback2.wav",
     's_anycompany': "/home/pi/M.O.R.G./sounds_IBM/anycompany.wav",
     's_anyplans': "/home/pi/M.O.R.G./sounds_IBM/anyplans.wav",
     's_allyourn': "/home/pi/M.O.R.G./sounds_IBM/AllYourn.wav",
     's_brightlight': "/home/pi/M.O.R.G./sounds_IBM/brightlight.wav",
     's_chiquita': "/home/pi/M.O.R.G./sounds_IBM/Chiquita.wav",
     's_dimlight': "/home/pi/M.O.R.G./sounds_IBM/dimlight.wav",
+    's_eveningwelcomeback1': "/home/pi/M.O.R.G./sounds_IBM/eveningwelcomeback1.wav",
+    's_eveningwelcomeback2': "/home/pi/M.O.R.G./sounds_IBM/eveningwelcomeback2.wav",
     's_freebird': "/home/pi/M.O.R.G./sounds_IBM/FreeBird.wav",
     's_fridayheresmusic_m': "/home/pi/M.O.R.G./sounds_IBM/fridayheresmusic.wav",
     's_fridayhowsmusic_m': "/home/pi/M.O.R.G./sounds_IBM/fridayhowsmusic.wav",
@@ -21,6 +25,8 @@ sounds = {
     's_lightson': "/home/pi/M.O.R.G./sounds_IBM/lightson.wav",
     's_mondaymorning': "/home/pi/M.O.R.G./sounds_IBM/mondaymorning.wav",
     's_morninggreatday': "/home/pi/M.O.R.G./sounds_IBM/morninggreatday.wav",
+    's_morningwelcomeback1': "/home/pi/M.O.R.G./sounds_IBM/morningwelcomeback1.wav",
+    's_morningwelcomeback2': "/home/pi/M.O.R.G./sounds_IBM/morningwelcomeback2.wav",
     's_morningproductive': "/home/pi/M.O.R.G./sounds_IBM/morningproductive.wav",
     's_morninghadfun': "/home/pi/M.O.R.G./sounds_IBM/morninghadfun.wav",
     's_morningproductiveday': "/home/pi/M.O.R.G./sounds_IBM/morningproductiveday.wav",

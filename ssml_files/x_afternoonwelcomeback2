@@ -1,0 +1,9 @@
+<speak>
+  <prosody pitch="-3st">
+  <prosody rate="140">
+    Lights have been powered on!
+    <break strength="medium"></break>I'm having a great afternoon, in case you were wondering!
+    <break strength="medium"></break>Have a tremendous day sir.
+  </prosody>
+  </prosody>
+</speak>
