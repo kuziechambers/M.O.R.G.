@@ -55,7 +55,7 @@ sounds = {
     's_welcomehome_g': "/home/pi/M.O.R.G./sounds_IBM/welcomehome_g.wav",
     's_welcomeback_g': "/home/pi/M.O.R.G./sounds_IBM/welcomeback_g.wav",
     's_watermelonsugar': "/home/pi/M.O.R.G./sounds_IBM/WatermelonSugar.wav",
-    's_wayout': "/home/pi/M.O.R.G./sounds_IBM/Wayout.wav",
+    's_wayout': "/home/pi/M.O.R.G./sounds_IBM/WayOut.wav",
     's_wake': "/home/pi/M.O.R.G./sounds_IBM/wake.wav"
 }
 
