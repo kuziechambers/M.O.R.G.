@@ -43,6 +43,21 @@ def get_high_temp():
     temp_value = today_max[0:2]
     return int(temp_value)
 
+def get_weekend_temp():
+    high_response = requests.get(URL)
+    high_data = high_response.json()
+    days = high_data['daily']
+    saturday_min = str(days[1]['temp']['min'])
+    saturday_max = str(days[1]['temp']['max'])
+    sunday_min = str(days[2]['temp']['min'])
+    sunday_max = str(days[2]['temp']['max'])
+    saturday_min = saturday_min[0:2]
+    saturday_max = saturday_max[0:2]
+    sunday_min = sunday_min[0:2]
+    sunday_max = sunday_max[0:2]
+    return [int(saturday_min), int(saturday_max), int(sunday_min), int(sunday_max)]
+
+
 def get_rain():
     try:
         rain_response = requests.get(URL)
@@ -62,6 +77,31 @@ def get_rain():
         return str("none")
 
 
+def weekend_weather_update(temp_list):
+    current_temp_degrees = get_current_temp()
+    low_temp_degrees = get_low_temp()
+    high_temp_degrees = get_high_temp()
+    saturday_low_sound = get_degrees_sound(temp_list[0])
+    saturday_high_sound = get_degrees_sound(temp_list[1])
+    sunday_low_sound = get_degrees_sound(temp_list[2])
+    sunday_high_sound = get_degrees_sound(temp_list[3])
+    rain_time = get_rain()
+
+    play_sound(sounds['s_enjoyweekendweather'])
+
+    play_sound(sounds['s_saturdaylow'])
+    play_sound(saturday_low_sound)
+    play_sound(degrees_sounds['s_degrees'])
+    play_sound(sounds['s_temphigh'])
+    play_sound(saturday_high_sound)
+
+    play_sound(sounds['s_sundaylow'])
+    play_sound(sunday_low_sound)
+    play_sound(degrees_sounds['s_degrees'])
+    play_sound(sounds['s_temphigh'])
+    play_sound(sunday_high_sound)
+
+
 def weather_update():
     current_temp_degrees = get_current_temp()
     low_temp_degrees = get_low_temp()
@@ -76,10 +116,8 @@ def weather_update():
     play_sound(degrees_sounds['s_degrees'])
     play_sound(sounds['s_templow'])
     play_sound(low_temp_sound)
-    play_sound(degrees_sounds['s_degrees'])
     play_sound(sounds['s_temphigh'])
     play_sound(high_temp_sound)
-    play_sound(degrees_sounds['s_degrees'])
     if rain_time != "none":
         rain_sound = time_to_sound(rain_time)
         play_sound(sounds['s_rainchance'])

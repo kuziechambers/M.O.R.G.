@@ -16,6 +16,7 @@ from smartthings import turnon_outlet, turnoff_outlet
 from constants_sound import sounds, play_sound, bright_lights_on, dim_lights_on, concentrate_lights_on
 from constants_time import *
 from message_service import send_text
+from weather_events import weather_update, weekend_weather_update, get_weekend_temp
 
 
 # Grab and write pid to .pid file
@@ -64,6 +65,14 @@ while True:
                 if 0 <= weekday <= 4:
                     since_office_motion_update()
                 time.sleep(2.0)
+                if weekday == 4 and weekend_start <= now_time <= weekend_end:
+                    temps = get_weekend_temp()
+                    turnon_outlet()
+                    time.sleep(1.0)
+                    play_sound(sounds['s_wake'])
+                    weekend_weather_update(temps)
+                    turnoff_outlet()
+
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()
                 time.sleep(30.0)
@@ -141,7 +150,7 @@ while True:
 
                             time.sleep(1.0)
                             play_sound(sounds['s_wake'])
-                            play_sound(sounds['s_weclomeback_g'])
+                            play_sound(sounds['s_welcomeback_g'])
                             concentrate_lights_on()
                             time.sleep(1.0)
                             play_sound(sounds[path])
@@ -162,6 +171,7 @@ while True:
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_goodmorning_g'])
                             concentrate_lights_on()
+                            weather_update()
                             time.sleep(1.0)
                             play_sound(sounds[path])
                             turnoff_outlet()

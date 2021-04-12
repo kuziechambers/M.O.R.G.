@@ -46,7 +46,7 @@ def tts_play(ssml_file, filename):
 #     tts_play(string, string_i)
 #     i = i + 1
 
-tts_play("x_degrees", "degrees")
+tts_play("x_sundaylow", "sundaylow")
 
 
 

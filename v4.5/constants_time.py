@@ -28,6 +28,9 @@ evening_end = ti(23, 44, 59, 000000)
 latenight_start = ti(23, 55, 00, 000000)
 latenight_end = ti(1, 55, 00, 000000)
 
+weekend_start = ti(17, 5, 00, 000000)
+weekend_end = ti(17, 5, 10, 000000)
+
 def time_to_sound(time):
     if time == "00:00:00":
         return time_sounds['s_zero']

@@ -50,8 +50,6 @@ while True:
                 # #play_sound(sounds['s_up'])
                 # turnoff_outlet()
 
-                play_sound('/home/pi/M.O.R.G./sounds_IBM/degrees/82.wav')
-
                 turnon_outlet()
                 time.sleep(1.0)
                 play_sound(sounds['s_wake'])
