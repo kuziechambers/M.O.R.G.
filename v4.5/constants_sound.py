@@ -91,6 +91,7 @@ time_sounds = {
 }
 
 degrees_sounds = {
+    's_degrees': "/home/pi/M.O.R.G./sounds_IBM/degrees/degrees.wav",
     's_40below': "/home/pi/M.O.R.G./sounds_IBM/degrees/40below.wav",
     's_40': "/home/pi/M.O.R.G./sounds_IBM/degrees/40.wav",
     's_41': "/home/pi/M.O.R.G./sounds_IBM/degrees/41.wav",

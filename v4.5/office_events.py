@@ -8,7 +8,7 @@ from smartthings import *
 from constants_sound import *
 from constants_time import *
 from logger import morg_log
-from weather_events import get_rain, get_current_temp
+from weather_events import weather_update
 
 OFFICE_PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/39'
 
@@ -78,6 +78,7 @@ def since_office_motion_update():
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    weather_update()
                     time.sleep(1.0)
                     play_sound(sounds['s_mondaymorning'])
                     turnoff_outlet()
@@ -95,6 +96,7 @@ def since_office_motion_update():
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    weather_update()
                     time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
@@ -112,6 +114,7 @@ def since_office_motion_update():
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    weather_update()
                     time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
@@ -129,6 +132,7 @@ def since_office_motion_update():
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    weather_update()
                     time.sleep(1.0)
                     play_sound(sounds[path])
                     turnoff_outlet()
@@ -139,6 +143,7 @@ def since_office_motion_update():
                     play_sound(sounds['s_wake'])
                     play_sound(sounds['s_goodmorning_g'])
                     concentrate_lights_on()
+                    weather_update()
                     time.sleep(1.0)
                     play_sound(sounds['s_fridaymorning'])
                     turnoff_outlet()
