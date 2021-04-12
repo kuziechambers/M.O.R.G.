@@ -13,7 +13,7 @@ from office_events import (
     since_office_motion_update,
 )
 from smartthings import turnon_outlet, turnoff_outlet
-from constants_sound import sounds, play_sound, bright_lights_on, concentrate_lights_on
+from constants_sound import sounds, play_sound, bright_lights_on, concentrate_lights_on, degrees_sounds
 from constants_time import *
 from message_service import send_text
 from weather_events import weather_update
@@ -49,15 +49,18 @@ while True:
             # #play_sound(sounds['s_up'])
             # turnoff_outlet()
 
+            play_sound('/home/pi/M.O.R.G./sounds_IBM/degrees/82.wav')
+
             turnon_outlet()
             time.sleep(1.0)
             play_sound(sounds['s_wake'])
             play_sound(sounds['s_goodmorning_g'])
             concentrate_lights_on()
+            weather_update()
             time.sleep(1.0)
             play_sound(sounds['s_mondaymorning'])
             turnoff_outlet()
-            weather_update()
+
 
 
 
