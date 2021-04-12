@@ -72,14 +72,14 @@ def weather_update():
     rain_time = get_rain()
 
     play_sound(sounds['s_temprightnow'])
-    play_sound(degrees_sounds[current_temp_sound])
+    play_sound(current_temp_sound)
     play_sound(sounds['s_templow'])
-    play_sound(degrees_sounds[low_temp_sound])
+    play_sound(low_temp_sound)
     play_sound(sounds['s_temphigh'])
-    play_sound(degrees_sounds[high_temp_sound])
+    play_sound(high_temp_sound)
     if rain_time != "none":
         rain_sound = time_to_sound(rain_time)
         play_sound(sounds['s_rainchance'])
-        play_sound(time_sounds[rain_time])
+        play_sound(rain_sound)
 
 
