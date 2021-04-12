@@ -152,6 +152,7 @@ while True:
                             play_sound(sounds['s_wake'])
                             play_sound(sounds['s_welcomeback_g'])
                             concentrate_lights_on()
+                            weather_update()
                             time.sleep(1.0)
                             play_sound(sounds[path])
                             turnoff_outlet()
