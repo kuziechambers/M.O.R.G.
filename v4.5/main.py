@@ -196,7 +196,7 @@ while True:
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
                             afternoon_phrases = ["s_afternoonwelcomeback1",
-                                                 "s_afternoonwelcomeback2,"
+                                                 "s_afternoonwelcomeback2",
                                                  "s_anyplans"]
 
                             rint = 0
