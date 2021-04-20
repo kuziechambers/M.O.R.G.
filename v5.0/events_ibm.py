@@ -93,7 +93,7 @@ def transcribe_response(text):
                 voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
                 accept='audio/wav'
             ).get_result().content)
-    play_sound(sound_path)
+    #play_sound(sound_path)
 
 
 def prosody_on_text(text):
