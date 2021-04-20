@@ -8,6 +8,7 @@ import pyaudio
 import wave
 from pysndfx import AudioEffectsChain
 from constants import play_sound
+import soundfile as sf
 #from events_ibm import prosody_on_text
 
 THRESHOLD = 500
@@ -148,16 +149,20 @@ def fx_to_file():
         # .lowshelf()
     )
 
-    infile = '/home/pi/M.O.R.G./stt_files/temp_response.wav'
-    outfile = '/home/pi/M.O.R.G./stt_files/temp_response_fx.wav'
-    # Or, apply the effects directly to a ndarray.
-    from librosa import load
-    y, sr = load(infile, sr=None)
-    y = fx(y)
-    # Apply the effects and return the results as a ndarray.
-    y = fx(infile)
-    # Apply the effects to a ndarray but store the resulting audio to disk.
-    fx(y, outfile)
+    infile = '/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/temp_response.wav'
+    outfile = '/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/temp_response_fx.wav'
+    fx(infile, outfile)
+
+    # Read wav with dtype= 'int16'
+    # data, samplerate = sf.read(infile, dtype='int16')
+    # x = fx(x)
+    # x = fx(infile)
+    # # Write 'int16'-signal and read with default
+    # sf.write(outfile, x, Fs)
+
+
 
 def play_fx_file():
     play_sound('/home/pi/M.O.R.G./stt_files/temp_response_fx.wav')
+
+fx_to_file()
