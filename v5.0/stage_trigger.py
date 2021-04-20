@@ -1,12 +1,11 @@
 import random
-from playsound import playsound
 from events_door import (
     get_motion_state
 )
 import sys
 import datetime as dt
 import time
-from constants import *
+from constants import turnon_outlet, turnoff_outlet, play_sound, sounds, concentrate_lights_on
 from events_weather import weather_update
 
 
