@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import wikipedia
 from os import path
 from statistics import mean
 from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
@@ -246,3 +247,24 @@ def watson_delete_session(sesh_id):
     ).get_result()
 
     return json.dumps(response, indent=2)
+
+
+
+
+
+def wiki_search(wiki_text):
+    print(wiki_text)
+    suggestion = wikipedia.suggest(wiki_text)
+    print(suggestion)
+    if suggestion is None:
+        try:
+            summary = wikipedia.summary(wiki_text, sentences=2)
+        except wikipedia.exceptions.DisambiguationError:
+            summary = "My apologies, it appears the word " + wiki_text + " is either too disambiguous for my wiki search or it doesn't exist. Ask in another way."
+    if suggestion is not None:
+        summary = wikipedia.summary(suggestion, sentences=2)
+
+    print(summary)
+    slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
+    transcribe_response(slow_summary)
+    fx_to_file()
