@@ -1,13 +1,13 @@
-import datetime as dt
-import sys
-import time
-from door_events import (
+from random import random
+
+from events_door import (
     get_motion_state
 )
-from smartthings import turnon_outlet, turnoff_outlet
-from constants_sound import sounds, play_sound, concentrate_lights_on
-from constants_time import *
-from weather_events import weather_update
+import sys
+import datetime as dt
+import time
+from constants import *
+from events_weather import weather_update
 
 
 
@@ -31,15 +31,13 @@ while True:
 
         if motion is True:
             if seconds_away > 3600:
-                # turnon_outlet()
-                # time.sleep(1.0)
-                # play_sound(sounds['s_wake'])
-                # play_sound(sounds['s_welcomeback_g'])
-                # bright_lights_on()
-                # time.sleep(1.0)
-                # play_sound(sounds['s_eveningwelcomeback2'])
-                # #play_sound(sounds['s_up'])
-                # turnoff_outlet()
+
+                phrases = ["s_tuesdaymorning",
+                           "s_morningproductive"]
+
+                rint = 0
+                rint = random.randint(0, 1)
+                path = phrases[rint]
 
                 turnon_outlet()
                 time.sleep(1.0)
@@ -49,7 +47,7 @@ while True:
                 play_sound(sounds['s_lightson'])
                 weather_update()
                 time.sleep(1.0)
-                play_sound(sounds['s_mondaymorning'])
+                play_sound(sounds[path])
                 turnoff_outlet()
     except:
         ex = sys.exc_info()
