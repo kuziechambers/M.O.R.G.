@@ -113,10 +113,13 @@ def weekend_weather_update(temp_list):
 
 def weather_update():
     current_temp_degrees = get_current_temp()
+    print(str(current_temp_degrees))
     low_temp_degrees = get_low_temp()
+    print(str(low_temp_degrees))
     high_temp_degrees = get_high_temp()
+    print(str(high_temp_degrees))
     rain_time = get_rain()
-    print(type(rain_time))
+    print(str(rain_time))
     if rain_time != "none":
         weather_text = "The temperature right now is <break strength='weak'></break>"\
                        + str(current_temp_degrees)\
@@ -135,6 +138,7 @@ def weather_update():
                        + str(low_temp_degrees)\
                        + ". At the moment, there is no expected rain today."
 
+    print(weather_text)
     play_response(weather_text)
 
 
