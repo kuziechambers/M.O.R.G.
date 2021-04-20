@@ -1,11 +1,11 @@
 from datetime import datetime as datetime
 import datetime as dt
-import pytz
+#import pytz
 import requests, json
-from playsound import playsound
-from constants import sounds
+#from playsound import playsound
+from constants import sounds, play_sound
 from events_ibm import play_response
-from events_sound import fx_to_file, play_fx_file
+#from events_sound import fx_to_file, play_fx_file
 
 # base URL
 base_url = "https://api.openweathermap.org/data/2.5/onecall?"
@@ -107,7 +107,7 @@ def weekend_weather_update(temp_list):
                    + str(sunday_high) \
                    + "."
 
-    playsound(sounds['s_enjoyweekendweather'])
+    play_sound(sounds['s_enjoyweekendweather'])
     play_response(weather_text)
 
 

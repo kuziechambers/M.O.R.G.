@@ -5,7 +5,7 @@ from os import path
 from statistics import mean
 from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from playsound import playsound
+from constants import play_sound
 import sounddevice as sd
 from scipy.io.wavfile import write
 from events_text import send_text
@@ -64,7 +64,7 @@ def tts_play(ssml_file, filename):
                 voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
                 accept='audio/wav'
             ).get_result().content)
-    playsound(sound_path)
+    play_sound(sound_path)
 
 def play_response(text):
     sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
@@ -79,7 +79,7 @@ def play_response(text):
                 accept='audio/wav'
             ).get_result().content)
     fx_to_file()
-    playsound("/home/pi/M.O.R.G./stt_files/temp_response_fx.wav")
+    play_fx_file()
 
 def transcribe_response(text):
     sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
@@ -93,7 +93,7 @@ def transcribe_response(text):
                 voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
                 accept='audio/wav'
             ).get_result().content)
-    playsound(sound_path)
+    play_sound(sound_path)
 
 
 def prosody_on_text(text):
