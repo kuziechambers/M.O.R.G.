@@ -51,8 +51,8 @@ tts.set_service_url(tts_api_url)
 
 # TTS FUNCTIONS
 def tts_play(ssml_file, filename):
-    ssml_path = "/hopme/pi/M.O.R.G./ssml_files/" + ssml_file
-    sound_path = "/hopme/pi/M.O.R.G./ssml_files/" + filename + ".wav"
+    ssml_path = "/home/pi/M.O.R.G./ssml_files/" + ssml_file
+    sound_path = "/home/pi/M.O.R.G./ssml_files/" + filename + ".wav"
     with open(ssml_path, 'r') as f:
         text = f.read()
     with open(sound_path, 'wb') as audio_file:
@@ -67,7 +67,7 @@ def tts_play(ssml_file, filename):
     playsound(sound_path)
 
 def play_response(text):
-    sound_path = "/hopme/pi/M.O.R.G./stt_files/temp_response.wav"
+    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
     pro_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
     with open(sound_path, 'wb') as audio_file:
         audio_file.write(
@@ -79,10 +79,10 @@ def play_response(text):
                 accept='audio/wav'
             ).get_result().content)
     fx_to_file()
-    playsound("/hopme/pi/M.O.R.G./stt_files/temp_response_fx.wav")
+    playsound("/home/pi/M.O.R.G./stt_files/temp_response_fx.wav")
 
 def transcribe_response(text):
-    sound_path = "/hopme/pi/M.O.R.G./stt_files/temp_response.wav"
+    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
     pro_text = '<speak><prosody pitch="-3st"><prosody rate="125">' + text + '</prosody></prosody></speak>'
     with open(sound_path, 'wb') as audio_file:
         audio_file.write(
@@ -105,8 +105,8 @@ def prosody_on_text(text):
 
 # STT FUNCTIONS
 def stt_transcribe():
-   if path.exists("/hopme/pi/M.O.R.G./stt_files/spoken_input.wav"):
-      with open('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
+   if path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
+      with open('/home/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
          transcript = stt.recognize(audio=audio_file, content_type='audio/wav', model='en-US_BroadbandModel', continuous=True, customization_id='139e688f-f2bc-47a5-a670-8e25294580ff').get_result()
          #transcript = stt.recognize(audio=audio_file, content_type='audio/wav', model='en-US_BroadbandModel', continuous=True).get_result()
       print(transcript)
@@ -114,7 +114,7 @@ def stt_transcribe():
       text_output = transcript['results'][0]['alternatives'][0]['transcript']
       text_output = text_output.strip()
 
-      os.remove("/hopme/pi/M.O.R.G./stt_files/spoken_input.wav")
+      os.remove("/home/pi/M.O.R.G./stt_files/spoken_input.wav")
       print(text_output)
       return str(text_output)
 
@@ -132,11 +132,11 @@ def start_recording():
    print("Starting recording...")
    send_text("Starting recording...")
    sd.wait()  # Wait until recording is finished
-   write('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav', fs, recording)  # Save as WAV file
-   if path.exists("/hopme/pi/M.O.R.G./stt_files/spoken_input.wav"):
+   write('/home/pi/M.O.R.G./stt_files/spoken_input.wav', fs, recording)  # Save as WAV file
+   if path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
       send_text("Recording stopped, audio file saved./n/n-M.O.R.G.")
       print("Recording stopped, audio file saved.")
-   if not path.exists("/hopme/pi/M.O.R.G./stt_files/spoken_input.wav"):
+   if not path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
       send_text("Recording stopped, audio file NOT saved./n/n-M.O.R.G.")
       print("Recording stopped, audio file NOT saved.")
 
@@ -161,7 +161,7 @@ def init_watson_session():
 def send_whole_watson_request(sesh_id):
 
     # Initialize and transcribe IBM Speech-to-Text
-    with open('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
+    with open('/home/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
         transcript = stt.recognize(audio=audio_file,
                                    content_type='audio/wav',
                                    model='en-US_BroadbandModel',
@@ -169,7 +169,7 @@ def send_whole_watson_request(sesh_id):
                                    interim_results=True,
                                    low_latency=True,
                                    customization_id='139e688f-f2bc-47a5-a670-8e25294580ff').get_result()
-    os.remove("/hopme/pi/M.O.R.G./stt_files/spoken_input.wav")
+    os.remove("/home/pi/M.O.R.G./stt_files/spoken_input.wav")
     results = transcript['results']
     transcripts = []
     confidences = []
@@ -207,7 +207,7 @@ def send_whole_watson_request(sesh_id):
 
         #watson_response = "Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?"
         play_response("Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?")
-        record_to_file('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+        record_to_file('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
         return sesh_id
 
     else:
@@ -222,7 +222,7 @@ def send_whole_watson_request(sesh_id):
     print(watson_response)
 
     # Initialize and transcribe IBM Text-to-Speech
-    sound_path = "/hopme/pi/M.O.R.G./stt_files/temp_response.wav"
+    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
     with open(sound_path, 'wb') as audio_file:
         audio_file.write(
             tts.synthesize(

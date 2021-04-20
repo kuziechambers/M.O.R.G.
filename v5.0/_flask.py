@@ -36,7 +36,7 @@ class Compute(Thread):
             print(self.request)
             print(self.request.values.get('Body', None))
             print("Starting recording")
-            record_to_file('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+            record_to_file('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
             resp = "Done listening."
             print("done")
             return str(resp)
@@ -47,7 +47,7 @@ class Compute(Thread):
             print(self.request)
             print(self.request.values.get('Body', None))
             print("Starting recording")
-            record_to_file('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+            record_to_file('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
             resp = "Done listening."
             print("done")
             return str(resp)
@@ -57,16 +57,16 @@ class Compute(Thread):
             print(self.request)
             print(self.request.values.get('Body', None))
             time.sleep(10)
-            anythingelse_phrases = ["/hopme/pi/M.O.R.G./stt_files/anythingelse.wav",
-                                    "/hopme/pi/M.O.R.G./stt_files/isthatall.wav",
-                                    "/hopme/pi/M.O.R.G./stt_files/willthatbeall.wav"]
+            anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
+                                    "/home/pi/M.O.R.G./stt_files/isthatall.wav",
+                                    "/home/pi/M.O.R.G./stt_files/willthatbeall.wav"]
 
             rint = 0
             rint = random.randint(0, 2)
             path = anythingelse_phrases[rint]
             playsound(path)
             print("Starting recording")
-            record_to_file_wosir('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+            record_to_file_wosir('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
             resp = "Done listening."
             print("done")
             return str(resp)

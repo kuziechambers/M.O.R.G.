@@ -113,7 +113,7 @@ def record_to_file(output_path):
     if path.exists(output_path):
         os.remove(output_path)
     #send_text("Listening...\n\n-M.O.R.G.")
-    playsound('/hopme/pi/M.O.R.G./stt_files/listening.wav')
+    playsound('/home/pi/M.O.R.G./stt_files/listening.wav')
     sample_width, data = record()
     data = pack('<' + ('h'*len(data)), *data)
     wf = wave.open(output_path, 'wb')
@@ -148,8 +148,8 @@ def fx_to_file():
         # .lowshelf()
     )
 
-    infile = '/hopme/pi/M.O.R.G./stt_files/temp_response.wav'
-    outfile = '/hopme/pi/M.O.R.G./stt_files/temp_response_fx.wav'
+    infile = '/home/pi/M.O.R.G./stt_files/temp_response.wav'
+    outfile = '/home/pi/M.O.R.G./stt_files/temp_response_fx.wav'
     # Or, apply the effects directly to a ndarray.
     from librosa import load
     y, sr = load(infile, sr=None)
@@ -160,4 +160,4 @@ def fx_to_file():
     fx(y, outfile)
 
 def play_fx_file():
-    playsound('/hopme/pi/M.O.R.G./stt_files/temp_response_fx.wav')
+    playsound('/home/pi/M.O.R.G./stt_files/temp_response_fx.wav')

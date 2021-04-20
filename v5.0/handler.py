@@ -11,7 +11,7 @@ new_session_id = None
 
 while True:
     try:
-        if path.exists('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav'):
+        if path.exists('/home/pi/M.O.R.G./stt_files/spoken_input.wav'):
             # noinspection PyUnboundLocalVariable
             if new_session_id is not None:
                 send_whole_watson_request(convo_id)
@@ -19,10 +19,10 @@ while True:
                 new_session_id = send_whole_watson_request(convo_id)
 
     except KeyboardInterrupt:
-        if path.exists('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav'):
-            os.remove('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+        if path.exists('/home/pi/M.O.R.G./stt_files/spoken_input.wav'):
+            os.remove('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
         exit()
     # except:
     #     print(sys.exc_info())
-    #     if path.exists('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav'):
-    #         os.remove('/hopme/pi/M.O.R.G./stt_files/spoken_input.wav')
+    #     if path.exists('/home/pi/M.O.R.G./stt_files/spoken_input.wav'):
+    #         os.remove('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
