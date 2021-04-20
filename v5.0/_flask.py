@@ -1,7 +1,7 @@
 import datetime as dt
 import time
 import random
-
+import os
 from flask import Flask, request, jsonify
 from playsound import playsound
 from twilio.twiml.messaging_response import MessagingResponse
@@ -21,7 +21,7 @@ from threading import Thread
 #from multiprocessing import Queue
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
-#os.system("cd /Users/kuziechambers; ./ngrok http -region=us -hostname=morg.ngrok.io 5000 &")
+os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io -log=stdout 5000 > /dev/null &")
 
 # noinspection PyTypeChecker
 class Compute(Thread):
