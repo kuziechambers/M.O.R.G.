@@ -1,4 +1,4 @@
-from random import random
+import random
 
 from events_door import (
     get_motion_state
