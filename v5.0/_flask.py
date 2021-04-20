@@ -9,6 +9,7 @@ from constants import (bright_lights_on,
                        all_lights_off,
                        turn_on_light,
                        turn_off_light,
+                       play_sound,
                        wiki_search,
                        morning_start, morning_end,
                        afternoon_start, afternoon_end,
@@ -64,7 +65,7 @@ class Compute(Thread):
             rint = 0
             rint = random.randint(0, 2)
             path = anythingelse_phrases[rint]
-            playsound(path)
+            play_sound(path)
             print("Starting recording")
             record_to_file_wosir('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
             resp = "Done listening."

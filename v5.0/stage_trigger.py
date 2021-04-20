@@ -1,5 +1,5 @@
 import random
-
+from playsound import playsound
 from events_door import (
     get_motion_state
 )
