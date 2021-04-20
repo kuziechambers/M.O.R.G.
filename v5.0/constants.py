@@ -3,11 +3,8 @@ import os
 import requests
 import simpleaudio as audio
 from datetime import time as ti
-from events_ibm import transcribe_response
-from events_sound import fx_to_file
 
 # sound filenames dictionary
-import wikipedia
 # import warnings
 # warnings.catch_warnings()
 # warnings.simplefilter("ignore")
@@ -381,20 +378,3 @@ def turnoff_outlet():
 
 def turnon_outlet():
     os.system('sthelper turnon "M.O.R.G. Light"')
-
-def wiki_search(wiki_text):
-    print(wiki_text)
-    suggestion = wikipedia.suggest(wiki_text)
-    print(suggestion)
-    if suggestion is None:
-        try:
-            summary = wikipedia.summary(wiki_text, sentences=2)
-        except wikipedia.exceptions.DisambiguationError:
-            summary = "My apologies, it appears the word " + wiki_text + " is either too disambiguous for my wiki search or it doesn't exist. Ask in another way."
-    if suggestion is not None:
-        summary = wikipedia.summary(suggestion, sentences=2)
-
-    print(summary)
-    slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
-    transcribe_response(slow_summary)
-    fx_to_file()
