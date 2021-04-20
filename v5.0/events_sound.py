@@ -149,8 +149,8 @@ def fx_to_file():
         # .lowshelf()
     )
 
-    infile = '/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/temp_response.wav'
-    outfile = '/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/temp_response_fx.wav'
+    infile = '/home/pi/M.O.R.G./stt_files/temp_response.wav'
+    outfile = '/home/pi/M.O.R.G./stt_files/temp_response_fx.wav'
     fx(infile, outfile)
 
     # Read wav with dtype= 'int16'
