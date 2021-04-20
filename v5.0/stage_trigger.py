@@ -49,6 +49,8 @@ while True:
                 time.sleep(1.0)
                 play_sound(sounds[path])
                 turnoff_outlet()
+    except KeyboardInterrupt:
+        exit()
     except:
         ex = sys.exc_info()
         print(ex)
