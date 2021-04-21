@@ -84,11 +84,14 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 
-q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
-# Create an instance of AudioSource
-audio_source = AudioSource(q, True, True)
-# instantiate pyaudio
-audio = pyaudio.PyAudio()
+try:
+    q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
+    # Create an instance of AudioSource
+    audio_source = AudioSource(q, True, True)
+    # instantiate pyaudio
+    audio = pyaudio.PyAudio()
+except:
+    print(sys.exc_info())
 
 # define callback for the speech to text service
 class MyRecognizeCallback(RecognizeCallback):
