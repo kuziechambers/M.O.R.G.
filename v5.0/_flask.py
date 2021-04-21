@@ -28,9 +28,9 @@ try:
 
     # noinspection PyTypeChecker
     class Compute(Thread):
-        def __init__(self, request, target):
+        def __init__(self, req, target):
             Thread.__init__(self)
-            self.request = request
+            self.request = req
             self.target = target
 
 
@@ -61,7 +61,7 @@ try:
                                         "/home/pi/M.O.R.G./stt_files/isthatall.wav",
                                         "/home/pi/M.O.R.G./stt_files/willthatbeall.wav"]
 
-                rint = 0
+                
                 rint = random.randint(0, 2)
                 path = anythingelse_phrases[rint]
                 play_sound(path)
