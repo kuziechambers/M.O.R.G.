@@ -18,7 +18,7 @@ from events_ibm import watson_init_session, watson_delete_session, stt_watson_tt
 from threading import Thread
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
-os.system("cd /Users/kuziechambers; ./ngrok http -region=us -hostname=morg.ngrok.io 5000 &")
+os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io 5000 -log=stdout > /dev/null &")
 
 global convo_id
 convo_id = watson_init_session()
