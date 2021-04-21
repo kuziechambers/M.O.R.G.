@@ -186,18 +186,17 @@ def stt_listen_and_recognize():
     except:
         print(sys.exc_info())
 
-    # mycallback = MyRecognizeCallback()
-    # stt.recognize_using_websocket(audio=audio_source,
-    #                               content_type='audio/l16; rate=44100',
-    #                               recognize_callback=mycallback,
-    #                               interim_results=True,
-    #                               low_latency=True,
-    #                               inactivity_timeout=2,
-    #                               model='en-US_BroadbandModel',
-    #                               customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
-    #                               )
-    transcript = ""
-    #transcript = mycallback.get_transcript()
+    mycallback = MyRecognizeCallback()
+    stt.recognize_using_websocket(audio=audio_source,
+                                  content_type='audio/l16; rate=44100',
+                                  recognize_callback=mycallback,
+                                  interim_results=True,
+                                  low_latency=True,
+                                  inactivity_timeout=2,
+                                  model='en-US_BroadbandModel',
+                                  customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
+                                  )
+    transcript = mycallback.get_transcript()
     try:
         text_output = transcript[0]
         text_output = text_output['transcript']
