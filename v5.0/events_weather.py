@@ -4,7 +4,7 @@ import datetime as dt
 import requests, json
 #from playsound import playsound
 from constants import sounds, play_sound
-from events_ibm import play_response
+from events_ibm import tts_transcribe_play
 #from events_sound import fx_to_file, play_fx_file
 
 # base URL
@@ -108,7 +108,7 @@ def weekend_weather_update(temp_list):
                    + "."
 
     play_sound(sounds['s_enjoyweekendweather'])
-    play_response(weather_text)
+    tts_transcribe_play(weather_text)
 
 
 def weather_update():
@@ -139,7 +139,7 @@ def weather_update():
                        + ". At the moment, there is no expected rain today."
 
     print(weather_text)
-    play_response(weather_text)
+    tts_transcribe_play(weather_text)
 
 
 

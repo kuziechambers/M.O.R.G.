@@ -82,7 +82,7 @@ def record():
 
     r = array('h')
 
-    while 1:
+    while num_silent < 3:
         # little endian, signed short
         snd_data = array('h', stream.read(CHUNK_SIZE))
         if byteorder == 'big':
@@ -114,7 +114,7 @@ def record_to_file(output_path):
     if path.exists(output_path):
         os.remove(output_path)
     #send_text("Listening...\n\n-M.O.R.G.")
-    play_sound('/home/pi/M.O.R.G./stt_files/listening.wav')
+    #play_sound('/home/pi/M.O.R.G./stt_files/listening.wav')
     sample_width, data = record()
     data = pack('<' + ('h'*len(data)), *data)
     wf = wave.open(output_path, 'wb')
@@ -140,7 +140,7 @@ def record_to_file_wosir(output_path):
     wf.close()
     print(".wav File saved.")
 
-def fx_to_file():
+def fx_to_file(inpath, outpath):
     fx = (
         AudioEffectsChain()
             .highshelf(gain=5)
@@ -149,9 +149,9 @@ def fx_to_file():
         # .lowshelf()
     )
 
-    infile = '/home/pi/M.O.R.G./stt_files/temp_response.wav'
-    outfile = '/home/pi/M.O.R.G./stt_files/temp_response_fx.wav'
-    fx(infile, outfile)
+    inpath = inpath
+    outpath = outpath
+    fx(inpath, outpath)
 
     # Read wav with dtype= 'int16'
     # data, samplerate = sf.read(infile, dtype='int16')
@@ -161,8 +161,7 @@ def fx_to_file():
     # sf.write(outfile, x, Fs)
 
 
+def play_fx_file(play_path):
+    play_sound(play_path)
 
-def play_fx_file():
-    play_sound('/home/pi/M.O.R.G./stt_files/temp_response_fx.wav')
-
-fx_to_file()
+#fx_to_file()

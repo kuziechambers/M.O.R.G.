@@ -10,18 +10,10 @@ from constants import play_sound
 import sounddevice as sd
 from scipy.io.wavfile import write
 from events_text import send_text
+from wss_setup import TTSCallback, stt_listen_and_recognize
 from ibm_watson.websocket import SynthesizeCallback
 from events_sound import fx_to_file, record_to_file, play_fx_file
 
-class MySynthesizeCallback(SynthesizeCallback):
-    def __init__(self):
-        SynthesizeCallback.__init__(self)
-
-    def on_audio_stream(self, audio_stream):
-        return audio_stream
-
-    def on_data(self, data):
-        return data
 
 
 # KEYS & URLS
@@ -30,8 +22,10 @@ watson_url = "https://api.us-south.assistant.watson.cloud.ibm.com/instances/7ddf
 watson_id = "3f934fcc-26e7-4859-9ca8-9295241370c2"
 stt_api_key = "k1m0jszudJwIwrpwtUAT50OHK0E8Kdbi6WR5NpPVrkbI"
 stt_url = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/74a3c1c6-e299-40a4-8c20-84da0ea7c27f"
-tts_api_key = 'xd5WDO7vtjDEf5v9jzmYbdbRG6zLm2AK4PBmk8y6PxCV'
-tts_api_url = 'https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/ba47dae7-3648-4a3c-9df9-679f789c4fd2'
+tts_api_key = "xd5WDO7vtjDEf5v9jzmYbdbRG6zLm2AK4PBmk8y6PxCV"
+tts_wss_url = "wss://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/ba47dae7-3648-4a3c-9df9-679f789c4fd2"
+
+
 
 # INIT AUTHENTICATORS
 authenticator = IAMAuthenticator(watson_api_key)
@@ -44,58 +38,45 @@ stt.set_service_url(stt_url)
 
 tts_authenticator = IAMAuthenticator(tts_api_key)
 tts = TextToSpeechV1(authenticator=tts_authenticator)
-tts.set_service_url(tts_api_url)
+tts.set_service_url(tts_wss_url)
 
 #
 # Functions are in order of: TTS functions, STT functions, Watson functions
 #
 
 # TTS FUNCTIONS
-def tts_play(ssml_file, filename):
+def tts_read_play_ssml(ssml_file, filename):
     ssml_path = "/home/pi/M.O.R.G./ssml_files/" + ssml_file
     sound_path = "/home/pi/M.O.R.G./ssml_files/" + filename + ".wav"
     with open(ssml_path, 'r') as f:
         text = f.read()
-    with open(sound_path, 'wb') as audio_file:
-        audio_file.write(
-            tts.synthesize(
-                text,
-                #voice='en-US_HenryV3Voice',
-                #voice='en-US_KevinV3Voice',
-                voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
-                accept='audio/wav'
-            ).get_result().content)
+    my_callback = TTSCallback(sound_path)
+    tts.synthesize_using_websocket(text,
+                                   my_callback,
+                                   accept='audio/wav',
+                                   voice='en-GB_JamesV3Voice')
     play_sound(sound_path)
 
-def play_response(text):
-    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
+def tts_transcribe_play(text):
+    inpath = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
+    outpath = "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav"
     pro_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
-    with open(sound_path, 'wb') as audio_file:
-        audio_file.write(
-            tts.synthesize(
-                pro_text,
-                #voice='en-US_HenryV3Voice',
-                #voice='en-US_KevinV3Voice',
-                voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
-                accept='audio/wav'
-            ).get_result().content)
-    fx_to_file()
-    play_fx_file()
+    my_callback = TTSCallback(inpath)
+    tts.synthesize_using_websocket(pro_text,
+                                   my_callback,
+                                   accept='audio/wav',
+                                   voice='en-GB_JamesV3Voice')
+    fx_to_file(inpath, outpath)
+    play_fx_file(outpath)
 
-def transcribe_response(text):
-    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
-    pro_text = '<speak><prosody pitch="-3st"><prosody rate="125">' + text + '</prosody></prosody></speak>'
-    with open(sound_path, 'wb') as audio_file:
-        audio_file.write(
-            tts.synthesize(
-                pro_text,
-                #voice='en-US_HenryV3Voice',
-                #voice='en-US_KevinV3Voice',
-                voice='en-GB_JamesV3Voice',# 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
-                accept='audio/wav'
-            ).get_result().content)
-    #play_sound(sound_path)
-
+def tts_transcribe(text):
+    sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
+    pro_text = prosody_on_text(text)
+    my_callback = TTSCallback(sound_path)
+    tts.synthesize_using_websocket(pro_text,
+                                   my_callback,
+                                   accept='audio/wav',
+                                   voice='en-GB_JamesV3Voice')
 
 def prosody_on_text(text):
     new_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
@@ -105,39 +86,41 @@ def prosody_on_text(text):
 
 
 # STT FUNCTIONS
-def stt_transcribe():
-   if path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
-      with open('/home/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
-         transcript = stt.recognize(audio=audio_file, content_type='audio/wav', model='en-US_BroadbandModel', continuous=True, customization_id='139e688f-f2bc-47a5-a670-8e25294580ff').get_result()
-         #transcript = stt.recognize(audio=audio_file, content_type='audio/wav', model='en-US_BroadbandModel', continuous=True).get_result()
+def stt_recognize():
+   if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
+      with open('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', 'rb') as audio_file:
+         transcript = stt.recognize(audio=audio_file,
+                                    content_type='audio/wav',
+                                    model='en-US_BroadbandModel',
+                                    continuous=True,
+                                    customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
+                                    ).get_result()
+
       print(transcript)
 
       text_output = transcript['results'][0]['alternatives'][0]['transcript']
       text_output = text_output.strip()
 
-      os.remove("/home/pi/M.O.R.G./stt_files/spoken_input.wav")
+      os.remove("/home/pi/M.O.R.G./stt_files/_spoken_input.wav")
       print(text_output)
       return str(text_output)
 
 def start_recording():
    fs = 44100  # Sample rate
    seconds = 8  # Duration of recording
-
    # for airpods
    sd.default.channels = 1,2
    # for mac
    #sd.default.channels = 2
-
    recording = sd.rec(int(seconds * fs), samplerate=fs)
-
    print("Starting recording...")
    send_text("Starting recording...")
    sd.wait()  # Wait until recording is finished
-   write('/home/pi/M.O.R.G./stt_files/spoken_input.wav', fs, recording)  # Save as WAV file
-   if path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
+   write('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', fs, recording)  # Save as WAV file
+   if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file saved./n/n-M.O.R.G.")
       print("Recording stopped, audio file saved.")
-   if not path.exists("/home/pi/M.O.R.G./stt_files/spoken_input.wav"):
+   if not path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file NOT saved./n/n-M.O.R.G.")
       print("Recording stopped, audio file NOT saved.")
 
@@ -150,7 +133,7 @@ def watson_create_session():
     sesh_id = response['session_id']
     return sesh_id
 
-def init_watson_session():
+def watson_init_session():
     response = assistant.create_session(
         assistant_id=watson_id
     ).get_result()
@@ -158,36 +141,26 @@ def init_watson_session():
     # Create IBM Watson Assistant session
     return sesh_id
 
+def watson_delete_session(sesh_id):
+    assistant.set_service_url(watson_url)
+    response = assistant.delete_session(
+        assistant_id=watson_id,
+        session_id=sesh_id
+    ).get_result()
+    return json.dumps(response, indent=2)
+
+
+
+
+
 # noinspection PyTypeChecker
-def send_whole_watson_request(sesh_id):
+def stt_watson_tts(sesh_id):
 
     # Initialize and transcribe IBM Speech-to-Text
-    with open('/home/pi/M.O.R.G./stt_files/spoken_input.wav', 'rb') as audio_file:
-        transcript = stt.recognize(audio=audio_file,
-                                   content_type='audio/wav',
-                                   model='en-US_BroadbandModel',
-                                   continuous=True,
-                                   interim_results=True,
-                                   low_latency=True,
-                                   customization_id='139e688f-f2bc-47a5-a670-8e25294580ff').get_result()
-    os.remove("/home/pi/M.O.R.G./stt_files/spoken_input.wav")
-    results = transcript['results']
-    transcripts = []
-    confidences = []
-
-    for final in results:
-        for key, value in final.items():
-            if key == 'alternatives':
-                for item in value:
-                    for k, v in item.items():
-                        if k == 'transcript':
-                            transcripts.append(v)
-                        if k == 'confidence':
-                            confidences.append(v)
-    stt_text = ''.join(transcripts).strip()
-    confidence = mean(confidences)
-    print("Text: '" + stt_text + "' | Confidence: " + str(confidence))
-    print()
+    stt_text = stt_listen_and_recognize()
+    print(stt_text)
+    if stt_text == "no audio":
+        return sesh_id
 
     # Send request to IBM Watson Assistant session
     response = assistant.message(
@@ -207,8 +180,8 @@ def send_whole_watson_request(sesh_id):
                        message['output']['generic'][0]['suggestions'][1]['label'].strip("-")]
 
         #watson_response = "Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?"
-        play_response("Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?")
-        record_to_file('/home/pi/M.O.R.G./stt_files/spoken_input.wav')
+        tts_transcribe_play("Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?")
+        record_to_file('/home/pi/M.O.R.G./stt_files/_spoken_input.wav')
         return sesh_id
 
     else:
@@ -223,30 +196,17 @@ def send_whole_watson_request(sesh_id):
     print(watson_response)
 
     # Initialize and transcribe IBM Text-to-Speech
-    sound_path = "/home/pi/M.O.R.G./stt_files/temp_response.wav"
-    with open(sound_path, 'wb') as audio_file:
-        audio_file.write(
-            tts.synthesize(
-                watson_response,
-                # voice='en-US_HenryV3Voice',
-                # voice='en-US_KevinV3Voice',
-                voice='en-GB_JamesV3Voice',  # 'en-GB_JamesV3Voice' "en-US_MichaelVoice"
-                accept='audio/wav',
-            ).get_result().content)
+    sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
+    my_callback = TTSCallback(sound_path)
+    tts.synthesize_using_websocket(watson_response,
+                                   my_callback,
+                                   accept='audio/wav',
+                                   voice='en-GB_JamesV3Voice')
 
-    fx_to_file()
-    play_fx_file()
+    fx_to_file(sound_path, "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
+    play_fx_file("/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
 
     return sesh_id
-
-def watson_delete_session(sesh_id):
-    assistant.set_service_url(watson_url)
-    response = assistant.delete_session(
-        assistant_id=watson_id,
-        session_id=sesh_id
-    ).get_result()
-
-    return json.dumps(response, indent=2)
 
 
 
@@ -266,5 +226,5 @@ def wiki_search(wiki_text):
 
     print(summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
-    transcribe_response(slow_summary)
+    tts_transcribe(slow_summary)
     fx_to_file()

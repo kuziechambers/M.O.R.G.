@@ -43,7 +43,7 @@ def tts_play(ssml_file, filename):
 # while i < 106:
 #     string_i = str(i)
 #     string = "x_" + string_i
-#     tts_play(string, string_i)
+#     tts_read_play_ssml(string, string_i)
 #     i = i + 1
 
 tts_play("x_sundaylow", "sundaylow")

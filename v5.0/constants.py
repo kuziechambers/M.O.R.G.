@@ -283,7 +283,7 @@ def turn_off_light(text):
 
     if light_id2 == 0:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
-        requests.put(url, data=json.dumps(concentratepayload))
+        requests.put(url, data=json.dumps(offpayload))
     else:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
         url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id2) + "/state/"

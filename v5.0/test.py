@@ -1,31 +1,138 @@
-import wikipedia
-from events_ibm import transcribe_response
-from events_sound import fx_to_file
-from events_weather import get_rain, weather_update, get_weekend_temp
+from events_sound import play_sound
+import pyaudio
+from ibm_watson import SpeechToTextV1
+from ibm_watson.websocket import RecognizeCallback, AudioSource
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+import concurrent.futures
+try:
+    from Queue import Queue, Full
+except ImportError:
+    from queue import Queue, Full
 
-#print(get_rain())
-from datetime import datetime
-date_string = '00:00:00'
 
-# r_time = datetime.strptime(date_string, '%H:%M:%S')
-# time_string = str(r_time.strftime("%I:%M %p"))
-#
-# if time_string[:1] == "0":
-#     date_P = time_string[1:2] + time_string[-2:]
-# if time_string[:1] != "0":
-#     date_P = time_string[0:2] + time_string[-2:]
-#
-# if date_P == "12AM":
-#     date_P = "Midnight"
-# print(date_P)
+stt_api_key = "k1m0jszudJwIwrpwtUAT50OHK0E8Kdbi6WR5NpPVrkbI"
+stt_url = "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/74a3c1c6-e299-40a4-8c20-84da0ea7c27f"
 
-#weather_update()
+stt_authenticator = IAMAuthenticator(stt_api_key)
+stt = SpeechToTextV1(authenticator=stt_authenticator)
+stt.set_service_url(stt_url)
 
-transcribe_response("Anything else?")
-fx_to_file()
+# define callback for the speech to text service
+class MyRecognizeCallback(RecognizeCallback):
+    def __init__(self):
+        RecognizeCallback.__init__(self)
+        self.transcript = "none"
 
-# text = "nffl"
-#
-# suggestion = wikipedia.suggest("iron man")
-# print(suggestion)
-# print(wikipedia.summary(suggestion, sentences=3))
+    def on_transcription(self, transcript):
+        self.transcript = transcript
+
+    def get_transcript(self):
+        return self.transcript
+
+    def on_connected(self):
+        print('Connection was successful')
+
+    def on_error(self, error):
+        print('Error received: {}'.format(error))
+
+    def on_inactivity_timeout(self, error):
+        print('Inactivity timeout: {}'.format(error))
+
+    def on_listening(self):
+        play_sound('/home/pi/M.O.R.G./stt_files/listening.wav')
+        print('Service is listening')
+
+    # def on_hypothesis(self, hypothesis):
+    #     print(hypothesis)
+
+    # def on_data(self, data):
+    #     print(data)
+
+    def on_close(self):
+        print("Connection closed")
+
+class WebsocketThreadClass:
+    def __init__(self):
+        self._running = True
+
+    def terminate(self):
+        self._running = False
+
+    def run(self):
+        while self._running:
+            try:
+                output = recognize_using_websocket()
+            except:
+                print("Recognize finished.")
+            return output
+
+
+CHUNK = 3*1024
+BUF_MAX_SIZE = CHUNK * 10
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+
+q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
+# Create an instance of AudioSource
+audio_source = AudioSource(q, True, True)
+# instantiate pyaudio
+audio = pyaudio.PyAudio()
+
+# this function will initiate the recognize service and pass in the AudioSource
+def recognize_using_websocket(*args):
+    mycallback = MyRecognizeCallback()
+    stt.recognize_using_websocket(audio=audio_source,
+                                  content_type='audio/l16; rate=44100',
+                                  recognize_callback=mycallback,
+                                  interim_results=True,
+                                  low_latency=True,
+                                  inactivity_timeout=2,
+                                  model='en-US_BroadbandModel',
+                                  customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
+                                  )
+    return mycallback.get_transcript()
+
+def pyaudio_callback(in_data, frame_count, time_info, status):
+    try:
+        q.put(in_data)
+    except Full:
+        pass # discard
+    return None, pyaudio.paContinue
+
+
+# noinspection PyTypeChecker
+def stt_listen_and_recognize():
+    # open stream using callback
+    stream = audio.open(
+        format=FORMAT,
+        channels=CHANNELS,
+        rate=RATE,
+        input=True,
+        frames_per_buffer=CHUNK,
+        stream_callback=pyaudio_callback,
+        start=False
+    )
+    stream.start_stream()
+
+    mycallback = MyRecognizeCallback()
+    stt.recognize_using_websocket(audio=audio_source,
+                                  content_type='audio/l16; rate=44100',
+                                  recognize_callback=mycallback,
+                                  interim_results=True,
+                                  low_latency=True,
+                                  inactivity_timeout=2,
+                                  model='en-US_BroadbandModel',
+                                  customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
+                                  )
+    transcript = mycallback.get_transcript()
+    text_output = transcript[0]
+    text_output = text_output['transcript']
+
+    return text_output
+
+
+print(stt_listen_and_recognize())
+
+
+
