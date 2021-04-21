@@ -115,8 +115,8 @@ class MyRecognizeCallback(RecognizeCallback):
         play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
         print('Service is listening')
 
-    # def on_hypothesis(self, hypothesis):
-    #     print(hypothesis)
+    def on_hypothesis(self, hypothesis):
+        print(hypothesis)
 
     # def on_data(self, data):
     #     print(data)
@@ -172,7 +172,7 @@ def stt_listen_and_recognize():
         channels=CHANNELS,
         rate=RATE,
         input=True,
-        nput_device_index=10,
+        input_device_index=10,
         frames_per_buffer=CHUNK,
         stream_callback=pyaudio_callback,
         start=False
