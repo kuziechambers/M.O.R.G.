@@ -178,7 +178,10 @@ def stt_listen_and_recognize():
         stream_callback=pyaudio_callback,
         start=False
     )
-    stream.start_stream()
+    try:
+        stream.start_stream()
+    except:
+        print(sys.exc_info())
 
     # mycallback = MyRecognizeCallback()
     # stt.recognize_using_websocket(audio=audio_source,
