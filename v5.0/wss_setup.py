@@ -134,26 +134,26 @@ class WebsocketThreadClass:
     def run(self):
         while self._running:
             try:
-                output = recognize_using_websocket()
+                print("")
             except:
                 print("Recognize finished.")
-            return output
+            return
 
 
 
 # this function will initiate the recognize service and pass in the AudioSource
-def recognize_using_websocket(*args):
-    mycallback = MyRecognizeCallback()
-    stt.recognize_using_websocket(audio=audio_source,
-                                  content_type='audio/l16; rate=44100',
-                                  recognize_callback=mycallback,
-                                  interim_results=True,
-                                  low_latency=True,
-                                  inactivity_timeout=2,
-                                  model='en-US_BroadbandModel',
-                                  customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
-                                  )
-    return mycallback.get_transcript()
+# def recognize_using_websocket(*args):
+#     mycallback = MyRecognizeCallback()
+#     stt.recognize_using_websocket(audio=audio_source,
+#                                   content_type='audio/l16; rate=44100',
+#                                   recognize_callback=mycallback,
+#                                   interim_results=True,
+#                                   low_latency=True,
+#                                   inactivity_timeout=2,
+#                                   model='en-US_BroadbandModel',
+#                                   customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
+#                                   )
+#     return mycallback.get_transcript()
 
 
 def pyaudio_callback(in_data, frame_count, time_info, status):
