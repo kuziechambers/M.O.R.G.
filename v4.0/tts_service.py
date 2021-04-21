@@ -40,7 +40,7 @@ def tts_play(ssml_file, filename):
 
 
 tts_play('x_afternoonwelcomeback1', 'afternoonwelcomeback1')
-#tts_play("x_morningproductiveday", "morningproductiveday")
+#tts_read_play_ssml("x_morningproductiveday", "morningproductiveday")
 
 
 
