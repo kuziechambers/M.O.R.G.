@@ -25,7 +25,6 @@ convo_id = watson_init_session()
 
 try:
 
-
     # noinspection PyTypeChecker
     class Compute(Thread):
         def __init__(self, req, target):
