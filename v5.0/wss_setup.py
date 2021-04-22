@@ -209,7 +209,7 @@ def stt_listen_and_recognize():
         stream.stop_stream()
         stream.close()
         audio.terminate()
-        audio_source.completed_recording()
+        #audio_source.completed_recording()
     except:
         print(transcript)
         print(sys.exc_info())
