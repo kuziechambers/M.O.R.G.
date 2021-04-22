@@ -163,6 +163,7 @@ class WebsocketThreadClass:
 def pyaudio_callback(in_data, frame_count, time_info, status):
     try:
         q.put(in_data)
+        print(in_data)
     except Full:
         pass  # discard
     return None, pyaudio.paContinue
