@@ -154,8 +154,6 @@ class WebsocketThreadClass:
 
 def pyaudio_callback(in_data, frame_count, time_info, status):
 
-    global q
-    q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
     # Create an instance of AudioSource
     # instantiate pyaudio
 
@@ -169,8 +167,12 @@ def pyaudio_callback(in_data, frame_count, time_info, status):
 
 # noinspection PyTypeChecker
 def stt_listen_and_recognize():
-    # with q.mutex:
-    #     q.queue.clear()
+
+    global q
+    q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
+
+    with q.mutex:
+        q.queue.clear()
 
     audio = pyaudio.PyAudio()
     audio_source = AudioSource(q, True, True)
