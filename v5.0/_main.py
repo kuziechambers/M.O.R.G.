@@ -418,7 +418,7 @@ while True:
 
 
 #except:
-    ex = sys.exc_info()
-    send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-    morg_log.error(str(ex))
-    os.remove("/tmp/mydaemon.pid")
+    # ex = sys.exc_info()
+    # send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+    # morg_log.error(str(ex))
+    # os.remove("/tmp/mydaemon.pid")
