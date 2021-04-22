@@ -58,8 +58,8 @@ class MyRecognizeCallback(RecognizeCallback):
     def on_hypothesis(self, hypothesis):
         print(hypothesis)
 
-    def on_data(self, data):
-        print(data)
+    # def on_data(self, data):
+    #     print(data)
 
     def on_close(self):
         print("Connection closed")
@@ -108,14 +108,15 @@ stream = audio.open(
 #########################################################################
 
 print("Enter CTRL+C to end recording...")
-stream.start_stream()
-
+#stream.start_stream()
 try:
-    recognize_thread = Thread(target=recognize_using_weboscket, args=())
-    recognize_thread.start()
-
     while True:
-        pass
+        recognize_thread = Thread(target=recognize_using_weboscket, args=())
+        recognize_thread.start()
+
+        while True:
+            pass
+
 except KeyboardInterrupt:
     # stop recording
     stream.stop_stream()
