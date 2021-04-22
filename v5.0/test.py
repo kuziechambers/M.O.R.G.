@@ -10,8 +10,18 @@ import pyaudio
 
 
 p = pyaudio.PyAudio()
+print(p.get_default_input_device_info())
+print()
+print()
+print()
 for i in range(p.get_device_count()):
     print(p.get_device_info_by_index(i))
 
+
+print()
+print()
+print()
+for i in range(p.get_host_api_count()):
+    print(p.get_host_api_info_by_index(i))
 
 

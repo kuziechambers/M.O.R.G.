@@ -181,7 +181,7 @@ def stt_watson_tts(sesh_id):
 
         #watson_response = "Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?"
         tts_transcribe_play("Apologies, did you say " + suggestions[0] + " or " + suggestions[1] + "?")
-        record_to_file('/home/pi/M.O.R.G./stt_files/_spoken_input.wav')
+        stt_listen_and_recognize()
         return sesh_id
 
     else:

@@ -182,7 +182,7 @@ def stt_listen_and_recognize():
         channels=CHANNELS,
         rate=RATE,
         input=True,
-        input_device_index=10,
+        input_device_index=2,
         frames_per_buffer=CHUNK,
         stream_callback=pyaudio_callback,
         start=False
@@ -195,9 +195,10 @@ def stt_listen_and_recognize():
     mycallback = MyRecognizeCallback()
     stt.recognize_using_websocket(audio=audio_source,
                                   content_type='audio/l16; rate=44100',
+                                  background_audio_suppression=0.5,
                                   recognize_callback=mycallback,
                                   interim_results=True,
-                                  low_latency=True,
+                                  low_latency=False,
                                   inactivity_timeout=2,
                                   model='en-US_BroadbandModel',
                                   customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
