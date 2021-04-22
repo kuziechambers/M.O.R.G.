@@ -206,6 +206,10 @@ def stt_listen_and_recognize():
     try:
         text_output = transcript[0]
         text_output = text_output['transcript']
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+        audio_source.completed_recording()
     except:
         print(transcript)
         print(sys.exc_info())
