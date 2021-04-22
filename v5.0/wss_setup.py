@@ -84,14 +84,6 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 
-try:
-    q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
-    # Create an instance of AudioSource
-    audio_source = AudioSource(q, True, True)
-    # instantiate pyaudio
-    audio = pyaudio.PyAudio()
-except:
-    print(sys.exc_info())
 
 # define callback for the speech to text service
 class MyRecognizeCallback(RecognizeCallback):
@@ -161,9 +153,15 @@ class WebsocketThreadClass:
 
 
 def pyaudio_callback(in_data, frame_count, time_info, status):
+
+    global q
+    q = Queue(maxsize=int(round(BUF_MAX_SIZE / CHUNK)))
+    # Create an instance of AudioSource
+    # instantiate pyaudio
+
     try:
         q.put(in_data)
-        print(in_data)
+        #print(in_data)
     except Full:
         pass  # discard
     return None, pyaudio.paContinue
@@ -171,6 +169,11 @@ def pyaudio_callback(in_data, frame_count, time_info, status):
 
 # noinspection PyTypeChecker
 def stt_listen_and_recognize():
+    with q.mutex:
+        q.queue.clear()
+
+    audio = pyaudio.PyAudio()
+    audio_source = AudioSource(q, True, True)
     # open stream using callback
     stream = audio.open(
         format=FORMAT,
