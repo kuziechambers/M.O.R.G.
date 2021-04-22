@@ -107,8 +107,8 @@ class MyRecognizeCallback(RecognizeCallback):
         print('Inactivity timeout: {}'.format(error))
 
     def on_listening(self):
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
         print('Service is listening')
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
 
     def on_hypothesis(self, hypothesis):
         print(hypothesis)
