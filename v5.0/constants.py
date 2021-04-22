@@ -2,6 +2,7 @@ import json
 import os
 import requests
 import simpleaudio as audio
+from playsound import playsound
 from datetime import time as ti
 
 # sound filenames dictionary
@@ -181,7 +182,8 @@ def get_degrees_sound(degrees):
 
 # play sound function
 def play_sound(sound_file):
-    audio.WaveObject.from_wave_file(sound_file).play().wait_done()
+    playsound(sound_file)
+    #audio.WaveObject.from_wave_file(sound_file).play().wait_done()
 
 # light payloads
 brightpayload = {
