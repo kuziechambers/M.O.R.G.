@@ -169,8 +169,8 @@ def pyaudio_callback(in_data, frame_count, time_info, status):
 
 # noinspection PyTypeChecker
 def stt_listen_and_recognize():
-    with q.mutex:
-        q.queue.clear()
+    # with q.mutex:
+    #     q.queue.clear()
 
     audio = pyaudio.PyAudio()
     audio_source = AudioSource(q, True, True)
