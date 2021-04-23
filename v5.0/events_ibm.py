@@ -67,7 +67,7 @@ def tts_transcribe_play(text):
                                    accept='audio/wav',
                                    voice='en-GB_JamesV3Voice')
     fx_to_file(inpath, outpath)
-    play_fx_file(outpath)
+    play_fx_file()
 
 def tts_transcribe(text):
     sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
@@ -205,7 +205,7 @@ def stt_watson_tts(sesh_id):
                                    voice='en-GB_JamesV3Voice')
 
     fx_to_file(sound_path, "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
-    play_fx_file("/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
+    play_fx_file()
 
     return sesh_id
 
