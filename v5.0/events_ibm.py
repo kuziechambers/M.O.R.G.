@@ -158,7 +158,7 @@ def stt_watson_tts(sesh_id):
 
     # Initialize and transcribe IBM Speech-to-Text
     stt_text = stt_listen_and_recognize()
-    print(stt_text)
+    print("STT-------: " + stt_text)
     if stt_text == "no audio":
         return sesh_id
 
@@ -173,7 +173,7 @@ def stt_watson_tts(sesh_id):
     ).get_result()
     message = json.dumps(response)
     message = json.loads(message)
-    print(message)
+    print("WATSON----: " + message)
     response_type = message['output']['generic'][0]['response_type']
     if response_type == "suggestion":
         suggestions = [message['output']['generic'][0]['suggestions'][0]['label'].strip("-"),
@@ -192,8 +192,9 @@ def stt_watson_tts(sesh_id):
             print(sys.exc_info())
             watson_response = "Apologies sir, I didn't understand."
 
+    print("WATSON----: " + watson_response)
     watson_response = prosody_on_text(str(watson_response))
-    print(watson_response)
+
 
     # Initialize and transcribe IBM Text-to-Speech
     sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
@@ -213,9 +214,9 @@ def stt_watson_tts(sesh_id):
 
 
 def wiki_search(wiki_text):
-    print(wiki_text)
+    print("WIKI------: " + wiki_text)
     suggestion = wikipedia.suggest(wiki_text)
-    print(suggestion)
+    print("WIKI------: " + suggestion)
     if suggestion is None:
         try:
             summary = wikipedia.summary(wiki_text, sentences=2)
@@ -224,7 +225,7 @@ def wiki_search(wiki_text):
     if suggestion is not None:
         summary = wikipedia.summary(suggestion, sentences=2)
 
-    print(summary)
+    print("WIKI------: " + summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
     fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")

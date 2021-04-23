@@ -44,7 +44,7 @@ class TTSCallback(SynthesizeCallback):
 
     def on_close(self):
         self.fd.close()
-        print('TTS----: Done synthesizing. Closing the connection')
+        print('TTS-------: Done synthesizing. Closing the connection')
 
 def synthesize_wss(text, sound_path):
     new_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
@@ -98,26 +98,26 @@ class MyRecognizeCallback(RecognizeCallback):
         return self.transcript
 
     def on_connected(self):
-        print('STT----: Connection was successful')
+        print('STT-------: Connection was successful')
 
     def on_error(self, error):
-        print('STT----: Error received: {}'.format(error))
+        print('STT-------: Error received: {}'.format(error))
 
     def on_inactivity_timeout(self, error):
-        print('STT----: Inactivity timeout: {}'.format(error))
+        print('STT-------: Inactivity timeout: {}'.format(error))
 
     def on_listening(self):
-        print('STT----: Service is listening')
+        print('STT-------: Service is listening')
         play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
 
     def on_hypothesis(self, hypothesis):
-        print(hypothesis)
+        print("STT-------: " + hypothesis)
 
     # def on_data(self, data):
     #     print(data)
 
     def on_close(self):
-        print("STT----: Connection closed")
+        print("STT-------: Connection closed")
 
 
 class WebsocketThreadClass:
@@ -190,7 +190,7 @@ def stt_listen_and_recognize():
     try:
         stream.start_stream()
     except:
-        print(sys.exc_info())
+        print("STT-------: " + sys.exc_info())
 
     mycallback = MyRecognizeCallback()
     stt.recognize_using_websocket(audio=audio_source,
@@ -212,8 +212,8 @@ def stt_listen_and_recognize():
         audio.terminate()
         #audio_source.completed_recording()
     except:
-        print(transcript)
-        print(sys.exc_info())
+        print("STT-------: " + transcript)
+        print("STT-------: " + sys.exc_info())
         text_output = "no audio"
         stream.stop_stream()
         stream.close()
