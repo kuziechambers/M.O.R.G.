@@ -214,9 +214,9 @@ def stt_watson_tts(sesh_id):
 
 
 def wiki_search(wiki_text):
-    print("WIKI------: " + wiki_text)
+    print("-----WIKI-----------: " + wiki_text)
     suggestion = wikipedia.suggest(wiki_text)
-    print("WIKI------: " + suggestion)
+    print("-----WIKI-----------: " + str(suggestion))
     if suggestion is None:
         try:
             summary = wikipedia.summary(wiki_text, sentences=2)
@@ -225,7 +225,7 @@ def wiki_search(wiki_text):
     if suggestion is not None:
         summary = wikipedia.summary(suggestion, sentences=2)
 
-    print("WIKI------: " + summary)
+    print("-----WIKI-----------: " + summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
     fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
