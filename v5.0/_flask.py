@@ -21,7 +21,6 @@ from threading import Thread
 os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io -log=stdout 5000 > /home/pi/ngrok.log &")
 
 global convo_id
-convo_id = watson_init_session()
 
 try:
 
@@ -38,6 +37,8 @@ try:
                 print("/sms/COMMANDBEGUN: " + self.target)
                 print(self.request)
                 print(self.request.values.get('Body', None))
+                global convo_id
+                convo_id = watson_init_session()
                 stt_watson_tts(convo_id)
                 resp = "Done listening."
                 return str(resp)
@@ -212,8 +213,6 @@ try:
                     time_greeting = "Good evening"
                 else:
                     time_greeting = "Good day"
-                global convo_id
-                convo_id = watson_init_session()
                 return jsonify({'action': 'hello person', 'result': 'processing', 'time': time_greeting, 'samevalues': 'no'})
         if action == "repeat-that":
             thread_a = Compute(request.__copy__(), "repeat_that")

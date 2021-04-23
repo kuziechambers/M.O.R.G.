@@ -31,10 +31,10 @@ class TTSCallback(SynthesizeCallback):
         self.fd = open(self.file_path, 'ab')
 
     def on_connected(self):
-        print('Connection was successful')
+        print('TTS----: Connection was successful')
 
     def on_error(self, error):
-        print('Error received: {}'.format(error))
+        print('TTS----: Error received: {}'.format(error))
 
     def on_timing_information(self, timing_information):
         print(timing_information)
@@ -44,7 +44,7 @@ class TTSCallback(SynthesizeCallback):
 
     def on_close(self):
         self.fd.close()
-        print('Done synthesizing. Closing the connection')
+        print('TTS----: Done synthesizing. Closing the connection')
 
 def synthesize_wss(text, sound_path):
     new_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
@@ -98,16 +98,16 @@ class MyRecognizeCallback(RecognizeCallback):
         return self.transcript
 
     def on_connected(self):
-        print('Connection was successful')
+        print('STT----: Connection was successful')
 
     def on_error(self, error):
-        print('Error received: {}'.format(error))
+        print('STT----: Error received: {}'.format(error))
 
     def on_inactivity_timeout(self, error):
-        print('Inactivity timeout: {}'.format(error))
+        print('STT----: Inactivity timeout: {}'.format(error))
 
     def on_listening(self):
-        print('Service is listening')
+        print('STT----: Service is listening')
         play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
 
     def on_hypothesis(self, hypothesis):
@@ -117,7 +117,7 @@ class MyRecognizeCallback(RecognizeCallback):
     #     print(data)
 
     def on_close(self):
-        print("Connection closed")
+        print("STT----: Connection closed")
 
 
 class WebsocketThreadClass:
@@ -215,6 +215,9 @@ def stt_listen_and_recognize():
         print(transcript)
         print(sys.exc_info())
         text_output = "no audio"
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
 
     return text_output
 
