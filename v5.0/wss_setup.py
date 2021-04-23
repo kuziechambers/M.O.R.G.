@@ -182,7 +182,7 @@ def stt_listen_and_recognize():
         channels=CHANNELS,
         rate=RATE,
         input=True,
-        input_device_index=2,
+        input_device_index=3,
         frames_per_buffer=CHUNK,
         stream_callback=pyaudio_callback,
         start=False
