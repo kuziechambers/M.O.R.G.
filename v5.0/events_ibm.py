@@ -229,3 +229,4 @@ def wiki_search(wiki_text):
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
     fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
+    play_fx_file()

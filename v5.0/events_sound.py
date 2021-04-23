@@ -161,7 +161,7 @@ def fx_to_file(inpath, outpath):
     # sf.write(outfile, x, Fs)
 
 
-def play_fx_file(play_path):
-    play_sound(play_path)
+def play_fx_file():
+    play_sound("/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
 
 #fx_to_file()
