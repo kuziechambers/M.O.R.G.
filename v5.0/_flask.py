@@ -35,8 +35,8 @@ try:
         def run(self):
             if self.target == "sms_listen":
                 print("FLASK-----: " + "/sms/COMMANDBEGUN: " + self.target)
-                print("FLASK-----: " + self.request)
-                print("FLASK-----: " + self.request.values.get('Body', None))
+                print("FLASK-----: " + str(self.request))
+                print("FLASK-----: " + str(self.request.values.get('Body', None)))
                 global convo_id
                 convo_id = watson_init_session()
                 stt_watson_tts(convo_id)
@@ -46,16 +46,16 @@ try:
             if self.target == "repeat_that":
                 print("FLASK-----: " + "/sms/COMMANDBEGUN: " + self.target)
                 time.sleep(5)
-                print("FLASK-----: " + self.request)
-                print("FLASK-----: " + self.request.values.get('Body', None))
+                print("FLASK-----: " + str(self.request))
+                print("FLASK-----: " + str(self.request.values.get('Body', None)))
                 stt_watson_tts(convo_id)
                 resp = "Done listening."
                 return str(resp)
 
             if self.target == "anything_else":
                 print("FLASK-----: " + "/sms/COMMANDBEGUN: " + self.target)
-                print("FLASK-----: " + self.request)
-                print("FLASK-----: " + self.request.values.get('Body', None))
+                print("FLASK-----: " + str(self.request))
+                print("FLASK-----: " + str(self.request.values.get('Body', None)))
                 time.sleep(5)
                 anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
                                         "/home/pi/M.O.R.G./stt_files/isthatall.wav",
@@ -70,17 +70,17 @@ try:
                 return str(resp)
 
             if self.target == "all_bright_lights_on":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 bright_lights_on()
                 return
 
             if self.target == "all_lights_off":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 all_lights_off()
                 return
 
             if self.target == "light_on":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
                 print(light)
@@ -88,7 +88,7 @@ try:
                 return
 
             if self.target == "light_off":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
                 print(light)
@@ -96,26 +96,26 @@ try:
                 return
 
             if self.target == "wiki_search":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 wiki_text = str(message['wikitext'])
                 wiki_search(wiki_text)
                 return
 
             if self.target == "say_hello":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 print("Hello " + str(message['person']))
                 return
 
             if self.target == "say_hello_two_people":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 print("Hello " + str(message['person1']) + " and " + str(message['person2']))
                 return
 
             if self.target == "end_convo":
-                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + self.target)
+                print("FLASK-----: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 watson_delete_session(convo_id)
                 time.sleep(2)
@@ -162,7 +162,7 @@ try:
         message = request.get_json()
         action = message['action']
 
-        print("FLASK-----: ACTION: " + action)
+        print("FLASK-----: ACTION: " + str(action))
         if action == "all-lights-on":
             thread_a = Compute(request.__copy__(), "all_bright_lights_on")
             thread_a.start()

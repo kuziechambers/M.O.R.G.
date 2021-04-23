@@ -173,7 +173,7 @@ def stt_watson_tts(sesh_id):
     ).get_result()
     message = json.dumps(response)
     message = json.loads(message)
-    print("WATSON----: " + message)
+    print("WATSON----: " + str(message))
     response_type = message['output']['generic'][0]['response_type']
     if response_type == "suggestion":
         suggestions = [message['output']['generic'][0]['suggestions'][0]['label'].strip("-"),
