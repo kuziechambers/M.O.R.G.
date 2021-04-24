@@ -60,14 +60,17 @@ try:
                 anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
                                         "/home/pi/M.O.R.G./stt_files/isthatall.wav",
                                         "/home/pi/M.O.R.G./stt_files/willthatbeall.wav"]
-
-                
                 rint = random.randint(0, 2)
                 path = anythingelse_phrases[rint]
                 play_sound(path)
                 stt_watson_tts(convo_id)
                 resp = "Done listening."
                 return str(resp)
+
+            if self.target == "any_greeting":
+                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                message = self.request.get_json()
+                return
 
             if self.target == "all_bright_lights_on":
                 print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
@@ -100,6 +103,16 @@ try:
                 message = self.request.get_json()
                 wiki_text = str(message['wikitext'])
                 wiki_search(wiki_text)
+                return
+
+            if self.target == "whats_my_name":
+                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                message = self.request.get_json()
+                return
+
+            if self.target == "who_am_i":
+                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                message = self.request.get_json()
                 return
 
             if self.target == "say_hello":
@@ -163,6 +176,10 @@ try:
         action = message['action']
 
         print("-----FLASK----------: ACTION: " + str(action))
+        if action == "greeting-hello" or action == "greeting-half-inquire" or action == "greeting-we-inquire" or action == "greeting-full-inquiry":
+            thread_a = Compute(request.__copy__(), "any_greeting")
+            thread_a.start()
+            return jsonify({'action': 'any greeting', 'result': 'processing'})
         if action == "all-lights-on":
             thread_a = Compute(request.__copy__(), "all_bright_lights_on")
             thread_a.start()
@@ -174,15 +191,23 @@ try:
         if action == "turn-on-light":
             thread_a = Compute(request.__copy__(), "light_on")
             thread_a.start()
-            return jsonify({'action': 'turn light on', 'result': 'processing'})
+            return jsonify({'action': 'one light on', 'result': 'processing'})
         if action == "turn-off-light":
             thread_a = Compute(request.__copy__(), "light_off")
             thread_a.start()
-            return jsonify({'action': 'turn light off', 'result': 'processing'})
+            return jsonify({'action': 'one light off', 'result': 'processing'})
         if action == "wiki-response":
             thread_a = Compute(request.__copy__(), "wiki_search")
             thread_a.start()
             return jsonify({'action': 'wiki', 'result': 'processing'})
+        if action == "whats-my-name":
+            thread_a = Compute(request.__copy__(), "whats_my_name")
+            thread_a.start()
+            return jsonify({'action': 'whats my name', 'result': 'processing'})
+        if action == "who-am-i":
+            thread_a = Compute(request.__copy__(), "who_am_i")
+            thread_a.start()
+            return jsonify({'action': 'who am i', 'result': 'processing'})
         if action == "say-hello":
             thread_a = Compute(request.__copy__(), "say_hello")
             thread_a.start()
