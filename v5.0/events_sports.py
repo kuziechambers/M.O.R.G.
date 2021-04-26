@@ -1,9 +1,4 @@
-import time
 from datetime import datetime
-import sys
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-import pandas as panda
 from events_ibm import tts_transcribe_play
 
 def percent_to_float(x):
