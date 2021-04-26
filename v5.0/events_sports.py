@@ -1,8 +1,10 @@
 import time
+from datetime import datetime
 import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import pandas as panda
+from events_ibm import tts_transcribe_play
 
 def percent_to_float(x):
     return float(x.strip('%'))/100
@@ -15,54 +17,75 @@ class SportsEvent:
         self.home_away = home_away
 
     def get_game_date(self):
-        return self.game_date
+        return str(self.game_date)
 
     def get_game_time(self):
-        return self.game_date
+        return str(self.game_time)
     
     def get_game_opp(self):
-        return self.game_date
+        return str(self.game_opp)
 
     def get_home_away(self):
-        return self.home_away
-
-                        
+        return str(self.home_away)
 
 
-mavs_game_dates_times = {"2021-04-24 19:30" : ['Lakers','Home'],
-                         "2021-04-26 21:00" : ["Kings","Away"],
-                         "2021-04-27 20:30" : ["Warriors","Away"],
-                         "2021-04-29 18:00" : ["Pistons","Away"],
-                         "2021-05-01 20:00" : ["Wizards","Home"],
-                         "2021-05-02 19:00" : ["Kings","Home"],
-                         "2021-05-04 19:00" : ["Heat","Away"],
-                         "2021-05-06 18:30" : ["Nets","Home"],
-                         "2021-05-07 19:30" : ["Cavs","Home"],
-                         "2021-05-09 18:00" : ["Cavs","Home"],
-                         "2021-05-11 19:00" : ["Grizzlies","Home"],
-                         "2021-05-12 20:00" : ["Pelicans","Home"],
-                         "2021-05-14 20:00" : ["Raptors","Home"],
-                         "2021-05-16 19:30" : ["Timberwolves","Home"]}
 
 
-mavs_games = []
 
-def compile_game_info(games_array):
-    for g_date_time, g_opp_location in games_array.items():
+
+today_date = str(datetime.today()).split(" ")
+today_date = today_date[0]
+print(today_date)
+
+def get_mavs_game():
+    mavs_game_dates_times = {"2021-04-24 19:30": ['Lakers', 'Home'],
+                             "2021-04-26 21:00": ["Kings", "Away"],
+                             "2021-04-27 20:30": ["Warriors", "Away"],
+                             "2021-04-29 18:00": ["Pistons", "Away"],
+                             "2021-05-01 20:00": ["Wizards", "Home"],
+                             "2021-05-02 19:00": ["Kings", "Home"],
+                             "2021-05-04 19:00": ["Heat", "Away"],
+                             "2021-05-06 18:30": ["Nets", "Home"],
+                             "2021-05-07 19:30": ["Cavs", "Home"],
+                             "2021-05-09 18:00": ["Cavs", "Home"],
+                             "2021-05-11 19:00": ["Grizzlies", "Home"],
+                             "2021-05-12 20:00": ["Pelicans", "Home"],
+                             "2021-05-14 20:00": ["Raptors", "Home"],
+                             "2021-05-16 19:30": ["Timberwolves", "Home"]}
+    mavs_games = []
+
+    found = False
+    for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")
-        for date_list in date_times:
-            print(date_list)
-            print(type(date_list))
-            g_date = date_list[0]
-            g_time = date_list[1]
+        print(date_times[0])
+        if date_times[0] == today_date:
+            d = datetime.strptime(date_times[1], "%H:%M")
+            time_string = str(d.strftime("%I:%M %p"))
+            rain = True
+            if time_string[:1] == "0":
+                date_P = time_string[1:2] + time_string[-2:]
+            if time_string[:1] != "0":
+                date_P = time_string[0:2] + time_string[-2:]
+            if date_P == "12AM":
+                date_P = "Midnight"
+            todays_game = SportsEvent(date_times[0], date_P, g_opp_location[0], g_opp_location[1])
+            if todays_game.get_home_away() == "Home":
+                text = "The Mavs play tonight at home against the " + todays_game.get_game_opp() +\
+                       ". The game begins around " + todays_game.get_game_time()
+            if todays_game.get_home_away() == "Away":
+                text = "The Mavs play tonight on the road against the " + todays_game.get_game_opp() + \
+                       ". The game begins around " + todays_game.get_game_time()
+            print(text)
+            tts_transcribe_play(text)
+            found = True
+            return
 
-            #print(g_date)
-            #print(g_time)
+    if found is False:
+        text = "The Mavs do not play tonight."
+        print(text)
+        tts_transcribe_play(text)
 
 
-        #game = SportsEvent()
-
-compile_game_info(mavs_game_dates_times)
 
 
 

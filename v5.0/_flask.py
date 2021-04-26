@@ -15,6 +15,7 @@ from constants import (bright_lights_on,
                        latenight_start, latenight_end
                        )
 from events_ibm import watson_init_session, watson_delete_session, stt_watson_tts, wiki_search
+from events_sports import get_mavs_game
 from threading import Thread
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
@@ -103,6 +104,12 @@ try:
                 message = self.request.get_json()
                 wiki_text = str(message['wikitext'])
                 wiki_search(wiki_text)
+                return
+
+            if self.target == "mavs_game":
+                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                message = self.request.get_json()
+                get_mavs_game()
                 return
 
             if self.target == "whats_my_name":
@@ -200,6 +207,10 @@ try:
             thread_a = Compute(request.__copy__(), "wiki_search")
             thread_a.start()
             return jsonify({'action': 'wiki', 'result': 'processing'})
+        if action == "mavs-game":
+            thread_a = Compute(request.__copy__(), "mavs_game")
+            thread_a.start()
+            return jsonify({'action': 'mavs', 'result': 'processing'})
         if action == "whats-my-name":
             thread_a = Compute(request.__copy__(), "whats_my_name")
             thread_a.start()
