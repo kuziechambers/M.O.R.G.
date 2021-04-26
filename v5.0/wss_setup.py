@@ -195,11 +195,11 @@ def stt_listen_and_recognize():
     mycallback = MyRecognizeCallback()
     stt.recognize_using_websocket(audio=audio_source,
                                   content_type='audio/l16; rate=44100',
-                                  background_audio_suppression=0.5,
+                                  background_audio_suppression=0.2,
                                   recognize_callback=mycallback,
                                   interim_results=True,
                                   low_latency=False,
-                                  inactivity_timeout=2,
+                                  inactivity_timeout=3,
                                   model='en-US_BroadbandModel',
                                   customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
                                   )
