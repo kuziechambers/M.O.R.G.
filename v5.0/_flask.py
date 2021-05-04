@@ -15,7 +15,7 @@ from constants import (bright_lights_on,
                        latenight_start, latenight_end
                        )
 from events_ibm import watson_init_session, watson_delete_session, stt_watson_tts, wiki_search
-from events_sports import get_mavs_game
+from events_sports import ask_mavs_game
 from threading import Thread
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
@@ -109,7 +109,7 @@ try:
             if self.target == "mavs_game":
                 print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
-                get_mavs_game()
+                ask_mavs_game()
                 return
 
             if self.target == "whats_my_name":

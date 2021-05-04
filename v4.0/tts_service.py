@@ -20,8 +20,8 @@ voices = text_to_speech.list_voices().get_result()
 #print(json.dumps(voices, indent=2))
 
 def tts_play(ssml_file, filename):
-    ssml_path = "/Users/kuziechambers/PycharmProjects/M.O.R.G./ssml_files/" + ssml_file
-    sound_path = "/Users/kuziechambers/PycharmProjects/M.O.R.G./ssml_files/" + filename + ".wav"
+    ssml_path = "/home/pi/M.O.R.G./ssml_files/" + ssml_file
+    sound_path = "/home/pi/M.O.R.G./ssml_files/" + filename + ".wav"
 
     with open(ssml_path, 'r') as f:
         text = f.read()

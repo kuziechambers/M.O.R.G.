@@ -11,6 +11,8 @@ from events_office import (
     since_office_motion_init,
     since_office_motion_update,
 )
+from events_ibm import tts_transcribe_play
+from events_sports import get_mavs_game
 from constants import *
 from events_text import send_text
 from events_weather import weather_update, weekend_weather_update, get_weekend_temp
@@ -62,13 +64,18 @@ while True:
                 if 0 <= weekday <= 4:
                     since_office_motion_update()
                 time.sleep(2.0)
-                if weekday == 4 and weekend_start <= now_time <= weekend_end:
+                if weekday == 4 and weekend_start <= now_time <= weekend_end: # Weekend-start
                     temps = get_weekend_temp()
                     turnon_outlet()
                     time.sleep(1.0)
                     play_sound(sounds['s_wake'])
                     weekend_weather_update(temps)
                     turnoff_outlet()
+                if weekend_start <= now_time <= weekend_end: # Get Mavs game
+                    true_or_false, text = get_mavs_game()
+                    if true_or_false:
+                        play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
+                        tts_transcribe_play(text)
 
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()
@@ -195,7 +202,7 @@ while True:
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
                             afternoon_phrases = ["s_afternoonwelcomeback1",
-                                                 "s_afternoonwelcomeback2,"
+                                                 "s_afternoonwelcomeback2",
                                                  "s_anyplans"]
 
                             rint = 0

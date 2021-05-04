@@ -47,12 +47,51 @@ def get_mavs_game():
                              "2021-05-12 20:00": ["Pelicans", "Home"],
                              "2021-05-14 20:00": ["Raptors", "Home"],
                              "2021-05-16 19:30": ["Timberwolves", "Home"]}
-    mavs_games = []
+    found = False
+    text = "none"
+    for g_date_time, g_opp_location in mavs_game_dates_times.items():
+        date_times = g_date_time.split(" ")
+        if date_times[0] == today_date:
+            d = datetime.strptime(date_times[1], "%H:%M")
+            time_string = str(d.strftime("%I:%M %p"))
+            rain = True
+            if time_string[:1] == "0":
+                date_P = time_string[1:2] + time_string[-2:]
+            if time_string[:1] != "0":
+                date_P = time_string[0:2] + time_string[-2:]
+            if date_P == "12AM":
+                date_P = "Midnight"
+            todays_game = SportsEvent(date_times[0], date_P, g_opp_location[0], g_opp_location[1])
+            if todays_game.get_home_away() == "Home":
+                text = "The Mavs play tonight at home against the " + todays_game.get_game_opp() +\
+                       ". The game begins around " + todays_game.get_game_time()
+            if todays_game.get_home_away() == "Away":
+                text = "The Mavs play tonight on the road against the " + todays_game.get_game_opp() + \
+                       ". The game begins around " + todays_game.get_game_time()
+            found = True
+            return found, text
 
+    if found is False:
+        return found, text
+
+def ask_mavs_game():
+    mavs_game_dates_times = {"2021-04-24 19:30": ['Lakers', 'Home'],
+                             "2021-04-26 21:00": ["Kings", "Away"],
+                             "2021-04-27 20:30": ["Warriors", "Away"],
+                             "2021-04-29 18:00": ["Pistons", "Away"],
+                             "2021-05-01 20:00": ["Wizards", "Home"],
+                             "2021-05-02 19:00": ["Kings", "Home"],
+                             "2021-05-04 19:00": ["Heat", "Away"],
+                             "2021-05-06 18:30": ["Nets", "Home"],
+                             "2021-05-07 19:30": ["Cavs", "Home"],
+                             "2021-05-09 18:00": ["Cavs", "Home"],
+                             "2021-05-11 19:00": ["Grizzlies", "Home"],
+                             "2021-05-12 20:00": ["Pelicans", "Home"],
+                             "2021-05-14 20:00": ["Raptors", "Home"],
+                             "2021-05-16 19:30": ["Timberwolves", "Home"]}
     found = False
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")
-        print(date_times[0])
         if date_times[0] == today_date:
             d = datetime.strptime(date_times[1], "%H:%M")
             time_string = str(d.strftime("%I:%M %p"))
@@ -79,19 +118,6 @@ def get_mavs_game():
         text = "The Mavs do not play tonight."
         print(text)
         tts_transcribe_play(text)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # url = "https://www.basketball-reference.com/teams/DAL/2021_games.html"
