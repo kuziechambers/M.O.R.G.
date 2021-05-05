@@ -47,7 +47,6 @@ while True:
         last_motion_date = last_motion.date()
         last_motion_time = last_motion.time()
         seconds_away = (now - last_motion).total_seconds()
-        #seconds_away = 10000
         weekday = dt.datetime.now().weekday()
 
         # Log constantly
@@ -141,7 +140,7 @@ while True:
                             play_sound(sounds['s_lightson'])
                             turnoff_outlet()
 
-                        if 2400 < seconds_away < 7200:  # between 40min - 120min
+                        if 2400 < seconds_away < 9000:  # between 40min - 150min
 
                             send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
 
@@ -162,7 +161,7 @@ while True:
                             play_sound(sounds[path])
                             turnoff_outlet()
 
-                        if seconds_away > 7200:  # longer than 120min
+                        if seconds_away > 9000:  # longer than 150min
 
                             send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
 
@@ -197,7 +196,7 @@ while True:
                             play_sound(sounds['s_lightson'])
                             turnoff_outlet()
 
-                        if 2400 < seconds_away < 7200:  # between 40min - 120min
+                        if 2400 < seconds_away < 9000:  # between 40min - 150min
 
                             send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
@@ -217,7 +216,7 @@ while True:
                             play_sound(sounds[path])
                             turnoff_outlet()
 
-                        elif seconds_away > 7200:  # longer than 120min
+                        elif seconds_away > 9000:  # longer than 150min
                             afternoon_text_phrases = ["Good afternoon sir.",
                                                       "Hope you're having a wonderful afternoon."]
                             rint = 0
@@ -225,7 +224,7 @@ while True:
                             text_phrase = afternoon_text_phrases[rint]
                             send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
 
-                            if weekday == 4:  # longer than 120min, is it friday?
+                            if weekday == 4:  # longer than 150min, is it friday?
 
                                 friday_afternoon_phrases = ["s_sevensummers",
                                                             "s_withoutyou",
@@ -246,7 +245,7 @@ while True:
                                 play_sound(sounds[path])
                                 turnoff_outlet()
 
-                            elif weekday == 5:  # longer than 120min, is it saturday?
+                            elif weekday == 5:  # longer than 150min, is it saturday?
 
                                 saturday_phrases = ["s_saturdaybackinblack_m",
                                                     "s_saturdayhighwaytohell_m"]
@@ -264,7 +263,7 @@ while True:
                                 turnoff_outlet()
 
 
-                            else:  # longer than 120min
+                            else:  # longer than 150min
 
                                 afternoon_phrases = ["s_sevensummers",
                                                      "s_withoutyou",
@@ -304,7 +303,7 @@ while True:
                                 play_sound(sounds['s_lightson'])
                                 turnoff_outlet()
 
-                        if 2400 < seconds_away < 7200:  # between 40min - 120min
+                        if 2400 < seconds_away < 9000:  # between 40min - 150min
 
                             if 4 <= weekday <= 5:  # between friday - saturday
 
