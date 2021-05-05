@@ -1,11 +1,9 @@
 from datetime import datetime as datetime
 import datetime as dt
-#import pytz
-import requests, json
-#from playsound import playsound
+import requests
 from constants import sounds, play_sound
 from events_ibm import tts_transcribe_play
-#from events_sound import fx_to_file, play_fx_file
+
 
 # base URL
 base_url = "https://api.openweathermap.org/data/2.5/onecall?"
@@ -88,8 +86,6 @@ def get_rain():
         return date_P
     else:
         return str("none")
-#except:
-#    return str("none")
 
 
 def weekend_weather_update(temp_list):
@@ -113,13 +109,9 @@ def weekend_weather_update(temp_list):
 
 def weather_update():
     current_temp_degrees = get_current_temp()
-    print(str(current_temp_degrees))
     low_temp_degrees = get_low_temp()
-    print(str(low_temp_degrees))
     high_temp_degrees = get_high_temp()
-    print(str(high_temp_degrees))
     rain_time = get_rain()
-    print(str(rain_time))
     if rain_time != "none":
         weather_text = "The temperature right now is <break strength='weak'></break>"\
                        + str(current_temp_degrees)\
@@ -138,7 +130,6 @@ def weather_update():
                        + str(low_temp_degrees)\
                        + ". At the moment, there is no expected rain today."
 
-    print(weather_text)
     tts_transcribe_play(weather_text)
 
 

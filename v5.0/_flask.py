@@ -14,9 +14,14 @@ from constants import (bright_lights_on,
                        evening_start, evening_end,
                        latenight_start, latenight_end
                        )
+from logger import flask_log
 from events_ibm import watson_init_session, watson_delete_session, stt_watson_tts, wiki_search
 from events_sports import ask_mavs_game
 from threading import Thread
+
+pid = str(os.getpid())
+pidfile = "/tmp/flask.pid"
+logfile = open(pidfile, "w").write(pid)
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
 os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io -log=stdout 5000 > /home/pi/ngrok.log &")
@@ -35,9 +40,12 @@ try:
 
         def run(self):
             if self.target == "sms_listen":
-                print("-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
-                print("-----FLASK----------: " + str(self.request))
-                print("-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 global convo_id
                 convo_id = watson_init_session()
                 stt_watson_tts(convo_id)
@@ -45,18 +53,24 @@ try:
                 return str(resp)
 
             if self.target == "repeat_that":
-                print("-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
                 time.sleep(5)
-                print("-----FLASK----------: " + str(self.request))
-                print("-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 stt_watson_tts(convo_id)
                 resp = "Done listening."
                 return str(resp)
 
             if self.target == "anything_else":
-                print("-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
-                print("-----FLASK----------: " + str(self.request))
-                print("-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 time.sleep(5)
                 anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
                                         "/home/pi/M.O.R.G./stt_files/isthatall.wav",
@@ -69,73 +83,109 @@ try:
                 return str(resp)
 
             if self.target == "any_greeting":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
             if self.target == "all_bright_lights_on":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 bright_lights_on()
                 return
 
             if self.target == "all_lights_off":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 all_lights_off()
                 return
 
             if self.target == "light_on":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
-                print(light)
+                flask_log(str(now_date) + " | " + str(now_time) + light)
                 turn_on_light(light)
                 return
 
             if self.target == "light_off":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
-                print(light)
+                flask_log(str(now_date) + " | " + str(now_time) + light)
                 turn_off_light(light)
                 return
 
             if self.target == "wiki_search":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 wiki_text = str(message['wikitext'])
                 wiki_search(wiki_text)
                 return
 
             if self.target == "mavs_game":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 ask_mavs_game()
                 return
 
             if self.target == "whats_my_name":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
             if self.target == "who_am_i":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
             if self.target == "say_hello":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
-                print("Hello " + str(message['person']))
+                flask_log(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person']))
                 return
 
             if self.target == "say_hello_two_people":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
-                print("Hello " + str(message['person1']) + " and " + str(message['person2']))
+                flask_log(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person1']) + " and " + str(message['person2']))
                 return
 
             if self.target == "end_convo":
-                print("-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                now = dt.datetime.now()
+                now_date = now.date()
+                now_time = now.time()
+                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 watson_delete_session(convo_id)
                 time.sleep(2)
@@ -181,8 +231,11 @@ try:
         # Get the message the user sent our Twilio number
         message = request.get_json()
         action = message['action']
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
 
-        print("-----FLASK----------: ACTION: " + str(action))
+        flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: ACTION: " + str(action))
         if action == "greeting-hello" or action == "greeting-half-inquire" or action == "greeting-we-inquire" or action == "greeting-full-inquiry":
             thread_a = Compute(request.__copy__(), "any_greeting")
             thread_a.start()

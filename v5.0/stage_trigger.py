@@ -9,7 +9,6 @@ from constants import turnon_outlet, turnoff_outlet, play_sound, sounds, concent
 from events_weather import weather_update
 
 
-
 stage_time = "2021-03-01 12:00:00.000000"
 
 last_motion = dt.datetime.strptime(stage_time, '%Y-%m-%d %H:%M:%S.%f')

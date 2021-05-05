@@ -2,13 +2,8 @@ import json
 import os
 import requests
 import simpleaudio as audio
-from playsound import playsound
 from datetime import time as ti
 
-# sound filenames dictionary
-# import warnings
-# warnings.catch_warnings()
-# warnings.simplefilter("ignore")
 
 sounds = {
     's_afternoonwelcomeback1': "/home/pi/M.O.R.G./sounds_IBM/afternoonwelcomeback1.wav",

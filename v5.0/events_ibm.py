@@ -2,17 +2,17 @@ import json
 import os
 import sys
 import wikipedia
+import datetime as dt
 from os import path
-from statistics import mean
 from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from constants import play_sound
 import sounddevice as sd
 from scipy.io.wavfile import write
 from events_text import send_text
+from logger import flask_log
 from wss_setup import TTSCallback, stt_listen_and_recognize
-from ibm_watson.websocket import SynthesizeCallback
-from events_sound import fx_to_file, record_to_file, play_fx_file
+from events_sound import fx_to_file, play_fx_file
 
 
 
@@ -96,13 +96,19 @@ def stt_recognize():
                                     customization_id='139e688f-f2bc-47a5-a670-8e25294580ff'
                                     ).get_result()
 
-      print(transcript)
+      now = dt.datetime.now()
+      now_date = now.date()
+      now_time = now.time()
+      flask_log(str(now_date) + " | " + str(now_time) + str(transcript))
 
       text_output = transcript['results'][0]['alternatives'][0]['transcript']
       text_output = text_output.strip()
 
       os.remove("/home/pi/M.O.R.G./stt_files/_spoken_input.wav")
-      print(text_output)
+      now = dt.datetime.now()
+      now_date = now.date()
+      now_time = now.time()
+      flask_log(str(now_date) + " | " + str(now_time) + text_output)
       return str(text_output)
 
 def start_recording():
@@ -113,16 +119,25 @@ def start_recording():
    # for mac
    #sd.default.channels = 2
    recording = sd.rec(int(seconds * fs), samplerate=fs)
-   print("Starting recording...")
+   now = dt.datetime.now()
+   now_date = now.date()
+   now_time = now.time()
+   flask_log(str(now_date) + " | " + str(now_time) + "Starting recording...")
    send_text("Starting recording...")
    sd.wait()  # Wait until recording is finished
    write('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', fs, recording)  # Save as WAV file
    if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file saved./n/n-M.O.R.G.")
-      print("Recording stopped, audio file saved.")
+      now = dt.datetime.now()
+      now_date = now.date()
+      now_time = now.time()
+      flask_log(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file saved.")
    if not path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file NOT saved./n/n-M.O.R.G.")
-      print("Recording stopped, audio file NOT saved.")
+      now = dt.datetime.now()
+      now_date = now.date()
+      now_time = now.time()
+      flask_log(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file NOT saved.")
 
 
 
@@ -158,7 +173,10 @@ def stt_watson_tts(sesh_id):
 
     # Initialize and transcribe IBM Speech-to-Text
     stt_text = stt_listen_and_recognize()
-    print("-----STT------------: " + stt_text)
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + stt_text)
     if stt_text == "no audio":
         return sesh_id
 
@@ -173,7 +191,10 @@ def stt_watson_tts(sesh_id):
     ).get_result()
     message = json.dumps(response)
     message = json.loads(message)
-    print("-----WATSON---------: " + str(message))
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + str(message))
     response_type = message['output']['generic'][0]['response_type']
     if response_type == "suggestion":
         suggestions = [message['output']['generic'][0]['suggestions'][0]['label'].strip("-"),
@@ -188,11 +209,17 @@ def stt_watson_tts(sesh_id):
         try:
             watson_response = message['output']['generic'][0]['text']
         except:
-            print(message)
+            now = dt.datetime.now()
+            now_date = now.date()
+            now_time = now.time()
+            flask_log(str(now_date) + " | " + str(now_time) + message)
             print(sys.exc_info())
             watson_response = "Apologies sir, I didn't understand."
 
-    print("-----WATSON---------: " + watson_response)
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + watson_response)
     watson_response = prosody_on_text(str(watson_response))
 
 
@@ -214,9 +241,15 @@ def stt_watson_tts(sesh_id):
 
 
 def wiki_search(wiki_text):
-    print("-----WIKI-----------: " + wiki_text)
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + wiki_text)
     suggestion = wikipedia.suggest(wiki_text)
-    print("-----WIKI-----------: " + str(suggestion))
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + str(suggestion))
     if suggestion is None:
         try:
             summary = wikipedia.summary(wiki_text, sentences=2)
@@ -225,7 +258,10 @@ def wiki_search(wiki_text):
     if suggestion is not None:
         summary = wikipedia.summary(suggestion, sentences=2)
 
-    print("-----WIKI-----------: " + summary)
+    now = dt.datetime.now()
+    now_date = now.date()
+    now_time = now.time()
+    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
     fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")

@@ -3,13 +3,10 @@ from os import path
 from sys import byteorder
 from array import array
 from struct import pack
-from events_text import send_text
 import pyaudio
 import wave
 from pysndfx import AudioEffectsChain
 from constants import play_sound
-import soundfile as sf
-#from events_ibm import prosody_on_text
 
 THRESHOLD = 500
 CHUNK_SIZE = 2*1024

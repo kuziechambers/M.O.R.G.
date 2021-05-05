@@ -109,7 +109,6 @@ def ask_mavs_game():
             if todays_game.get_home_away() == "Away":
                 text = "The Mavs play tonight on the road against the " + todays_game.get_game_opp() + \
                        ". The game begins around " + todays_game.get_game_time()
-            print(text)
             tts_transcribe_play(text)
             found = True
             return

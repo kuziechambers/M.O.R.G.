@@ -1,13 +1,13 @@
 import os
 import sys
 from os import path
+import datetime as dt
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import TextToSpeechV1, SpeechToTextV1
 from ibm_watson.websocket import SynthesizeCallback, RecognizeCallback, AudioSource
-from events_sound import fx_to_file
 from events_sound import play_sound
+from logger import flask_log
 import pyaudio
-import concurrent.futures
 
 
 ##########################################################
@@ -31,20 +31,32 @@ class TTSCallback(SynthesizeCallback):
         self.fd = open(self.file_path, 'ab')
 
     def on_connected(self):
-        print('-----TTS------------: Connection was successful')
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----TTS------------: Connection was successful')
 
     def on_error(self, error):
-        print('-----TTS------------: Error received: {}'.format(error))
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----TTS------------: Error received: {}'.format(error))
 
     def on_timing_information(self, timing_information):
-        print(timing_information)
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + timing_information)
 
     def on_audio_stream(self, audio_stream):
         self.fd.write(audio_stream)
 
     def on_close(self):
         self.fd.close()
-        print('-----TTS------------: Done synthesizing. Closing the connection')
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----TTS------------: Done synthesizing. Closing the connection')
 
 def synthesize_wss(text, sound_path):
     new_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
@@ -98,26 +110,44 @@ class MyRecognizeCallback(RecognizeCallback):
         return self.transcript
 
     def on_connected(self):
-        print('-----STT------------: Connection was successful')
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----STT------------: Connection was successful')
 
     def on_error(self, error):
-        print('-----STT------------: Error received: {}'.format(error))
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----STT------------: Error received: {}'.format(error))
 
     def on_inactivity_timeout(self, error):
-        print('-----STT------------: Inactivity timeout: {}'.format(error))
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----STT------------: Inactivity timeout: {}'.format(error))
 
     def on_listening(self):
-        print('-----STT------------: Service is listening')
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + '-----STT------------: Service is listening')
         play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
 
     def on_hypothesis(self, hypothesis):
-        print("-----STT------------: " + hypothesis)
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + hypothesis)
 
     # def on_data(self, data):
     #     print(data)
 
     def on_close(self):
-        print("-----STT------------: Connection closed")
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: Connection closed")
 
 
 class WebsocketThreadClass:
@@ -190,7 +220,10 @@ def stt_listen_and_recognize():
     try:
         stream.start_stream()
     except:
-        print("-----STT------------: " + sys.exc_info())
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + sys.exc_info())
 
     mycallback = MyRecognizeCallback()
     stt.recognize_using_websocket(audio=audio_source,
@@ -212,8 +245,14 @@ def stt_listen_and_recognize():
         audio.terminate()
         #audio_source.completed_recording()
     except:
-        print("-----STT------------: " + str(transcript))
-        print("-----STT------------: " + str(sys.exc_info()))
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + str(transcript))
+        now = dt.datetime.now()
+        now_date = now.date()
+        now_time = now.time()
+        flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + str(sys.exc_info()))
         text_output = "no audio"
         stream.stop_stream()
         stream.close()

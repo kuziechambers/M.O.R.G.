@@ -20,7 +20,7 @@ from events_weather import weather_update, weekend_weather_update, get_weekend_t
 
 # Grab and write pid to .pid file
 pid = str(os.getpid())
-pidfile = "/tmp/mydaemon.pid"
+pidfile = "/tmp/morg.pid"
 logfile = open(pidfile, "w").write(pid)
 
 # Send startup text
