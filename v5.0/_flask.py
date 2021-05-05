@@ -43,9 +43,9 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 global convo_id
                 convo_id = watson_init_session()
                 stt_watson_tts(convo_id)
@@ -56,10 +56,10 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
                 time.sleep(5)
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 stt_watson_tts(convo_id)
                 resp = "Done listening."
                 return str(resp)
@@ -68,9 +68,9 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/sms/COMMANDBEGUN: " + self.target)
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 time.sleep(5)
                 anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
                                         "/home/pi/M.O.R.G./stt_files/isthatall.wav",
@@ -86,7 +86,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
@@ -94,7 +94,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 bright_lights_on()
                 return
 
@@ -102,7 +102,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 all_lights_off()
                 return
 
@@ -110,10 +110,10 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
-                flask_log(str(now_date) + " | " + str(now_time) + light)
+                flask_log.info(str(now_date) + " | " + str(now_time) + light)
                 turn_on_light(light)
                 return
 
@@ -121,10 +121,10 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 light = str(message['light'])
-                flask_log(str(now_date) + " | " + str(now_time) + light)
+                flask_log.info(str(now_date) + " | " + str(now_time) + light)
                 turn_off_light(light)
                 return
 
@@ -132,7 +132,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 wiki_text = str(message['wikitext'])
                 wiki_search(wiki_text)
@@ -142,7 +142,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 ask_mavs_game()
                 return
@@ -151,7 +151,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
@@ -159,7 +159,7 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 return
 
@@ -167,25 +167,25 @@ try:
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
-                flask_log(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person']))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person']))
                 return
 
             if self.target == "say_hello_two_people":
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
-                flask_log(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person1']) + " and " + str(message['person2']))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "Hello " + str(message['person1']) + " and " + str(message['person2']))
                 return
 
             if self.target == "end_convo":
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
-                flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
+                flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + "/convoresponse/COMMANDBEGUN: " + str(self.target))
                 message = self.request.get_json()
                 watson_delete_session(convo_id)
                 time.sleep(2)
@@ -235,7 +235,7 @@ try:
         now_date = now.date()
         now_time = now.time()
 
-        flask_log(str(now_date) + " | " + str(now_time) + "-----FLASK----------: ACTION: " + str(action))
+        flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: ACTION: " + str(action))
         if action == "greeting-hello" or action == "greeting-half-inquire" or action == "greeting-we-inquire" or action == "greeting-full-inquiry":
             thread_a = Compute(request.__copy__(), "any_greeting")
             thread_a.start()

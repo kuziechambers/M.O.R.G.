@@ -99,7 +99,7 @@ def stt_recognize():
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
-      flask_log(str(now_date) + " | " + str(now_time) + str(transcript))
+      flask_log.info(str(now_date) + " | " + str(now_time) + str(transcript))
 
       text_output = transcript['results'][0]['alternatives'][0]['transcript']
       text_output = text_output.strip()
@@ -108,7 +108,7 @@ def stt_recognize():
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
-      flask_log(str(now_date) + " | " + str(now_time) + text_output)
+      flask_log.info(str(now_date) + " | " + str(now_time) + text_output)
       return str(text_output)
 
 def start_recording():
@@ -122,7 +122,7 @@ def start_recording():
    now = dt.datetime.now()
    now_date = now.date()
    now_time = now.time()
-   flask_log(str(now_date) + " | " + str(now_time) + "Starting recording...")
+   flask_log.info(str(now_date) + " | " + str(now_time) + "Starting recording...")
    send_text("Starting recording...")
    sd.wait()  # Wait until recording is finished
    write('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', fs, recording)  # Save as WAV file
@@ -131,13 +131,13 @@ def start_recording():
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
-      flask_log(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file saved.")
+      flask_log.info(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file saved.")
    if not path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file NOT saved./n/n-M.O.R.G.")
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
-      flask_log(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file NOT saved.")
+      flask_log.info(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file NOT saved.")
 
 
 
@@ -176,7 +176,7 @@ def stt_watson_tts(sesh_id):
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----STT------------: " + stt_text)
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----STT------------: " + stt_text)
     if stt_text == "no audio":
         return sesh_id
 
@@ -194,7 +194,7 @@ def stt_watson_tts(sesh_id):
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + str(message))
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + str(message))
     response_type = message['output']['generic'][0]['response_type']
     if response_type == "suggestion":
         suggestions = [message['output']['generic'][0]['suggestions'][0]['label'].strip("-"),
@@ -212,14 +212,14 @@ def stt_watson_tts(sesh_id):
             now = dt.datetime.now()
             now_date = now.date()
             now_time = now.time()
-            flask_log(str(now_date) + " | " + str(now_time) + message)
+            flask_log.info(str(now_date) + " | " + str(now_time) + message)
             print(sys.exc_info())
             watson_response = "Apologies sir, I didn't understand."
 
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + watson_response)
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----WATSON---------: " + watson_response)
     watson_response = prosody_on_text(str(watson_response))
 
 
@@ -244,12 +244,12 @@ def wiki_search(wiki_text):
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + wiki_text)
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + wiki_text)
     suggestion = wikipedia.suggest(wiki_text)
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + str(suggestion))
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + str(suggestion))
     if suggestion is None:
         try:
             summary = wikipedia.summary(wiki_text, sentences=2)
@@ -261,7 +261,7 @@ def wiki_search(wiki_text):
     now = dt.datetime.now()
     now_date = now.date()
     now_time = now.time()
-    flask_log(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + summary)
+    flask_log.info(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
     fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
