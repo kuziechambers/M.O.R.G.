@@ -37,7 +37,7 @@ try:
             self.request = req
             self.target = target
 
-
+        # noinspection PyUnboundLocalVariable
         def run(self):
             if self.target == "sms_listen":
                 now = dt.datetime.now()
@@ -90,7 +90,7 @@ try:
                 message = self.request.get_json()
                 return
 
-            if self.target == "all_bright_lights_on":
+            if self.target == "all_lights_on":
                 now = dt.datetime.now()
                 now_date = now.date()
                 now_time = now.time()
@@ -241,7 +241,7 @@ try:
             thread_a.start()
             return jsonify({'action': 'any greeting', 'result': 'processing'})
         if action == "all-lights-on":
-            thread_a = Compute(request.__copy__(), "all_bright_lights_on")
+            thread_a = Compute(request.__copy__(), "all_lights_on")
             thread_a.start()
             return jsonify({'action': 'all lights on', 'result': 'processing'})
         if action == "all-lights-off":

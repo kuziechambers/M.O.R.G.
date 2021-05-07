@@ -15,5 +15,3 @@ def send_text(body):
              )
     except:
         print("Message wasn't sent")
-
-#send_text("hello")

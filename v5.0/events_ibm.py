@@ -11,7 +11,7 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 from events_text import send_text
 from logger import flask_log
-from wss_setup import TTSCallback, stt_listen_and_recognize
+from events_wss import TTSCallback, stt_listen_and_recognize
 from events_sound import fx_to_file, play_fx_file
 
 
@@ -46,6 +46,11 @@ tts.set_service_url(tts_wss_url)
 
 # TTS FUNCTIONS
 def tts_read_play_ssml(ssml_file, filename):
+    """
+    Read ssml file, TTS, save as wav file, then play
+    :param ssml_file:
+    :param filename:
+    """
     ssml_path = "/home/pi/M.O.R.G./ssml_files/" + ssml_file
     sound_path = "/home/pi/M.O.R.G./ssml_files/" + filename + ".wav"
     with open(ssml_path, 'r') as f:
@@ -58,6 +63,10 @@ def tts_read_play_ssml(ssml_file, filename):
     play_sound(sound_path)
 
 def tts_transcribe_play(text):
+    """
+    Read text param, add prosody, TTS, apply FX, then play
+    :param text:
+    """
     inpath = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
     outpath = "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav"
     pro_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
@@ -70,6 +79,10 @@ def tts_transcribe_play(text):
     play_fx_file()
 
 def tts_transcribe(text):
+    """
+    Read text param, TTS, save to _temp_response.wav
+    :param text:
+    """
     sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
     pro_text = prosody_on_text(text)
     my_callback = TTSCallback(sound_path)
@@ -79,6 +92,11 @@ def tts_transcribe(text):
                                    voice='en-GB_JamesV3Voice')
 
 def prosody_on_text(text):
+    """
+    Add proper prosody on the TTS text
+    :param text:
+    :return: str(new_text)
+    """
     new_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
     return new_text
 
@@ -87,6 +105,10 @@ def prosody_on_text(text):
 
 # STT FUNCTIONS
 def stt_recognize():
+   """
+   Grab speech from _spoken_input.wav file, STT, return text_output
+   :return: str(text_output)
+   """
    if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       with open('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', 'rb') as audio_file:
          transcript = stt.recognize(audio=audio_file,
@@ -112,6 +134,9 @@ def stt_recognize():
       return str(text_output)
 
 def start_recording():
+   """
+
+   """
    fs = 44100  # Sample rate
    seconds = 8  # Duration of recording
    # for airpods

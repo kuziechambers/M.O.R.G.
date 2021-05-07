@@ -40,7 +40,7 @@ def since_office_motion_init():
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-        os.remove("/tmp/mydaemon.pid")
+        os.remove("/tmp/morg.pid")
         exit()
 
 
@@ -155,5 +155,5 @@ def since_office_motion_update():
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-        os.remove("/tmp/mydaemon.pid")
+        os.remove("/tmp/morg.pid")
         exit()
