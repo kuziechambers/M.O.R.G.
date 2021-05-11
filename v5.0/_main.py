@@ -76,8 +76,10 @@ while True:
                     weekend_weather_update(temps)
                     turnoff_outlet()
                 if weekend_start <= now_time <= weekend_end: # Get Mavs game
+                    true_or_false = False
+                    text = ""
                     true_or_false, text = get_mavs_game()
-                    if true_or_false:
+                    if true_or_false is True and text != "":
                         play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
                         tts_transcribe_play(text)
 
