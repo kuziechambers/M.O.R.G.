@@ -134,13 +134,6 @@ while True:
 
 
                     elif evening_start <= now_time <= evening_end:  # EVENING
-                        evening_text_phrases = ["Good evening sir.",
-                                                "Make the most of your evening sir."]
-                        rint = 0
-                        rint = random.randint(0, 1)
-                        text_phrase = evening_text_phrases[rint]
-                        send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
-
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             evening_short_trigger()
 

@@ -150,13 +150,6 @@ def fx_to_file(inpath, outpath):
     outpath = outpath
     fx(inpath, outpath)
 
-    # Read wav with dtype= 'int16'
-    # data, samplerate = sf.read(infile, dtype='int16')
-    # x = fx(x)
-    # x = fx(infile)
-    # # Write 'int16'-signal and read with default
-    # sf.write(outfile, x, Fs)
-
 
 def play_fx_file():
     play_sound("/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")

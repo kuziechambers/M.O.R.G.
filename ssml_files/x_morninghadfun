@@ -1,8 +1,7 @@
 <speak>
   <prosody pitch="-3st">
   <prosody rate="140">
-    Lights have been powered on.
-    <break strength="medium"></break> I expect you had a fun night last night.
+    <break strength="medium"></break>I expect you had a fun night last night.
   </prosody>
   </prosody>
 </speak>

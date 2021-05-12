@@ -165,7 +165,7 @@ def morning_long_trigger():
     send_text('Front door has been opened.\n\nGood morning sir.\n\n-M.O.R.G.')
 
     morning_phrases = ["s_morninghadfun",
-                       "s_morningproductiveday"]
+                       "s_morningproductive"]
 
     rint = 0
     rint = random.randint(0, 1)
@@ -291,6 +291,13 @@ def evening_short_trigger():
     """
     Trigger actions for evening 10min - 40min
     """
+    evening_text_phrases = ["Good evening sir.",
+                            "Make the most of your evening sir."]
+    rint = 0
+    rint = random.randint(0, 1)
+    text_phrase = evening_text_phrases[rint]
+    send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
+
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomeback_g'])
@@ -305,6 +312,13 @@ def evening_medium_trigger(weekday):
     Trigger actions for evening 40min - 150min
     :param weekday: datetime.weekday()
     """
+    evening_text_phrases = ["Good evening sir.",
+                            "Make the most of your evening sir."]
+    rint = 0
+    rint = random.randint(0, 1)
+    text_phrase = evening_text_phrases[rint]
+    send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
+
     if 4 <= weekday <= 5:  # between friday - saturday
         evening_back_weekend_phrases = ["s_anycompany",
                                         "s_anyplans"]
@@ -341,6 +355,13 @@ def evening_long_trigger(weekday):
     Trigger actions for evening > 150min
     :param weekday: datetime.weekday()
     """
+    evening_text_phrases = ["Good evening sir.",
+                            "Make the most of your evening sir."]
+    rint = 0
+    rint = random.randint(0, 1)
+    text_phrase = evening_text_phrases[rint]
+    send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
+
     if weekday == 4:  # is it friday?
         evening_phrases = ["s_toosieslide",
                            "s_whatspoppin",
