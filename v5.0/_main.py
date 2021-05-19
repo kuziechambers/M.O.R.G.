@@ -82,7 +82,7 @@ while True:
                         text = ""
                         true_or_false, text = get_mavs_game()
                         if true_or_false is True and text != "":
-                            play_sound("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/speak.wav")
+                            play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
                             tts_transcribe_play(text)
                             mavs_date = now_date
 

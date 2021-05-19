@@ -51,8 +51,8 @@ def tts_read_play_ssml(ssml_file, filename):
     :param ssml_file:
     :param filename:
     """
-    ssml_path = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./ibm_ssmls/" + ssml_file
-    sound_path = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./ibm_wavs/" + filename + "_nofx.wav"
+    ssml_path = "/home/pi/M.O.R.G./ibm_ssmls/" + ssml_file
+    sound_path = "/home/pi/M.O.R.G./ibm_wavs/" + filename + "_nofx.wav"
     with open(ssml_path, 'r') as f:
         text = f.read()
     my_callback = TTSCallback(sound_path)
@@ -67,8 +67,8 @@ def tts_transcribe_play(text):
     Read text param, add prosody, TTS, apply FX, then play
     :param text:
     """
-    inpath = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response.wav"
-    outpath = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response_fx.wav"
+    inpath = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
+    outpath = "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav"
     pro_text = '<speak><prosody pitch="-3st"><prosody rate="130">' + text + '</prosody></prosody></speak>'
     my_callback = TTSCallback(inpath)
     tts.synthesize_using_websocket(pro_text,
@@ -83,7 +83,7 @@ def tts_transcribe(text):
     Read text param, TTS, save to _temp_response.wav
     :param text:
     """
-    sound_path = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response.wav"
+    sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
     pro_text = prosody_on_text(text)
     my_callback = TTSCallback(sound_path)
     tts.synthesize_using_websocket(pro_text,
@@ -109,8 +109,8 @@ def stt_recognize():
    Grab speech from _spoken_input.wav file, STT, return text_output
    :return: str(text_output)
    """
-   if path.exists("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav"):
-      with open('/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav', 'rb') as audio_file:
+   if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
+      with open('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', 'rb') as audio_file:
          transcript = stt.recognize(audio=audio_file,
                                     content_type='audio/wav',
                                     model='en-US_BroadbandModel',
@@ -126,7 +126,7 @@ def stt_recognize():
       text_output = transcript['results'][0]['alternatives'][0]['transcript']
       text_output = text_output.strip()
 
-      os.remove("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav")
+      os.remove("/home/pi/M.O.R.G./stt_files/_spoken_input.wav")
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
@@ -150,14 +150,14 @@ def start_recording():
    flask_log.info(str(now_date) + " | " + str(now_time) + "Starting recording...")
    send_text("Starting recording...")
    sd.wait()  # Wait until recording is finished
-   write('/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav', fs, recording)  # Save as WAV file
-   if path.exists("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav"):
+   write('/home/pi/M.O.R.G./stt_files/_spoken_input.wav', fs, recording)  # Save as WAV file
+   if path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file saved./n/n-M.O.R.G.")
       now = dt.datetime.now()
       now_date = now.date()
       now_time = now.time()
       flask_log.info(str(now_date) + " | " + str(now_time) + "Recording stopped, audio file saved.")
-   if not path.exists("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_spoken_input.wav"):
+   if not path.exists("/home/pi/M.O.R.G./stt_files/_spoken_input.wav"):
       send_text("Recording stopped, audio file NOT saved./n/n-M.O.R.G.")
       now = dt.datetime.now()
       now_date = now.date()
@@ -249,14 +249,14 @@ def stt_watson_tts(sesh_id):
 
 
     # Initialize and transcribe IBM Text-to-Speech
-    sound_path = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response.wav"
+    sound_path = "/home/pi/M.O.R.G./stt_files/_temp_response.wav"
     my_callback = TTSCallback(sound_path)
     tts.synthesize_using_websocket(watson_response,
                                    my_callback,
                                    accept='audio/wav',
                                    voice='en-GB_JamesV3Voice')
 
-    fx_to_file(sound_path, "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response_fx.wav")
+    fx_to_file(sound_path, "/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
     play_fx_file()
 
     return sesh_id
@@ -289,5 +289,5 @@ def wiki_search(wiki_text):
     flask_log.info(str(now_date) + " | " + str(now_time) + "-----WIKI-----------: " + summary)
     slow_summary = '<speak><prosody pitch="-1st"><prosody rate="130">' + summary + '</prosody></prosody></speak>'
     tts_transcribe(slow_summary)
-    fx_to_file("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response.wav","/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/_temp_response_fx.wav")
+    fx_to_file("/home/pi/M.O.R.G./stt_files/_temp_response.wav","/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
     play_fx_file()

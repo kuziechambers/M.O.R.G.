@@ -24,7 +24,7 @@ pidfile = "/tmp/flask.pid"
 logfile = open(pidfile, "w").write(pid)
 
 # ngrok API Key: 1rLgHkyR7ArlkSmyaxb7m1JDjOv_5pxZJWBfSPULe7EgbpRcV
-os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io -log=stdout 5000 > /Users/kuziechambers/PyCharmProjects/ngrok.log &")
+os.system("cd /home/pi; ./ngrok http -region=us -hostname=morg.ngrok.io -log=stdout 5000 > /home/pi/ngrok.log &")
 
 global convo_id
 
@@ -72,9 +72,9 @@ try:
                 flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request))
                 flask_log.info(str(now_date) + " | " + str(now_time) + "-----FLASK----------: " + str(self.request.values.get('Body', None)))
                 time.sleep(5)
-                anythingelse_phrases = ["/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/anythingelse.wav",
-                                        "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/isthatall.wav",
-                                        "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/willthatbeall.wav"]
+                anythingelse_phrases = ["/home/pi/M.O.R.G./stt_files/anythingelse.wav",
+                                        "/home/pi/M.O.R.G./stt_files/isthatall.wav",
+                                        "/home/pi/M.O.R.G./stt_files/willthatbeall.wav"]
                 rint = random.randint(0, 2)
                 path = anythingelse_phrases[rint]
                 play_sound(path)
@@ -189,7 +189,7 @@ try:
                 message = self.request.get_json()
                 watson_delete_session(convo_id)
                 time.sleep(2)
-                play_sound("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/listen_stop.wav")
+                play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                 return
 
 

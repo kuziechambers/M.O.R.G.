@@ -6,7 +6,7 @@ from events_ibm import tts_read_play_ssml
 
 
 tts_read_play_ssml("x_morningwelcomeback2", "morningwelcomeback2")
-#fx_to_file("/Users/kuziechambers/PyCharmProjects/M.O.R.G./ssml_files/morninghadfun.wav", "/Users/kuziechambers/PyCharmProjects/M.O.R.G./ssml_files/morninghadfun.wav")
+#fx_to_file("/home/pi/M.O.R.G./ssml_files/morninghadfun.wav", "/home/pi/M.O.R.G./ssml_files/morninghadfun.wav")
 
 # p = pyaudio.PyAudio()
 #
