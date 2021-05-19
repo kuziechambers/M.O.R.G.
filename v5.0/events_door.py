@@ -62,7 +62,7 @@ def grab_last_motion_line():
     """
     try:
         lcount = 0
-        fname = "/home/pi/M.O.R.G./logs/MORG.log"
+        fname = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/MORG.log"
         with open(fname, 'r') as f:
             for _ in f:
                 lcount += 1
@@ -93,7 +93,7 @@ def check_for_inside():
     :return: bool(ready)
     """
     linecount = 0
-    fname = "/home/pi/M.O.R.G./logs/MORG.log"
+    fname = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/MORG.log"
     with open(fname, 'r') as f:
         for line in f:
             linecount += 1
@@ -102,7 +102,7 @@ def check_for_inside():
     linetoread2 = linecount - 201
     linetoread3 = linecount - 202
 
-    a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
+    a_file = open("/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/MORG.log")
     lines_to_read = [linetoread1,
                      linetoread2,
                      linetoread3]

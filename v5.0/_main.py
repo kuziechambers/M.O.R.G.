@@ -32,9 +32,10 @@ print("Script booted sir.")
 # Import morg_log logger
 from logger import morg_log
 
-# Initiate last_motion times
+# Initiate times and dates variables
 last_motion = grab_last_motion_line()
 since_office_motion_init()
+mavs_date = datetime.today() - dt.timedelta(days=1)
 
 
 while True:
@@ -76,12 +77,14 @@ while True:
                     weekend_weather_update(temps)
                     turnoff_outlet()
                 if weekend_start <= now_time <= weekend_end: # Get Mavs game
-                    true_or_false = False
-                    text = ""
-                    true_or_false, text = get_mavs_game()
-                    if true_or_false is True and text != "":
-                        play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
-                        tts_transcribe_play(text)
+                    if mavs_date != now_date:
+                        true_or_false = False
+                        text = ""
+                        true_or_false, text = get_mavs_game()
+                        if true_or_false is True and text != "":
+                            play_sound("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/speak.wav")
+                            tts_transcribe_play(text)
+                            mavs_date = now_date
 
             if motion is True:  # Inside - True
                 last_motion = dt.datetime.now()

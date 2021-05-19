@@ -33,20 +33,7 @@ today_date = today_date[0]
 print(today_date)
 
 def get_mavs_game():
-    mavs_game_dates_times = {"2021-04-24 19:30": ['Lakers', 'Home'],
-                             "2021-04-26 21:00": ["Kings", "Away"],
-                             "2021-04-27 20:30": ["Warriors", "Away"],
-                             "2021-04-29 18:00": ["Pistons", "Away"],
-                             "2021-05-01 20:00": ["Wizards", "Home"],
-                             "2021-05-02 19:00": ["Kings", "Home"],
-                             "2021-05-04 19:00": ["Heat", "Away"],
-                             "2021-05-06 18:30": ["Nets", "Home"],
-                             "2021-05-07 19:30": ["Cavs", "Home"],
-                             "2021-05-09 18:00": ["Cavs", "Home"],
-                             "2021-05-11 19:00": ["Grizzlies", "Home"],
-                             "2021-05-12 20:00": ["Pelicans", "Home"],
-                             "2021-05-14 20:00": ["Raptors", "Home"],
-                             "2021-05-16 19:30": ["Timberwolves", "Home"]}
+    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away']}
     found = False
     text = "none"
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
@@ -75,20 +62,7 @@ def get_mavs_game():
         return found, text
 
 def ask_mavs_game():
-    mavs_game_dates_times = {"2021-04-24 19:30": ['Lakers', 'Home'],
-                             "2021-04-26 21:00": ["Kings", "Away"],
-                             "2021-04-27 20:30": ["Warriors", "Away"],
-                             "2021-04-29 18:00": ["Pistons", "Away"],
-                             "2021-05-01 20:00": ["Wizards", "Home"],
-                             "2021-05-02 19:00": ["Kings", "Home"],
-                             "2021-05-04 19:00": ["Heat", "Away"],
-                             "2021-05-06 18:30": ["Nets", "Home"],
-                             "2021-05-07 19:30": ["Cavs", "Home"],
-                             "2021-05-09 18:00": ["Cavs", "Home"],
-                             "2021-05-11 19:00": ["Grizzlies", "Home"],
-                             "2021-05-12 20:00": ["Pelicans", "Home"],
-                             "2021-05-14 20:00": ["Raptors", "Home"],
-                             "2021-05-16 19:30": ["Timberwolves", "Home"]}
+    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away']}
     found = False
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")

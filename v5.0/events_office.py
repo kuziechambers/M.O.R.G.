@@ -33,7 +33,7 @@ def since_office_motion_init():
         last_motion_update = dt.datetime.strptime(last_motion_update, '%Y-%m-%d %H:%M:%S')
         last_motion_update = last_motion_update - dt.timedelta(hours=5)
 
-        file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
+        file = open("/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/office_motion.log", "w+")
         file.write(str(last_motion_update))
         file.close()
     except:
@@ -55,7 +55,7 @@ def since_office_motion_update():
         last_motion_update = dt.datetime.strptime(last_motion_update, '%Y-%m-%d %H:%M:%S')
         last_motion_update = last_motion_update - dt.timedelta(hours=5)
 
-        a_file = open("/home/pi/M.O.R.G./logs/office_motion.log", "r")
+        a_file = open("/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/office_motion.log", "r")
         line = a_file.read()
         a_file.close()
 
@@ -64,7 +64,7 @@ def since_office_motion_update():
             seconds_away = (last_motion_update - line).total_seconds()
             if seconds_away > 9000 and morning_start_office <= last_motion_update.time() <= morning_end_office:
                 morg_log.info("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
-                file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
+                file = open("/Users/kuziechambers/PyCharmProjects/M.O.R.G./logs/office_motion.log", "w+")
                 file.write(str(last_motion_update))
                 file.close()
 

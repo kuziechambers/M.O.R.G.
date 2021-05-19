@@ -20,7 +20,7 @@ tts_authenticator = IAMAuthenticator(tts_api_key)
 tts = TextToSpeechV1(authenticator=tts_authenticator)
 tts.set_service_url(tts_wss_url)
 
-f_path = "/home/pi/M.O.R.G./stt_files/listening_b.wav"
+f_path = "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/listening_b.wav"
 
 class TTSCallback(SynthesizeCallback):
     def __init__(self, file_path):
@@ -69,7 +69,7 @@ def synthesize_wss(text, sound_path):
 
 
 # synthesize_wss("Will that be all for now.", f_path)
-# fx_to_file(f_path, "/home/pi/M.O.R.G./stt_files/willthatbeall.wav")
+# fx_to_file(f_path, "/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/willthatbeall.wav")
 
 
 
@@ -132,7 +132,7 @@ class MyRecognizeCallback(RecognizeCallback):
         now_date = now.date()
         now_time = now.time()
         flask_log.info(str(now_date) + " | " + str(now_time) + '-----STT------------: Service is listening')
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_wake.wav")
+        play_sound("/Users/kuziechambers/PyCharmProjects/M.O.R.G./stt_files/listen_wake.wav")
 
     def on_hypothesis(self, hypothesis):
         now = dt.datetime.now()
