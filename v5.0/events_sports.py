@@ -33,7 +33,10 @@ today_date = today_date[0]
 print(today_date)
 
 def get_mavs_game():
-    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away']}
+    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away'],
+                             "2021-05-25 21:30": ['Clippers', 'Away'],
+                             "2021-05-28 20:30": ['Clippers', 'Home'],
+                             "2021-05-30 20:30": ['Clippers', 'Home']}
     found = False
     text = "none"
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
@@ -62,7 +65,10 @@ def get_mavs_game():
         return found, text
 
 def ask_mavs_game():
-    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away']}
+    mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away'],
+                             "2021-05-25 21:30": ['Clippers', 'Away'],
+                             "2021-05-28 20:30": ['Clippers', 'Home'],
+                             "2021-05-30 20:30": ['Clippers', 'Home']}
     found = False
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")
