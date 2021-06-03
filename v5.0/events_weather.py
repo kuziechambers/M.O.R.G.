@@ -75,17 +75,16 @@ def get_rain():
             if str(main_weather) == "Rain" and d < tomorrow_fiveam:
                 time_string = str(d.strftime("%I:%M %p"))
                 rain = True
+                date_P = ""
                 if time_string[:1] == "0":
                     date_P = time_string[1:2] + time_string[-2:]
                 if time_string[:1] != "0":
                     date_P = time_string[0:2] + time_string[-2:]
                 if date_P == "12AM":
                     date_P = "Midnight"
+                return date_P
 
-    if rain is True:
-        return date_P
-    else:
-        return str("none")
+    return str("none")
 
 
 def weekend_weather_update(temp_list):

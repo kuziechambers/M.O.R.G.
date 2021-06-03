@@ -1,4 +1,7 @@
 from datetime import datetime
+
+from selenium.webdriver.chrome import webdriver
+
 from events_ibm import tts_transcribe_play
 
 def percent_to_float(x):
@@ -36,7 +39,9 @@ def get_mavs_game():
     mavs_game_dates_times = {"2021-05-22 15:30": ['Clippers', 'Away'],
                              "2021-05-25 21:30": ['Clippers', 'Away'],
                              "2021-05-28 20:30": ['Clippers', 'Home'],
-                             "2021-05-30 20:30": ['Clippers', 'Home']}
+                             "2021-05-30 20:30": ['Clippers', 'Home'],
+                             "2021-06-02 21:00": ['Clippers', 'Away'],
+                             "2021-06-04 20:30": ['Clippers', 'Home'],}
     found = False
     text = "none"
     for g_date_time, g_opp_location in mavs_game_dates_times.items():

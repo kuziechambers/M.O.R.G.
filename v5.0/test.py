@@ -3,9 +3,12 @@ import pyaudio
 
 from events_sound import fx_to_file, play_fx_file
 from events_ibm import tts_read_play_ssml
+from events_weather import get_rain
 
 
-tts_read_play_ssml("x_morningwelcomeback2", "morningwelcomeback2")
+
+
+#tts_read_play_ssml("x_morningwelcomeback2", "morningwelcomeback2")
 #fx_to_file("/home/pi/M.O.R.G./ssml_files/morninghadfun.wav", "/home/pi/M.O.R.G./ssml_files/morninghadfun.wav")
 
 # p = pyaudio.PyAudio()
