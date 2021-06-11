@@ -1,12 +1,14 @@
 import os
-from os import path
-from sys import byteorder
-from array import array
-from struct import pack
-import pyaudio
 import wave
+from array import array
+from os import path
+from struct import pack
+from sys import byteorder
+
+import pyaudio
 from pysndfx import AudioEffectsChain
-from constants import play_sound
+
+from utils import play_sound
 
 THRESHOLD = 500
 CHUNK_SIZE = 2*1024

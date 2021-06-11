@@ -1,25 +1,30 @@
 import datetime as dt
-from datetime import datetime
-import random
+import os
 import sys
 import time
-from events_door import (
-    get_motion_state, get_switch_state, grab_last_motion_line, check_for_inside,
-    morning_short_trigger, morning_medium_trigger, morning_long_trigger,
-    afternoon_short_trigger, afternoon_medium_trigger, afternoon_long_trigger,
-    evening_short_trigger, evening_medium_trigger, evening_long_trigger,
-    latenight_trigger
-    )
-from events_office import (
-    since_office_motion_init,
-    since_office_motion_update,
-)
-from events_ibm import tts_transcribe_play
-from events_sports import get_mavs_game
-from constants import *
-from events_text import send_text
-from events_weather import weather_update, weekend_weather_update, get_weekend_temp
+from datetime import datetime
 
+from events_door import (afternoon_long_trigger, afternoon_medium_trigger,
+                         afternoon_short_trigger, check_for_inside,
+                         evening_long_trigger, evening_medium_trigger,
+                         evening_short_trigger, get_motion_state,
+                         get_switch_state, grab_last_motion_line,
+                         latenight_trigger, morning_long_trigger,
+                         morning_medium_trigger, morning_short_trigger,
+                         play_weather_report_sound)
+from events_ibm import tts_transcribe_play
+from events_office import since_office_motion_init, since_office_motion_update
+from events_sports import get_mavs_game
+from events_text import send_text
+from events_weather import get_weekend_temp, weekend_weather_update
+from logger import morg_log
+from utils import (afternoon_end, afternoon_end_away, afternoon_start,
+                   afternoon_start_away, evening_end, evening_end_away,
+                   evening_start, evening_start_away, latenight_end,
+                   latenight_start, mavs_game_end, mavs_game_start,
+                   morning_end, morning_end_away, morning_start,
+                   morning_start_away, play_sound, sounds, turnoff_outlet,
+                   turnon_outlet, weekend_end, weekend_start)
 
 # Grab and write pid to .pid file
 pid = str(os.getpid())
@@ -30,8 +35,6 @@ logfile = open(pidfile, "w").write(pid)
 send_text('Script booted sir.\n\n-M.O.R.G.')
 print("Script booted sir.")
 
-# Import morg_log logger
-from logger import morg_log
 
 # Initiate times and dates variables
 last_motion = grab_last_motion_line()
@@ -75,9 +78,10 @@ while True:
                     turnon_outlet()
                     time.sleep(1.0)
                     play_sound(sounds['s_wake'])
+                    play_weather_report_sound()
                     weekend_weather_update(temps)
                     turnoff_outlet()
-                if weekend_start <= now_time <= weekend_end: # Get Mavs game
+                if mavs_game_start <= now_time <= mavs_game_end: # Get Mavs game
                     if mavs_date != now_date:
                         true_or_false = False
                         text = ""
@@ -110,9 +114,9 @@ while True:
 
             if motion is True:  # Outside - True
                 last_motion = dt.datetime.now()
-                ready = check_for_inside()
+                morg_log.info("DOOR GREETING TRIGGERED")
 
-                if ready is True:  # Time to trigger greeting
+                if check_for_inside() is True:  # Time to trigger greeting
                     turnon_outlet()
 
                     if morning_start <= now_time <= morning_end:  # MORNING
@@ -158,4 +162,6 @@ while True:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
+
+    finally:
         os.remove("/tmp/morg.pid")

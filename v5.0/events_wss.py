@@ -1,14 +1,16 @@
+import datetime as dt
 import os
 import sys
 from os import path
-import datetime as dt
+
+import pyaudio
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from ibm_watson import TextToSpeechV1, SpeechToTextV1
-from ibm_watson.websocket import SynthesizeCallback, RecognizeCallback, AudioSource
+from ibm_watson import SpeechToTextV1, TextToSpeechV1
+from ibm_watson.websocket import (AudioSource, RecognizeCallback,
+                                  SynthesizeCallback)
+
 from events_sound import play_sound
 from logger import flask_log
-import pyaudio
-
 
 ##########################################################
 ################## TEXT-TO-SPEECH CLASS ##################
@@ -259,9 +261,3 @@ def stt_listen_and_recognize():
         audio.terminate()
 
     return text_output
-
-
-
-
-
-

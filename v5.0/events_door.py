@@ -1,13 +1,13 @@
-import sys
-import re
-from logger import morg_log
 import datetime as dt
 import random
+import re
+import sys
 import time
-from constants import *
+
 from events_text import send_text
 from events_weather import weather_update
-
+from logger import morg_log
+from utils import *
 
 PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
 SWITCH_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/4'
@@ -107,26 +107,37 @@ def check_for_inside():
                      linetoread2,
                      linetoread3]
 
-    ready = True
+
     for position, line in enumerate(a_file):
         if position in lines_to_read:
             if "inside" in line:
                 print("Found the word inside")
-                ready = False
                 time.sleep(60.0)
-                break
-
-    if ready is True:
-        return ready
+                return False
+    return True
 
 
+def play_weather_report_sound():
+    weather_report_phrases = ["s_weatherreport1",
+                              "s_weatherreport2",
+                              "s_weatherreport3"]
 
+    rint = 0
+    rint = random.randint(0, 2)
+    path = weather_report_phrases[rint]
+    play_sound(sounds[path])
+
+
+
+
+### MORNING ACTIONS
 def morning_short_trigger():
     """
     Trigger actions for morning 10min - 40min
     """
     send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomeback_g'])
@@ -148,11 +159,13 @@ def morning_medium_trigger():
     rint = random.randint(0, 1)
     path = morning_phrases[rint]
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomeback_g'])
     morning_lights_on()
     play_sound(sounds['s_lightson'])
+    play_weather_report_sound()
     weather_update()
     time.sleep(1.0)
     play_sound(sounds[path])
@@ -171,23 +184,27 @@ def morning_long_trigger():
     rint = random.randint(0, 1)
     path = morning_phrases[rint]
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_goodmorning_g'])
     morning_lights_on()
     play_sound(sounds['s_lightson'])
+    play_weather_report_sound()
     weather_update()
     time.sleep(1.0)
     play_sound(sounds[path])
     turnoff_outlet()
 
 
+### AFTERNOON ACTIONS
 def afternoon_short_trigger():
     """
     Trigger actions for afternoon 10min - 40min
     """
     send_text('Front door has been opened.\n\nWelcome back sir.\n\n-M.O.R.G.')
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomeback_g'])
@@ -210,6 +227,7 @@ def afternoon_medium_trigger():
     rint = random.randint(0, 1)
     path = afternoon_phrases[rint]
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomemrchambers_g'])
@@ -241,6 +259,7 @@ def afternoon_long_trigger(weekday):
         rint = random.randint(0, 1)
         path = friday_afternoon_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodafternoon_g'])
@@ -258,6 +277,7 @@ def afternoon_long_trigger(weekday):
         rint = random.randint(0, 1)
         path = saturday_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodafternoon_g'])
@@ -277,6 +297,7 @@ def afternoon_long_trigger(weekday):
         rint = random.randint(0, 4)
         path = afternoon_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodafternoon_g'])
@@ -287,6 +308,7 @@ def afternoon_long_trigger(weekday):
         turnoff_outlet()
 
 
+### EVENING ACTIONS
 def evening_short_trigger():
     """
     Trigger actions for evening 10min - 40min
@@ -298,6 +320,7 @@ def evening_short_trigger():
     text_phrase = evening_text_phrases[rint]
     send_text('Front door has been opened.\n\n' + str(text_phrase) + '\n\n-M.O.R.G.')
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_welcomeback_g'])
@@ -342,6 +365,7 @@ def evening_medium_trigger(weekday):
         rint = random.randint(0, 1)
         path = evening_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_welcomeback_g'])
@@ -371,6 +395,7 @@ def evening_long_trigger(weekday):
         rint = random.randint(0, 3)
         path = evening_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodevening_g'])
@@ -388,6 +413,7 @@ def evening_long_trigger(weekday):
         rint = random.randint(0, 3)
         path = evening_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodevening_g'])
@@ -405,6 +431,7 @@ def evening_long_trigger(weekday):
         rint = random.randint(0, 3)
         path = evening_phrases[rint]
 
+        turnon_outlet()
         time.sleep(1.0)
         play_sound(sounds['s_wake'])
         play_sound(sounds['s_goodevening_g'])
@@ -415,6 +442,7 @@ def evening_long_trigger(weekday):
         turnoff_outlet()
 
 
+### LATENIGHT ACTIONS
 def latenight_trigger(weekday):
     """
     Trigger actions for latenight > 60min
@@ -428,6 +456,7 @@ def latenight_trigger(weekday):
             'Front door has been opened.\n\nLate night I see? Get some rest for the morning '
             'sir.\n\n-M.O.R.G.')
 
+    turnon_outlet()
     time.sleep(1.0)
     play_sound(sounds['s_wake'])
     play_sound(sounds['s_dimlight'])
@@ -436,4 +465,3 @@ def latenight_trigger(weekday):
     play_sound(sounds['s_lightson'])
     play_sound(sounds['s_welcomeback_g'])
     turnoff_outlet()
-

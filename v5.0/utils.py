@@ -1,9 +1,9 @@
 import json
 import os
-import requests
-import simpleaudio as audio
 from datetime import time as ti
 
+import requests
+import simpleaudio as audio
 
 sounds = {
     's_afternoonwelcomeback1': "/home/pi/M.O.R.G./sounds/afternoonwelcomeback1.wav",
@@ -59,6 +59,9 @@ sounds = {
     's_wednesdaymorning': "/home/pi/M.O.R.G./sounds/wednesdaymorning.wav",
     's_whatspoppin': "/home/pi/M.O.R.G./sounds/WhatsPoppin.wav",
     's_withoutyou': "/home/pi/M.O.R.G./sounds/WithoutYou.wav",
+    's_weatherreport1': "/home/pi/M.O.R.G./sounds/weatherreport1.wav",
+    's_weatherreport2': "/home/pi/M.O.R.G./sounds/weatherreport2.wav",
+    's_weatherreport3': "/home/pi/M.O.R.G./sounds/weatherreport3.wav",
     's_welcomemrchambers_g': "/home/pi/M.O.R.G./sounds/mrchambers_g.wav",
     's_welcomehome_g': "/home/pi/M.O.R.G./sounds/welcomehome_g.wav",
     's_welcomeback_g': "/home/pi/M.O.R.G./sounds/welcomeback_g.wav",
@@ -93,87 +96,6 @@ time_sounds = {
     's_twotwo': "/home/pi/M.O.R.G./sounds/times/twotwo.wav",
     's_twothree': "/home/pi/M.O.R.G./sounds/times/twothree.wav",
 }
-
-degrees_sounds = {
-    's_degrees': "/home/pi/M.O.R.G./sounds/degrees/degrees.wav",
-    's_40below': "/home/pi/M.O.R.G./sounds/degrees/40below.wav",
-    's_40': "/home/pi/M.O.R.G./sounds/degrees/40.wav",
-    's_41': "/home/pi/M.O.R.G./sounds/degrees/41.wav",
-    's_42': "/home/pi/M.O.R.G./sounds/degrees/42.wav",
-    's_43': "/home/pi/M.O.R.G./sounds/degrees/43.wav",
-    's_44': "/home/pi/M.O.R.G./sounds/degrees/44.wav",
-    's_45': "/home/pi/M.O.R.G./sounds/degrees/45.wav",
-    's_46': "/home/pi/M.O.R.G./sounds/degrees/46.wav",
-    's_47': "/home/pi/M.O.R.G./sounds/degrees/47.wav",
-    's_48': "/home/pi/M.O.R.G./sounds/degrees/48.wav",
-    's_49': "/home/pi/M.O.R.G./sounds/degrees/49.wav",
-    's_50': "/home/pi/M.O.R.G./sounds/degrees/50.wav",
-    's_51': "/home/pi/M.O.R.G./sounds/degrees/51.wav",
-    's_52': "/home/pi/M.O.R.G./sounds/degrees/52.wav",
-    's_53': "/home/pi/M.O.R.G./sounds/degrees/53.wav",
-    's_54': "/home/pi/M.O.R.G./sounds/degrees/54.wav",
-    's_55': "/home/pi/M.O.R.G./sounds/degrees/55.wav",
-    's_56': "/home/pi/M.O.R.G./sounds/degrees/56.wav",
-    's_57': "/home/pi/M.O.R.G./sounds/degrees/57.wav",
-    's_58': "/home/pi/M.O.R.G./sounds/degrees/58.wav",
-    's_59': "/home/pi/M.O.R.G./sounds/degrees/59.wav",
-    's_60': "/home/pi/M.O.R.G./sounds/degrees/60.wav",
-    's_61': "/home/pi/M.O.R.G./sounds/degrees/61.wav",
-    's_62': "/home/pi/M.O.R.G./sounds/degrees/62.wav",
-    's_63': "/home/pi/M.O.R.G./sounds/degrees/63.wav",
-    's_64': "/home/pi/M.O.R.G./sounds/degrees/64.wav",
-    's_65': "/home/pi/M.O.R.G./sounds/degrees/65.wav",
-    's_66': "/home/pi/M.O.R.G./sounds/degrees/66.wav",
-    's_67': "/home/pi/M.O.R.G./sounds/degrees/67.wav",
-    's_68': "/home/pi/M.O.R.G./sounds/degrees/68.wav",
-    's_69': "/home/pi/M.O.R.G./sounds/degrees/69.wav",
-    's_70': "/home/pi/M.O.R.G./sounds/degrees/70.wav",
-    's_71': "/home/pi/M.O.R.G./sounds/degrees/71.wav",
-    's_72': "/home/pi/M.O.R.G./sounds/degrees/72.wav",
-    's_73': "/home/pi/M.O.R.G./sounds/degrees/73.wav",
-    's_74': "/home/pi/M.O.R.G./sounds/degrees/74.wav",
-    's_75': "/home/pi/M.O.R.G./sounds/degrees/75.wav",
-    's_76': "/home/pi/M.O.R.G./sounds/degrees/76.wav",
-    's_77': "/home/pi/M.O.R.G./sounds/degrees/77.wav",
-    's_78': "/home/pi/M.O.R.G./sounds/degrees/78.wav",
-    's_79': "/home/pi/M.O.R.G./sounds/degrees/79.wav",
-    's_80': "/home/pi/M.O.R.G./sounds/degrees/80.wav",
-    's_81': "/home/pi/M.O.R.G./sounds/degrees/81.wav",
-    's_82': "/home/pi/M.O.R.G./sounds/degrees/82.wav",
-    's_83': "/home/pi/M.O.R.G./sounds/degrees/83.wav",
-    's_84': "/home/pi/M.O.R.G./sounds/degrees/84.wav",
-    's_85': "/home/pi/M.O.R.G./sounds/degrees/85.wav",
-    's_86': "/home/pi/M.O.R.G./sounds/degrees/86.wav",
-    's_87': "/home/pi/M.O.R.G./sounds/degrees/87.wav",
-    's_88': "/home/pi/M.O.R.G./sounds/degrees/88.wav",
-    's_89': "/home/pi/M.O.R.G./sounds/degrees/89.wav",
-    's_90': "/home/pi/M.O.R.G./sounds/degrees/90.wav",
-    's_91': "/home/pi/M.O.R.G./sounds/degrees/91.wav",
-    's_92': "/home/pi/M.O.R.G./sounds/degrees/92.wav",
-    's_93': "/home/pi/M.O.R.G./sounds/degrees/93.wav",
-    's_94': "/home/pi/M.O.R.G./sounds/degrees/94.wav",
-    's_95': "/home/pi/M.O.R.G./sounds/degrees/95.wav",
-    's_96': "/home/pi/M.O.R.G./sounds/degrees/96.wav",
-    's_97': "/home/pi/M.O.R.G./sounds/degrees/97.wav",
-    's_98': "/home/pi/M.O.R.G./sounds/degrees/98.wav",
-    's_99': "/home/pi/M.O.R.G./sounds/degrees/99.wav",
-    's_100': "/home/pi/M.O.R.G./sounds/degrees/100.wav",
-    's_101': "/home/pi/M.O.R.G./sounds/degrees/101.wav",
-    's_102': "/home/pi/M.O.R.G./sounds/degrees/102.wav",
-    's_103': "/home/pi/M.O.R.G./sounds/degrees/103.wav",
-    's_104': "/home/pi/M.O.R.G./sounds/degrees/104.wav",
-    's_105': "/home/pi/M.O.R.G./sounds/degrees/105.wav",
-    's_105over': "/home/pi/M.O.R.G./sounds/degrees/105over.wav",
-}
-
-def get_degrees_sound(degrees):
-    if degrees < 40:
-        return degrees_sounds['s_40below']
-    elif degrees > 105:
-        return degrees_sounds['s_105over']
-    else:
-        s_string = "s_" + str(degrees)
-        return degrees_sounds[s_string]
 
 # play sound function
 def play_sound(sound_file):
@@ -240,63 +162,64 @@ def all_lights_off():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps(offpayload))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps(offpayload))
 def turn_on_light(text):
-    light_id2=0
+    light_id = 0
+    light_id_2 = 0
     if "bedroom lamp" in text or "bedroom light" in text:
         light_id = 1
     if "mirror light" in text or "mirror lamp" in text:
         light_id = 5
     if "ceiling light" in text:
         light_id = 7
-        light_id2 = 8
+        light_id_2 = 8
     if "studio light" in text or "studio lamp" in text or "office light" in text or "office lamp" in text:
         light_id = 9
     if "tv lights" in text:
         light_id = 10
-        light_id2 = 11
+        light_id_2 = 11
     if "table lamp" in text or "table light" in text or "living room lamp" in text or "living room light" in text:
         light_id = 12
     if "tower lamp" in text or "tower light" in text:
         light_id = 13
 
-    if light_id2 == 0:
+    if light_id_2 == 0:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
         requests.put(url, data=json.dumps(concentratepayload))
     else:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
-        url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id2) + "/state/"
+        url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id_2) + "/state/"
         requests.put(url, data=json.dumps(concentratepayload))
         requests.put(url2, data=json.dumps(concentratepayload))
 def turn_off_light(text):
-    light_id2=0
+    light_id = 0
+    light_id_2 = 0
     if "bedroom lamp" in text or "bedroom light" in text:
         light_id = 1
     if "mirror light" in text or "mirror lamp" in text:
         light_id = 5
     if "ceiling light" in text:
         light_id = 7
-        light_id2 = 8
+        light_id_2 = 8
     if "studio light" in text or "studio lamp" in text or "office light" in text or "office lamp" in text:
         light_id = 9
     if "tv lights" in text:
         light_id = 10
-        light_id2 = 11
+        light_id_2 = 11
     if "table lamp" in text or "table light" in text or "living room lamp" in text or "living room light" in text:
         light_id = 12
     if "tower lamp" in text or "tower light" in text:
         light_id = 13
 
-    if light_id2 == 0:
+    if light_id_2 == 0:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
         requests.put(url, data=json.dumps(offpayload))
     else:
         url = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id) + "/state/"
-        url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id2) + "/state/"
+        url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id_2) + "/state/"
         requests.put(url, data=json.dumps(offpayload))
         requests.put(url2, data=json.dumps(offpayload))
 
 
-#--------- TIME ---------------
-
+### TIME
 # away times
 morning_start_away = ti(7, 00, 00, 000000)
 morning_end_away = ti(10, 59, 59, 000000)
@@ -323,8 +246,11 @@ evening_end = ti(23, 44, 59, 000000)
 latenight_start = ti(23, 55, 00, 000000)
 latenight_end = ti(1, 55, 00, 000000)
 
-weekend_start = ti(17, 41, 00, 000000)
-weekend_end = ti(17, 46, 10, 000000)
+weekend_start = ti(17, 5, 00, 000000)
+weekend_end = ti(17, 5, 8, 000000)
+
+mavs_game_start = ti(17, 7, 00, 000000)
+mavs_game_end = ti(17, 7, 8, 000000)
 
 def time_to_sound(time):
     if time == "00:00:00":

@@ -13268,3 +13268,4 @@ Office state: True  | difference between 2021-04-05 07:49:07 and 2021-04-06 08:4
 2021-04-06 | 12:37:24.130608 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 45738.594135,  lastmotion: 2021-04-05 | 23:55:05.536473
 2021-04-06 | 12:37:26.230184 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 45740.693711,  lastmotion: 2021-04-05 | 23:55:05.536473
 2021-04-06 | 12:37:33.065993 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 45747.52952,  lastmotion: 2021-04-05 | 23:55:05.536473
+(<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7fb7e8ea4288>)

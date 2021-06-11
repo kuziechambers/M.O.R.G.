@@ -1,9 +1,10 @@
-from datetime import datetime as datetime
 import datetime as dt
-import requests
-from constants import sounds, play_sound
-from events_ibm import tts_transcribe_play
+from datetime import datetime as datetime
 
+import requests
+
+from events_ibm import tts_transcribe_play
+from utils import play_sound, sounds
 
 # base URL
 base_url = "https://api.openweathermap.org/data/2.5/onecall?"
@@ -111,7 +112,15 @@ def weather_update():
     low_temp_degrees = get_low_temp()
     high_temp_degrees = get_high_temp()
     rain_time = get_rain()
-    if rain_time != "none":
+    if rain_time == "none":
+        weather_text = "The temperature right now is "\
+                       + str(current_temp_degrees)\
+                       + " degrees. The high for today is "\
+                       + str(high_temp_degrees)\
+                       + ", and the low is "\
+                       + str(low_temp_degrees)\
+                       + ". At the moment, there is no expected rain today."
+    else:
         weather_text = "The temperature right now is <break strength='weak'></break>"\
                        + str(current_temp_degrees)\
                        + " degrees. The high for today is <break strength='weak'></break>"\
@@ -120,18 +129,5 @@ def weather_update():
                        + str(low_temp_degrees)\
                        + ". There is a chance of rain beginning around <break strength='weak'></break>" \
                        + str(rain_time) + "."
-    else:
-        weather_text = "The temperature right now is "\
-                       + str(current_temp_degrees)\
-                       + " degrees. The high for today is "\
-                       + str(high_temp_degrees)\
-                       + ", and the low is "\
-                       + str(low_temp_degrees)\
-                       + ". At the moment, there is no expected rain today."
 
     tts_transcribe_play(weather_text)
-
-
-
-
-

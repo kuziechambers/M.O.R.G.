@@ -1,20 +1,21 @@
+import datetime as dt
 import json
 import os
 import sys
-import wikipedia
-import datetime as dt
 from os import path
-from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from constants import play_sound
+
 import sounddevice as sd
+import wikipedia
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
+from playsound import playsound
 from scipy.io.wavfile import write
-from events_text import send_text
-from logger import flask_log
-from events_wss import TTSCallback, stt_listen_and_recognize
+
 from events_sound import fx_to_file, play_fx_file
-
-
+from events_text import send_text
+from events_wss import TTSCallback, stt_listen_and_recognize
+from logger import flask_log
+from utils import play_sound
 
 # KEYS & URLS
 watson_api_key = "Oam6wIYU5kg59U3JJiOGUztOTSoF1lk0RMXgvVyOiSCW"
@@ -51,8 +52,8 @@ def tts_read_play_ssml(ssml_file, filename):
     :param ssml_file:
     :param filename:
     """
-    ssml_path = "/home/pi/M.O.R.G./ibm_ssmls/" + ssml_file
-    sound_path = "/home/pi/M.O.R.G./ibm_wavs/" + filename + "_nofx.wav"
+    ssml_path = "/home/pi/M.O.R.G./ssml_files/" + ssml_file
+    sound_path = "/home/pi/M.O.R.G./sounds/" + filename + "_nofx.wav"
     with open(ssml_path, 'r') as f:
         text = f.read()
     my_callback = TTSCallback(sound_path)
@@ -60,7 +61,8 @@ def tts_read_play_ssml(ssml_file, filename):
                                    my_callback,
                                    accept='audio/wav',
                                    voice='en-GB_JamesV3Voice')
-    play_sound(sound_path)
+    playsound(sound_path)
+
 
 def tts_transcribe_play(text):
     """
@@ -78,6 +80,7 @@ def tts_transcribe_play(text):
     fx_to_file(inpath, outpath)
     play_fx_file()
 
+
 def tts_transcribe(text):
     """
     Read text param, TTS, save to _temp_response.wav
@@ -90,6 +93,7 @@ def tts_transcribe(text):
                                    my_callback,
                                    accept='audio/wav',
                                    voice='en-GB_JamesV3Voice')
+
 
 def prosody_on_text(text):
     """

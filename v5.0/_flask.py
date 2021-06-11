@@ -1,23 +1,20 @@
 import datetime as dt
 import os
-import time
 import random
-from flask import Flask, request, jsonify
-from twilio.twiml.messaging_response import MessagingResponse
-from constants import (bright_lights_on,
-                       all_lights_off,
-                       turn_on_light,
-                       turn_off_light,
-                       play_sound,
-                       morning_start, morning_end,
-                       afternoon_start, afternoon_end,
-                       evening_start, evening_end,
-                       latenight_start, latenight_end
-                       )
-from logger import flask_log
-from events_ibm import watson_init_session, watson_delete_session, stt_watson_tts, wiki_search
-from events_sports import ask_mavs_game
+import time
 from threading import Thread
+
+from flask import Flask, jsonify, request
+from twilio.twiml.messaging_response import MessagingResponse
+
+from events_ibm import (stt_watson_tts, watson_delete_session,
+                        watson_init_session, wiki_search)
+from events_sports import ask_mavs_game
+from logger import flask_log
+from utils import (afternoon_end, afternoon_start, all_lights_off,
+                   bright_lights_on, evening_end, evening_start, latenight_end,
+                   latenight_start, morning_end, morning_start, play_sound,
+                   turn_off_light, turn_on_light)
 
 pid = str(os.getpid())
 pidfile = "/tmp/flask.pid"
@@ -191,6 +188,7 @@ try:
                 time.sleep(2)
                 play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                 return
+            return
 
 
 
