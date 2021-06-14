@@ -232,7 +232,7 @@ def stt_listen_and_recognize():
                                   content_type='audio/l16; rate=44100',
                                   background_audio_suppression=0.2,
                                   recognize_callback=mycallback,
-                                  interim_results=True,
+                                  interim_results=False,
                                   low_latency=False,
                                   inactivity_timeout=3,
                                   model='en-US_BroadbandModel',
