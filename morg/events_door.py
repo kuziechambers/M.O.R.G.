@@ -1,13 +1,20 @@
 import datetime as dt
+import json
+import os
 import random
 import re
 import sys
 import time
 
+import requests
+
+from constants import SOUNDS
 from events_text import send_text
 from events_weather import weather_update
 from logger import morg_log
-from utils import *
+from utils import (bright_lights_on, concentrate_lights_on, dim_lights_on,
+                   morning_lights_on, play_sound, play_weather_report_sound,
+                   turnoff_outlet, turnon_outlet)
 
 PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
 SWITCH_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/4'
@@ -117,17 +124,6 @@ def check_for_inside():
     return True
 
 
-def play_weather_report_sound():
-    weather_report_phrases = ["s_weatherreport1",
-                              "s_weatherreport2",
-                              "s_weatherreport3"]
-
-    rint = 0
-    rint = random.randint(0, 2)
-    path = weather_report_phrases[rint]
-    play_sound(sounds[path])
-
-
 
 
 ### MORNING ACTIONS
@@ -139,11 +135,11 @@ def morning_short_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_welcomeback_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_welcomeback_g'])
     morning_lights_on()
     time.sleep(1.0)
-    play_sound(sounds['s_lightson'])
+    play_sound(SOUNDS['s_lightson'])
     turnoff_outlet()
 
 def morning_medium_trigger():
@@ -161,14 +157,14 @@ def morning_medium_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_welcomeback_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_welcomeback_g'])
     morning_lights_on()
-    play_sound(sounds['s_lightson'])
+    play_sound(SOUNDS['s_lightson'])
     play_weather_report_sound()
     weather_update()
     time.sleep(1.0)
-    play_sound(sounds[path])
+    play_sound(SOUNDS[path])
     turnoff_outlet()
 
 def morning_long_trigger():
@@ -186,14 +182,14 @@ def morning_long_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_goodmorning_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_goodmorning_g'])
     morning_lights_on()
-    play_sound(sounds['s_lightson'])
+    play_sound(SOUNDS['s_lightson'])
     play_weather_report_sound()
     weather_update()
     time.sleep(1.0)
-    play_sound(sounds[path])
+    play_sound(SOUNDS[path])
     turnoff_outlet()
 
 
@@ -206,11 +202,11 @@ def afternoon_short_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_welcomeback_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_welcomeback_g'])
     concentrate_lights_on()
     time.sleep(1.0)
-    play_sound(sounds['s_lightson'])
+    play_sound(SOUNDS['s_lightson'])
     turnoff_outlet()
 
 def afternoon_medium_trigger():
@@ -229,11 +225,11 @@ def afternoon_medium_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_welcomemrchambers_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_welcomemrchambers_g'])
     concentrate_lights_on()
     time.sleep(1.0)
-    play_sound(sounds[path])
+    play_sound(SOUNDS[path])
     turnoff_outlet()
 
 def afternoon_long_trigger(weekday):
@@ -261,12 +257,12 @@ def afternoon_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodafternoon_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodafternoon_g'])
         concentrate_lights_on()
         time.sleep(1.0)
-        play_sound(sounds['s_fridayhowsmusic_m'])
-        play_sound(sounds[path])
+        play_sound(SOUNDS['s_fridayhowsmusic_m'])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
     elif weekday == 5:  # longer than 150min, is it saturday?
 
@@ -279,11 +275,11 @@ def afternoon_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodafternoon_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodafternoon_g'])
         concentrate_lights_on()
         time.sleep(1.0)
-        play_sound(sounds[path])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
     else:  # longer than 150min
 
@@ -299,12 +295,12 @@ def afternoon_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodafternoon_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodafternoon_g'])
         concentrate_lights_on()
         time.sleep(1.0)
-        play_sound(sounds['s_productiveday_m'])
-        play_sound(sounds[path])
+        play_sound(SOUNDS['s_productiveday_m'])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
 
 
@@ -322,11 +318,11 @@ def evening_short_trigger():
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_welcomeback_g'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_welcomeback_g'])
     bright_lights_on()
     time.sleep(1.0)
-    play_sound(sounds['s_lightson'])
+    play_sound(SOUNDS['s_lightson'])
     turnoff_outlet()
 
 
@@ -350,11 +346,11 @@ def evening_medium_trigger(weekday):
         path = evening_back_weekend_phrases[rint]
 
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodevening_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodevening_g'])
         bright_lights_on()
         time.sleep(1.0)
-        play_sound(sounds[path])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
     else:
         evening_phrases = ["s_howwasyourafternoon",
@@ -367,11 +363,11 @@ def evening_medium_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_welcomeback_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_welcomeback_g'])
         bright_lights_on()
         time.sleep(1.0)
-        play_sound(sounds[path])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
 
 def evening_long_trigger(weekday):
@@ -397,12 +393,12 @@ def evening_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodevening_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodevening_g'])
         bright_lights_on()
         time.sleep(1.0)
-        play_sound(sounds['s_fridayheresmusic_m'])
-        play_sound(sounds[path])
+        play_sound(SOUNDS['s_fridayheresmusic_m'])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
     if weekday == 5:  # is it saturday?
         evening_phrases = ["s_toosieslide",
@@ -415,12 +411,12 @@ def evening_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodevening_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodevening_g'])
         bright_lights_on()
         time.sleep(1.0)
-        play_sound(sounds['s_saturdaysequence_m'])
-        play_sound(sounds[path])
+        play_sound(SOUNDS['s_saturdaysequence_m'])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
     if 0 <= weekday <= 3 or weekday == 6:  # between sunday - thursday
         evening_phrases = ["s_withoutyou",
@@ -433,12 +429,12 @@ def evening_long_trigger(weekday):
 
         turnon_outlet()
         time.sleep(1.0)
-        play_sound(sounds['s_wake'])
-        play_sound(sounds['s_goodevening_g'])
+        play_sound(SOUNDS['s_wake'])
+        play_sound(SOUNDS['s_goodevening_g'])
         bright_lights_on()
         time.sleep(1.0)
-        play_sound(sounds['s_howssomemusic_m'])
-        play_sound(sounds[path])
+        play_sound(SOUNDS['s_howssomemusic_m'])
+        play_sound(SOUNDS[path])
         turnoff_outlet()
 
 
@@ -458,10 +454,10 @@ def latenight_trigger(weekday):
 
     turnon_outlet()
     time.sleep(1.0)
-    play_sound(sounds['s_wake'])
-    play_sound(sounds['s_dimlight'])
+    play_sound(SOUNDS['s_wake'])
+    play_sound(SOUNDS['s_dimlight'])
     dim_lights_on()
     time.sleep(1.0)
-    play_sound(sounds['s_lightson'])
-    play_sound(sounds['s_welcomeback_g'])
+    play_sound(SOUNDS['s_lightson'])
+    play_sound(SOUNDS['s_welcomeback_g'])
     turnoff_outlet()

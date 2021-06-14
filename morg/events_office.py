@@ -1,14 +1,19 @@
 import datetime as dt
+import json
+import os
 import random
 import re
 import sys
 import time
 
-from events_door import play_weather_report_sound
+import requests
+
+from constants import SOUNDS, TIME_FRAMES
 from events_text import send_text
 from events_weather import weather_update
 from logger import morg_log
-from utils import *
+from utils import (morning_lights_on, play_sound, play_weather_report_sound,
+                   turnoff_outlet, turnon_outlet)
 
 OFFICE_PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/39'
 
@@ -91,7 +96,7 @@ def since_office_motion_update():
         if str(last_motion_update) != line:
             line = dt.datetime.strptime(line, '%Y-%m-%d %H:%M:%S')
             seconds_away = (last_motion_update - line).total_seconds()
-            if seconds_away > 9000 and morning_start_office <= last_motion_update.time() <= morning_end_office:
+            if seconds_away > 9000 and TIME_FRAMES['morning_start_office'] <= last_motion_update.time() <= TIME_FRAMES['morning_end_office']:
                 if check_for_recent_trigger() is True:
                     morg_log.info("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
                     morg_log.info("OFFICE GREETING TRIGGERED")
@@ -104,14 +109,14 @@ def since_office_motion_update():
                     if weekday == 0:
                         turnon_outlet()
                         time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
+                        play_sound(SOUNDS['s_wake'])
+                        play_sound(SOUNDS['s_goodmorning_g'])
                         morning_lights_on()
-                        play_sound(sounds['s_lightson'])
+                        play_sound(SOUNDS['s_lightson'])
                         play_weather_report_sound()
                         weather_update()
                         time.sleep(1.0)
-                        play_sound(sounds['s_mondaymorning'])
+                        play_sound(SOUNDS['s_mondaymorning'])
                         turnoff_outlet()
 
                     if weekday == 1:
@@ -124,14 +129,14 @@ def since_office_motion_update():
 
                         turnon_outlet()
                         time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
+                        play_sound(SOUNDS['s_wake'])
+                        play_sound(SOUNDS['s_goodmorning_g'])
                         morning_lights_on()
-                        play_sound(sounds['s_lightson'])
+                        play_sound(SOUNDS['s_lightson'])
                         play_weather_report_sound()
                         weather_update()
                         time.sleep(1.0)
-                        play_sound(sounds[path])
+                        play_sound(SOUNDS[path])
                         turnoff_outlet()
 
                     if weekday == 2:
@@ -144,14 +149,14 @@ def since_office_motion_update():
 
                         turnon_outlet()
                         time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
+                        play_sound(SOUNDS['s_wake'])
+                        play_sound(SOUNDS['s_goodmorning_g'])
                         morning_lights_on()
-                        play_sound(sounds['s_lightson'])
+                        play_sound(SOUNDS['s_lightson'])
                         play_weather_report_sound()
                         weather_update()
                         time.sleep(1.0)
-                        play_sound(sounds[path])
+                        play_sound(SOUNDS[path])
                         turnoff_outlet()
 
                     if weekday == 3:
@@ -164,27 +169,27 @@ def since_office_motion_update():
 
                         turnon_outlet()
                         time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
+                        play_sound(SOUNDS['s_wake'])
+                        play_sound(SOUNDS['s_goodmorning_g'])
                         morning_lights_on()
-                        play_sound(sounds['s_lightson'])
+                        play_sound(SOUNDS['s_lightson'])
                         play_weather_report_sound()
                         weather_update()
                         time.sleep(1.0)
-                        play_sound(sounds[path])
+                        play_sound(SOUNDS[path])
                         turnoff_outlet()
 
                     if weekday == 4:
                         turnon_outlet()
                         time.sleep(1.0)
-                        play_sound(sounds['s_wake'])
-                        play_sound(sounds['s_goodmorning_g'])
+                        play_sound(SOUNDS['s_wake'])
+                        play_sound(SOUNDS['s_goodmorning_g'])
                         morning_lights_on()
-                        play_sound(sounds['s_lightson'])
+                        play_sound(SOUNDS['s_lightson'])
                         play_weather_report_sound()
                         weather_update()
                         time.sleep(1.0)
-                        play_sound(sounds['s_fridaymorning'])
+                        play_sound(SOUNDS['s_fridaymorning'])
                         turnoff_outlet()
 
     except:

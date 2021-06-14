@@ -3,8 +3,9 @@ from datetime import datetime as datetime
 
 import requests
 
+from constants import SOUNDS
 from events_ibm import tts_transcribe_play
-from utils import play_sound, sounds
+from utils import play_sound
 
 # base URL
 base_url = "https://api.openweathermap.org/data/2.5/onecall?"
@@ -103,7 +104,7 @@ def weekend_weather_update(temp_list):
                    + str(sunday_high) \
                    + "."
 
-    play_sound(sounds['s_enjoyweekendweather'])
+    play_sound(SOUNDS['s_enjoyweekendweather'])
     tts_transcribe_play(weather_text)
 
 

@@ -46,6 +46,7 @@ def get_mavs_game():
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")
         if date_times[0] == today_date:
+            date_P = ""
             d = datetime.strptime(date_times[1], "%H:%M")
             time_string = str(d.strftime("%I:%M %p"))
             rain = True
@@ -77,6 +78,8 @@ def ask_mavs_game():
     for g_date_time, g_opp_location in mavs_game_dates_times.items():
         date_times = g_date_time.split(" ")
         if date_times[0] == today_date:
+            text = ""
+            date_P = ""
             d = datetime.strptime(date_times[1], "%H:%M")
             time_string = str(d.strftime("%I:%M %p"))
             rain = True

@@ -7,13 +7,12 @@ from threading import Thread
 from flask import Flask, jsonify, request
 from twilio.twiml.messaging_response import MessagingResponse
 
+from constants import TIME_FRAMES
 from events_ibm import (stt_watson_tts, watson_delete_session,
                         watson_init_session, wiki_search)
 from events_sports import ask_mavs_game
 from logger import flask_log
-from utils import (afternoon_end, afternoon_start, all_lights_off,
-                   bright_lights_on, evening_end, evening_start, latenight_end,
-                   latenight_start, morning_end, morning_start, play_sound,
+from utils import (all_lights_off, bright_lights_on, play_sound,
                    turn_off_light, turn_on_light)
 
 pid = str(os.getpid())
@@ -275,11 +274,11 @@ try:
             thread_a.start()
             now = dt.datetime.now()
             now_time = now.time()
-            if morning_start <= now_time <= morning_end:
+            if TIME_FRAMES['morning_start'] <= now_time <= TIME_FRAMES['morning_end']:
                 time_greeting = "Good morning"
-            elif afternoon_start <= now_time <= afternoon_end:
+            elif TIME_FRAMES['afternoon_start'] <= now_time <= TIME_FRAMES['afternoon_end']:
                 time_greeting = "Good afternoon"
-            elif evening_start <= now_time <= evening_end or latenight_start <= now_time <= latenight_end:
+            elif TIME_FRAMES['evening_start'] <= now_time <= TIME_FRAMES['evening_end'] or TIME_FRAMES['latenight_start'] <= now_time <= TIME_FRAMES['latenight_end']:
                 time_greeting = "Good evening"
             else:
                 time_greeting = "Good day"
@@ -292,11 +291,11 @@ try:
             if str(message['person1']) == str(message['person2']):
                 return jsonify({'action': 'hello person', 'result': 'failed'})
             else:
-                if morning_start <= now_time <= morning_end:
+                if TIME_FRAMES['morning_start'] <= now_time <= TIME_FRAMES['morning_end']:
                     time_greeting = "Good morning"
-                elif afternoon_start <= now_time <= afternoon_end:
+                elif TIME_FRAMES['afternoon_start'] <= now_time <= TIME_FRAMES['afternoon_end']:
                     time_greeting = "Good afternoon"
-                elif evening_start <= now_time <= evening_end or latenight_start <= now_time <= latenight_end:
+                elif TIME_FRAMES['evening_start'] <= now_time <= TIME_FRAMES['evening_end'] or TIME_FRAMES['latenight_start'] <= now_time <= TIME_FRAMES['latenight_end']:
                     time_greeting = "Good evening"
                 else:
                     time_greeting = "Good day"

@@ -3,9 +3,10 @@ import random
 import sys
 import time
 
+from constants import SOUNDS
 from events_door import get_motion_state, play_weather_report_sound
 from events_weather import weather_update
-from utils import (concentrate_lights_on, play_sound, sounds, turnoff_outlet,
+from utils import (concentrate_lights_on, play_sound, turnoff_outlet,
                    turnon_outlet)
 
 stage_time = "2021-03-01 12:00:00.000000"
@@ -38,14 +39,14 @@ while True:
 
                 turnon_outlet()
                 time.sleep(1.0)
-                play_sound(sounds['s_wake'])
-                play_sound(sounds['s_goodmorning_g'])
+                play_sound(SOUNDS['s_wake'])
+                play_sound(SOUNDS['s_goodmorning_g'])
                 concentrate_lights_on()
-                play_sound(sounds['s_lightson'])
+                play_sound(SOUNDS['s_lightson'])
                 play_weather_report_sound()
                 weather_update()
                 time.sleep(1.0)
-                play_sound(sounds[path])
+                play_sound(SOUNDS[path])
                 turnoff_outlet()
     except KeyboardInterrupt:
         exit()

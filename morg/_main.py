@@ -4,27 +4,22 @@ import sys
 import time
 from datetime import datetime
 
+from constants import SOUNDS, TIME_FRAMES
 from events_door import (afternoon_long_trigger, afternoon_medium_trigger,
                          afternoon_short_trigger, check_for_inside,
                          evening_long_trigger, evening_medium_trigger,
                          evening_short_trigger, get_motion_state,
                          get_switch_state, grab_last_motion_line,
                          latenight_trigger, morning_long_trigger,
-                         morning_medium_trigger, morning_short_trigger,
-                         play_weather_report_sound)
+                         morning_medium_trigger, morning_short_trigger)
 from events_ibm import tts_transcribe_play
 from events_office import since_office_motion_init, since_office_motion_update
 from events_sports import get_mavs_game
 from events_text import send_text
 from events_weather import get_weekend_temp, weekend_weather_update
 from logger import morg_log
-from utils import (afternoon_end, afternoon_end_away, afternoon_start,
-                   afternoon_start_away, evening_end, evening_end_away,
-                   evening_start, evening_start_away, latenight_end,
-                   latenight_start, mavs_game_end, mavs_game_start,
-                   morning_end, morning_end_away, morning_start,
-                   morning_start_away, play_sound, sounds, turnoff_outlet,
-                   turnon_outlet, weekend_end, weekend_start)
+from utils import (play_sound, play_weather_report_sound, turnoff_outlet,
+                   turnon_outlet)
 
 # Grab and write pid to .pid file
 pid = str(os.getpid())
@@ -73,15 +68,15 @@ while True:
                 if 0 <= weekday <= 4:
                     since_office_motion_update()
                 time.sleep(2.0)
-                if weekday == 4 and weekend_start <= now_time <= weekend_end: # Weekend-start
+                if weekday == 4 and TIME_FRAMES['weekend_start'] <= now_time <= TIME_FRAMES['weekend_end']: # Weekend-start
                     temps = get_weekend_temp()
                     turnon_outlet()
                     time.sleep(1.0)
-                    play_sound(sounds['s_wake'])
+                    play_sound(SOUNDS['s_wake'])
                     play_weather_report_sound()
                     weekend_weather_update(temps)
                     turnoff_outlet()
-                if mavs_game_start <= now_time <= mavs_game_end: # Get Mavs game
+                if TIME_FRAMES['mavs_game_start'] <= now_time <= TIME_FRAMES['mavs_game_end']: # Get Mavs game
                     if mavs_date != now_date:
                         true_or_false = False
                         text = ""
@@ -101,15 +96,15 @@ while True:
         #####################
         if switch == "outside":
             if motion is False:  # Outside - False
-                play_sound(sounds['s_ping'])
+                play_sound(SOUNDS['s_ping'])
 
-                if 36000 < seconds_away < 36007 and morning_start_away <= now_time <= morning_end_away:
+                if 36000 < seconds_away < 36007 and TIME_FRAMES['morning_start_away'] <= now_time <= TIME_FRAMES['morning_end_away']:
                     send_text('Good morning sir.\nI slept quite well last night without your being here.\n\n-M.O.R.G.')
 
-                if 115200 < seconds_away < 115207 and afternoon_start_away <= now_time <= afternoon_end_away:
+                if 115200 < seconds_away < 115207 and TIME_FRAMES['afternoon_start_away'] <= now_time <= TIME_FRAMES['afternoon_end_away']:
                     send_text('Greetings Mr.Chambers,\nI hope you are having a wonderful time away sir.\n\n-M.O.R.G.')
 
-                if 14400 < seconds_away < 14407 and evening_start_away <= now_time <= evening_end_away:
+                if 14400 < seconds_away < 14407 and TIME_FRAMES['evening_start_away'] <= now_time <= TIME_FRAMES['evening_end_away']:
                     send_text('Good evening sir,\nEnjoying your night I hope.\n\n-M.O.R.G.')
 
             if motion is True:  # Outside - True
@@ -119,7 +114,7 @@ while True:
                 if check_for_inside() is True:  # Time to trigger greeting
                     turnon_outlet()
 
-                    if morning_start <= now_time <= morning_end:  # MORNING
+                    if TIME_FRAMES['morning_start'] <= now_time <= TIME_FRAMES['morning_end']:  # MORNING
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             morning_short_trigger()
 
@@ -130,7 +125,7 @@ while True:
                             morning_long_trigger()
 
 
-                    elif afternoon_start <= now_time <= afternoon_end:  # AFTERNOON
+                    elif TIME_FRAMES['afternoon_start'] <= now_time <= TIME_FRAMES['afternoon_end']:  # AFTERNOON
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             afternoon_short_trigger()
 
@@ -141,7 +136,7 @@ while True:
                             afternoon_long_trigger(weekday)
 
 
-                    elif evening_start <= now_time <= evening_end:  # EVENING
+                    elif TIME_FRAMES['evening_start'] <= now_time <= TIME_FRAMES['evening_end']:  # EVENING
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             evening_short_trigger()
 
@@ -152,7 +147,7 @@ while True:
                             evening_long_trigger(weekday)
 
 
-                    elif latenight_start <= now_time <= latenight_end:  # LATE NIGHT
+                    elif TIME_FRAMES['latenight_start'] <= now_time <= TIME_FRAMES['latenight_end']:  # LATE NIGHT
                         if seconds_away > 3600:  # longer than 60min
                             latenight_trigger(weekday)
 

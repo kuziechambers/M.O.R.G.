@@ -8,7 +8,6 @@ import sounddevice as sd
 import wikipedia
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import AssistantV2, SpeechToTextV1, TextToSpeechV1
-from playsound import playsound
 from scipy.io.wavfile import write
 
 from events_sound import fx_to_file, play_fx_file
@@ -61,7 +60,7 @@ def tts_read_play_ssml(ssml_file, filename):
                                    my_callback,
                                    accept='audio/wav',
                                    voice='en-GB_JamesV3Voice')
-    playsound(sound_path)
+    play_sound(sound_path)
 
 
 def tts_transcribe_play(text):
