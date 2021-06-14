@@ -157,6 +157,5 @@ while True:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-
-    finally:
         os.remove("/tmp/morg.pid")
+        exit()
