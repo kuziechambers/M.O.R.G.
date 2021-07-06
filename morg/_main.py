@@ -22,19 +22,30 @@ from utils import (play_sound, play_weather_report_sound, turnoff_outlet,
                    turnon_outlet)
 
 # Grab and write pid to .pid file
-pid = str(os.getpid())
-pidfile = "/tmp/morg.pid"
-logfile = open(pidfile, "w").write(pid)
+try:
+    pid = str(os.getpid())
+    pidfile = "/tmp/morg.pid"
+    logfile = open(pidfile, "w").write(pid)
 
-# Send startup text
-send_text('Script booted sir.\n\n-M.O.R.G.')
-print("Script booted sir.")
+    # Send startup text
+    send_text('Script booted sir.\n\n-M.O.R.G.')
+    print("Script booted sir.")
 
 
-# Initiate times and dates variables
-last_motion = grab_last_motion_line()
-since_office_motion_init()
-mavs_date = datetime.today() - dt.timedelta(days=1)
+    # Initiate times and dates variables
+    last_motion = grab_last_motion_line()
+    since_office_motion_init()
+    mavs_date = datetime.today() - dt.timedelta(days=1)
+except:
+    ex = sys.exc_info()
+    send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+    morg_log.error(str(ex))
+    try:
+        os.remove("/tmp/morg.pid")
+    except:
+        send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+        morg_log.error(str(ex))
+    sys.exit()
 
 
 while True:
@@ -152,10 +163,15 @@ while True:
                             latenight_trigger(weekday)
 
                     time.sleep(420.0)
+        time.sleep(1)
 
     except:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-        os.remove("/tmp/morg.pid")
-        exit()
+        try:
+            os.remove("/tmp/morg.pid")
+        except:
+            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+            morg_log.error(str(ex))
+        sys.exit()
