@@ -43,8 +43,9 @@ except:
     try:
         os.remove("/tmp/morg.pid")
     except:
-        send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        morg_log.error(str(ex))
+        e = sys.exc_info()
+        send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+        morg_log.error(str(e))
     sys.exit()
 
 
@@ -172,6 +173,7 @@ while True:
         try:
             os.remove("/tmp/morg.pid")
         except:
-            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-            morg_log.error(str(ex))
+            e = sys.exc_info()
+            send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+            morg_log.error(str(e))
         sys.exit()
