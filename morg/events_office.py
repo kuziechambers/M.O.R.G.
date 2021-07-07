@@ -26,6 +26,11 @@ def get_office_motion_state():
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
+        try:
+            os.remove("/tmp/morg.pid")
+        except:
+            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+            morg_log.error(str(ex))
         return False
 
 
@@ -74,7 +79,11 @@ def since_office_motion_init():
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-        os.remove("/tmp/morg.pid")
+        try:
+            os.remove("/tmp/morg.pid")
+        except:
+            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+            morg_log.error(str(ex))
         exit()
 
 
@@ -196,5 +205,9 @@ def since_office_motion_update():
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
-        os.remove("/tmp/morg.pid")
+        try:
+            os.remove("/tmp/morg.pid")
+        except:
+            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+            morg_log.error(str(ex))
         exit()
