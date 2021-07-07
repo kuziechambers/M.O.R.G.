@@ -68,24 +68,27 @@ def grab_last_motion_line():
     :return: datetime(last_motion)
     """
     try:
-        lcount = 0
+        line_count = 0
         fname = "/home/pi/M.O.R.G./logs/MORG.log"
         with open(fname, 'r') as f:
             for _ in f:
-                lcount += 1
+                line_count += 1
 
-        l_file = open(fname, "r")
-        l_lines = l_file.readlines()
-        l_file.close()
+        log_file = open(fname, "r")
+        lines = log_file.readlines()
+        log_file.close()
 
-        lcount = lcount - 15
-        lastline = l_lines[lcount]
-        lastline = lastline.rstrip()
-
-        last_chars = lastline[-28:]
-        last_chars = re.sub('\| ', '', last_chars)
-        last_motion = dt.datetime.strptime(last_chars, '%Y-%m-%d %H:%M:%S.%f')
-        return last_motion
+        line_count_end_range = line_count - 100
+        while line_count >= line_count_end_range:
+            if "lastmotion:" in lines[line_count]:
+                lastline = lines[line_count]
+                lastline = lastline.rstrip()
+                last_chars = lastline[-28:]
+                last_chars = re.sub('\| ', '', last_chars)
+                last_motion = dt.datetime.strptime(last_chars, '%Y-%m-%d %H:%M:%S.%f')
+                return last_motion
+            line_count = line_count - 1
+        return False
     except:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
@@ -113,7 +116,6 @@ def check_for_inside():
     lines_to_read = [linetoread1,
                      linetoread2,
                      linetoread3]
-
 
     for position, line in enumerate(a_file):
         if position in lines_to_read:
