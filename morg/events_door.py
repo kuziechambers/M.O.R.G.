@@ -91,7 +91,7 @@ def grab_last_motion_line():
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
         morg_log.error(str(ex))
         os.remove("/tmp/morg.pid")
-        exit()
+        sys.exit()
 
 # -----------------------
 def check_for_inside():

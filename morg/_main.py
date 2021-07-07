@@ -42,7 +42,7 @@ except:
     morg_log.error(str(ex))
     try:
         os.remove("/tmp/morg.pid")
-    except:
+    except FileNotFoundError as e:
         e = sys.exc_info()
         send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
         morg_log.error(str(e))
@@ -164,7 +164,6 @@ while True:
                             latenight_trigger(weekday)
 
                     time.sleep(420.0)
-        time.sleep(1)
 
     except:
         ex = sys.exc_info()
@@ -172,7 +171,7 @@ while True:
         morg_log.error(str(ex))
         try:
             os.remove("/tmp/morg.pid")
-        except:
+        except FileNotFoundError as e:
             e = sys.exc_info()
             send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
             morg_log.error(str(e))

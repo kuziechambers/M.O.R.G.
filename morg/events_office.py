@@ -28,9 +28,10 @@ def get_office_motion_state():
         morg_log.error(str(ex))
         try:
             os.remove("/tmp/morg.pid")
-        except:
-            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-            morg_log.error(str(ex))
+        except FileNotFoundError as e:
+            e = sys.exc_info()
+            send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+            morg_log.error(str(e))
         return False
 
 
@@ -39,26 +40,40 @@ def check_for_recent_trigger():
     Check for the line "GREETING TRIGGERED" in the MORG.log
     :return: bool
     """
-    linecount = 0
-    fname = "/home/pi/M.O.R.G./logs/MORG.log"
-    with open(fname, 'r') as f:
-        for line in f:
-            linecount += 1
+    try:
+        linecount = 0
+        fname = "/home/pi/M.O.R.G./logs/MORG.log"
+        with open(fname, 'r') as f:
+            for line in f:
+                linecount += 1
+            f.close()
 
-    lines_to_read = []
-    count = 1
-    while count <= 50:
-        linetoread = linecount - count
-        lines_to_read.append(linetoread)
-
-    a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
-
-    for position, line in enumerate(a_file):
-        if position in lines_to_read:
-            if "DOOR GREETING TRIGGERED" in line:
-                print("Found the word TRIGGERED")
-                return False
-    return True
+        lines_to_read = []
+        count = 1
+        while count <= 50:
+            linetoread = linecount - count
+            lines_to_read.append(linetoread)
+            count = count + 1
+        a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
+        for position, line in enumerate(a_file):
+            if position in lines_to_read:
+                if "DOOR GREETING TRIGGERED" in line:
+                    print("Found the word TRIGGERED")
+                    a_file.close()
+                    return False
+        a_file.close()
+        return True
+    except:
+        ex = sys.exc_info()
+        send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
+        morg_log.error(str(ex))
+        try:
+            os.remove("/tmp/morg.pid")
+        except FileNotFoundError as e:
+            e = sys.exc_info()
+            send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+            morg_log.error(str(e))
+        sys.exit()
 
 
 # -----------------------
@@ -81,10 +96,11 @@ def since_office_motion_init():
         morg_log.error(str(ex))
         try:
             os.remove("/tmp/morg.pid")
-        except:
-            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-            morg_log.error(str(ex))
-        exit()
+        except FileNotFoundError as e:
+            e = sys.exc_info()
+            send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+            morg_log.error(str(e))
+        sys.exit()
 
 
 # -----------------------
@@ -207,7 +223,8 @@ def since_office_motion_update():
         morg_log.error(str(ex))
         try:
             os.remove("/tmp/morg.pid")
-        except:
-            send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-            morg_log.error(str(ex))
-        exit()
+        except FileNotFoundError as e:
+            e = sys.exc_info()
+            send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
+            morg_log.error(str(e))
+        sys.exit()
