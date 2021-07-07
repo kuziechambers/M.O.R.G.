@@ -78,7 +78,8 @@ def grab_last_motion_line():
         lines = log_file.readlines()
         log_file.close()
 
-        line_count_end_range = line_count - 100
+        line_count_end_range = line_count - 101
+        line_count = line_count - 1
         while line_count >= line_count_end_range:
             if "lastmotion:" in lines[line_count]:
                 lastline = lines[line_count]

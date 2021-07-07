@@ -13955,3 +13955,16 @@ OFFICE GREETING TRIGGERED
 2021-07-07  |  13:23:35.649135 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 7997310.113,  lastmotion: 2021-04-05 | 23:55:05.536473
 2021-07-07  |  13:23:37.700463 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 7997312.164,  lastmotion: 2021-04-05 | 23:55:05.536473
 (<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7f979e1abe08>)
+(<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x7fae8b9ff988>)
+(<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fae8b9ffcc8>)
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fae8ba102c8>)
+(<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7fac36b95d48>)
+(<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x7fbc870a2108>)
+(<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fbc870bb648>)
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fbc870bbf08>)
+(<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7fbcecc95988>)
+(<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fbcec8ba248>)
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fbcec8ba308>)
+(<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7fd21c4939c8>)
+(<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fd21c0bd2c8>)
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fd21c0bd408>)
