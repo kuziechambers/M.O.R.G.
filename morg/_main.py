@@ -60,16 +60,17 @@ while True:
         now_time = now.time()
         last_motion_date = last_motion.date()
         last_motion_time = last_motion.time()
-        seconds_away = (now - last_motion).total_seconds()
+        seconds_away = round((now - last_motion).total_seconds(), 3)
         weekday = dt.datetime.now().weekday()
 
         # Log constantly
-        morg_log.info(str(now_date) +
-                      " | " +
-                      str(now_time) +
-                      " ----- motionstatus: "
-                      + str(motion) + ",  switchstatus: " + str(switch) + ",  secondsaway: " + str(seconds_away) +
-                      ",  lastmotion: " + str(last_motion_date) + " | " + str(last_motion_time))
+        morg_log.info(f"{now_date}  |  "
+                      f"{now_time} ----- "
+                      f"motionstatus: {motion},  "
+                      f"switchstatus: {switch},  "
+                      f"secondsaway: {seconds_away},  "
+                      f"lastmotion: {last_motion_date} | {last_motion_time}"
+                      )
 
 
         ####################
@@ -164,11 +165,14 @@ while True:
                             latenight_trigger(weekday)
 
                     time.sleep(420.0)
-
+    except KeyboardInterrupt:
+        sys.exit()
     except:
         ex = sys.exc_info()
         send_text('ERROR!\n\n' + str(ex) + '\n\n-M.O.R.G.')
-        morg_log.error(str(ex))
+        morg_log.error(f"{now_date}  |  "
+                       f"{now_time} ----- "
+                       f"ERROR!: {ex}")
         try:
             os.remove("/tmp/morg.pid")
         except FileNotFoundError as e:
