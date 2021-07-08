@@ -50,7 +50,7 @@ def check_for_recent_trigger():
 
         lines_to_read = []
         count = 1
-        while count <= 50:
+        while count <= 200:
             linetoread = linecount - count
             lines_to_read.append(linetoread)
             count = count + 1
