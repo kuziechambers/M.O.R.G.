@@ -113,13 +113,13 @@ while True:
             if motion is False:  # Outside - False
                 play_sound(SOUNDS['s_ping'])
 
-                if 36000 < seconds_away < 36007 and TIME_FRAMES['morning_start_away'] <= now_time <= TIME_FRAMES['morning_end_away']:
+                if 36000 < seconds_away < 36005 and TIME_FRAMES['morning_start_away'] <= now_time <= TIME_FRAMES['morning_end_away']:
                     send_text('Good morning sir.\nI slept quite well last night without your being here.\n\n-M.O.R.G.')
 
-                if 115200 < seconds_away < 115207 and TIME_FRAMES['afternoon_start_away'] <= now_time <= TIME_FRAMES['afternoon_end_away']:
+                if 115200 < seconds_away < 115205 and TIME_FRAMES['afternoon_start_away'] <= now_time <= TIME_FRAMES['afternoon_end_away']:
                     send_text('Greetings Mr.Chambers,\nI hope you are having a wonderful time away sir.\n\n-M.O.R.G.')
 
-                if 14400 < seconds_away < 14407 and TIME_FRAMES['evening_start_away'] <= now_time <= TIME_FRAMES['evening_end_away']:
+                if 14400 < seconds_away < 14405 and TIME_FRAMES['evening_start_away'] <= now_time <= TIME_FRAMES['evening_end_away']:
                     send_text('Good evening sir,\nEnjoying your night I hope.\n\n-M.O.R.G.')
 
             if motion is True:  # Outside - True
