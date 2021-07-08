@@ -97,6 +97,8 @@ while True:
                         if true_or_false is True and text != "":
                             play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
                             tts_transcribe_play(text)
+                            time.sleep(0.5)
+                            play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                             mavs_date = now_date
 
             if motion is True:  # Inside - True

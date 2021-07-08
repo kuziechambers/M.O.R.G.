@@ -1,4 +1,5 @@
 import datetime as dt
+import time
 from datetime import datetime as datetime
 
 import requests
@@ -105,6 +106,8 @@ def weekend_weather_update(temp_list):
                    + "."
 
     play_sound(SOUNDS['s_enjoyweekendweather'])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     tts_transcribe_play(weather_text)
 
 
@@ -132,3 +135,5 @@ def weather_update():
                        + str(rain_time) + "."
 
     tts_transcribe_play(weather_text)
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")

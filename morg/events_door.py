@@ -143,6 +143,8 @@ def morning_short_trigger():
     morning_lights_on()
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def morning_medium_trigger():
@@ -168,6 +170,8 @@ def morning_medium_trigger():
     weather_update()
     time.sleep(1.0)
     play_sound(SOUNDS[path])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def morning_long_trigger():
@@ -193,6 +197,8 @@ def morning_long_trigger():
     weather_update()
     time.sleep(1.0)
     play_sound(SOUNDS[path])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 
@@ -210,6 +216,8 @@ def afternoon_short_trigger():
     concentrate_lights_on()
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def afternoon_medium_trigger():
@@ -233,6 +241,8 @@ def afternoon_medium_trigger():
     concentrate_lights_on()
     time.sleep(1.0)
     play_sound(SOUNDS[path])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def afternoon_long_trigger(weekday):
@@ -266,6 +276,8 @@ def afternoon_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS['s_fridayhowsmusic_m'])
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     elif weekday == 5:  # longer than 150min, is it saturday?
 
@@ -283,6 +295,8 @@ def afternoon_long_trigger(weekday):
         concentrate_lights_on()
         time.sleep(1.0)
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     else:  # longer than 150min
 
@@ -304,6 +318,8 @@ def afternoon_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS['s_productiveday_m'])
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 
@@ -326,6 +342,8 @@ def evening_short_trigger():
     bright_lights_on()
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 
@@ -354,6 +372,8 @@ def evening_medium_trigger(weekday):
         bright_lights_on()
         time.sleep(1.0)
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     else:
         evening_phrases = ["s_howwasyourafternoon",
@@ -371,6 +391,8 @@ def evening_medium_trigger(weekday):
         bright_lights_on()
         time.sleep(1.0)
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 def evening_long_trigger(weekday):
@@ -402,6 +424,8 @@ def evening_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS['s_fridayheresmusic_m'])
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     if weekday == 5:  # is it saturday?
         evening_phrases = ["s_toosieslide",
@@ -420,6 +444,8 @@ def evening_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS['s_saturdaysequence_m'])
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     if 0 <= weekday <= 3 or weekday == 6:  # between sunday - thursday
         evening_phrases = ["s_withoutyou",
@@ -438,6 +464,8 @@ def evening_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS['s_howssomemusic_m'])
         play_sound(SOUNDS[path])
+        time.sleep(0.5)
+        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 
@@ -463,4 +491,6 @@ def latenight_trigger(weekday):
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
     play_sound(SOUNDS['s_welcomeback_g'])
+    time.sleep(0.5)
+    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()

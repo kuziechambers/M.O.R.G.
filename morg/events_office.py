@@ -142,6 +142,8 @@ def since_office_motion_update():
                         weather_update()
                         time.sleep(1.0)
                         play_sound(SOUNDS['s_mondaymorning'])
+                        time.sleep(0.5)
+                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 1:
@@ -162,6 +164,8 @@ def since_office_motion_update():
                         weather_update()
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
+                        time.sleep(0.5)
+                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 2:
@@ -182,6 +186,8 @@ def since_office_motion_update():
                         weather_update()
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
+                        time.sleep(0.5)
+                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 3:
@@ -202,6 +208,8 @@ def since_office_motion_update():
                         weather_update()
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
+                        time.sleep(0.5)
+                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 4:
@@ -215,6 +223,8 @@ def since_office_motion_update():
                         weather_update()
                         time.sleep(1.0)
                         play_sound(SOUNDS['s_fridaymorning'])
+                        time.sleep(0.5)
+                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
     except:
