@@ -107,7 +107,7 @@ def weekend_weather_update(temp_list):
 
     play_sound(SOUNDS['s_enjoyweekendweather'])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     tts_transcribe_play(weather_text)
 
 
@@ -136,4 +136,4 @@ def weather_update():
 
     tts_transcribe_play(weather_text)
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")

@@ -10,7 +10,7 @@ from constants import LIGHT_PAYLOADS, SOUNDS, TIME_SOUNDS
 
 # play sound function
 def play_sound(sound_file):
-    #playsound(sound_file)
+    # playsound(sound_file)
     audio.WaveObject.from_wave_file(sound_file).play().wait_done()
 
 
@@ -19,7 +19,6 @@ def play_weather_report_sound():
                               "s_weatherreport2",
                               "s_weatherreport3"]
 
-    rint = 0
     rint = random.randint(0, 2)
     path = weather_report_phrases[rint]
     play_sound(SOUNDS[path])
@@ -33,6 +32,8 @@ def bright_lights_on():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps(LIGHT_PAYLOADS['bright_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps(LIGHT_PAYLOADS['bright_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps(LIGHT_PAYLOADS['bright_payload']))
+
+
 def concentrate_lights_on():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/9/state/", data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/5/state/", data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
@@ -40,13 +41,17 @@ def concentrate_lights_on():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
+
+
 def morning_lights_on():
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/9/state/", data=json.dumps({"on": True,"bri": 254,"hue": 8645,"sat": 114,}))
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/5/state/", data=json.dumps({"on": True,"bri": 127,"hue": 8645,"sat": 114,}))
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/10/state/", data=json.dumps({"on": True,"bri": 178,"hue": 8645,"sat": 114,}))
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps({"on": True,"bri": 178,"hue": 8645,"sat": 114,}))
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps({"on": True,"bri": 127,"hue": 8645,"sat": 114,}))
-    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps({"on": True,"bri": 254,"hue": 8645,"sat": 114,}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/9/state/", data=json.dumps({"on": True, "bri": 254, "hue": 8645, "sat": 114}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/5/state/", data=json.dumps({"on": True, "bri": 127, "hue": 8645, "sat": 114}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/10/state/", data=json.dumps({"on": True, "bri": 178, "hue": 8645, "sat": 114}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps({"on": True, "bri": 178, "hue": 8645, "sat": 114}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps({"on": True, "bri": 127, "hue": 8645, "sat": 114}))
+    requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps({"on": True, "bri": 254, "hue": 8645, "sat": 114}))
+
+
 def dim_lights_on():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/9/state/", data=json.dumps(LIGHT_PAYLOADS['dim_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/5/state/", data=json.dumps(LIGHT_PAYLOADS['dim_payload']))
@@ -54,6 +59,8 @@ def dim_lights_on():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps(LIGHT_PAYLOADS['dim_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps(LIGHT_PAYLOADS['dim_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps(LIGHT_PAYLOADS['dim_payload']))
+
+
 def all_lights_off():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/9/state/", data=json.dumps(LIGHT_PAYLOADS['off_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/5/state/", data=json.dumps(LIGHT_PAYLOADS['off_payload']))
@@ -61,6 +68,8 @@ def all_lights_off():
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/11/state/", data=json.dumps(LIGHT_PAYLOADS['off_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/12/state/", data=json.dumps(LIGHT_PAYLOADS['off_payload']))
     requests.put("http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/13/state/", data=json.dumps(LIGHT_PAYLOADS['off_payload']))
+
+
 def turn_on_light(text):
     light_id = 0
     light_id_2 = 0
@@ -89,6 +98,8 @@ def turn_on_light(text):
         url2 = "http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/lights/" + str(light_id_2) + "/state/"
         requests.put(url, data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
         requests.put(url2, data=json.dumps(LIGHT_PAYLOADS['concentrate_payload']))
+
+
 def turn_off_light(text):
     light_id = 0
     light_id_2 = 0
@@ -172,6 +183,7 @@ def time_to_sound(time):
 
 def turnoff_outlet():
     os.system('sthelper turnoff "M.O.R.G. Light"')
+
 
 def turnon_outlet():
     os.system('sthelper turnon "M.O.R.G. Light"')

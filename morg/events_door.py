@@ -61,6 +61,7 @@ def get_switch_state():
         morg_log.error(str(ex))
         return "outside"
 
+
 # -----------------------
 def grab_last_motion_line():
     """
@@ -69,7 +70,7 @@ def grab_last_motion_line():
     """
     try:
         line_count = 0
-        fname = "/home/pi/M.O.R.G./logs/MORG.log"
+        fname = "/Users/kuchambers/PycharmProjects/M.O.R.G./logs/MORG.log"
         with open(fname, 'r') as f:
             for _ in f:
                 line_count += 1
@@ -82,9 +83,9 @@ def grab_last_motion_line():
         line_count = line_count - 1
         while line_count >= line_count_end_range:
             if "lastmotion:" in lines[line_count]:
-                lastline = lines[line_count]
-                lastline = lastline.rstrip()
-                last_chars = lastline[-28:]
+                last_line = lines[line_count]
+                last_line = last_line.rstrip()
+                last_chars = last_line[-28:]
                 last_chars = re.sub('\| ', '', last_chars)
                 last_motion = dt.datetime.strptime(last_chars, '%Y-%m-%d %H:%M:%S.%f')
                 return last_motion
@@ -97,6 +98,7 @@ def grab_last_motion_line():
         os.remove("/tmp/morg.pid")
         sys.exit()
 
+
 # -----------------------
 def check_for_inside():
     """
@@ -104,7 +106,7 @@ def check_for_inside():
     :return: bool(ready)
     """
     linecount = 0
-    fname = "/home/pi/M.O.R.G./logs/MORG.log"
+    fname = "/Users/kuchambers/PycharmProjects/M.O.R.G./logs/MORG.log"
     with open(fname, 'r') as f:
         for line in f:
             linecount += 1
@@ -113,7 +115,7 @@ def check_for_inside():
     linetoread2 = linecount - 201
     linetoread3 = linecount - 202
 
-    a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
+    a_file = open("/Users/kuchambers/PycharmProjects/M.O.R.G./logs/MORG.log")
     lines_to_read = [linetoread1,
                      linetoread2,
                      linetoread3]
@@ -144,7 +146,7 @@ def morning_short_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def morning_medium_trigger():
@@ -171,7 +173,7 @@ def morning_medium_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS[path])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def morning_long_trigger():
@@ -198,7 +200,7 @@ def morning_long_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS[path])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 
@@ -217,7 +219,7 @@ def afternoon_short_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def afternoon_medium_trigger():
@@ -242,7 +244,7 @@ def afternoon_medium_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS[path])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 def afternoon_long_trigger(weekday):
@@ -277,7 +279,7 @@ def afternoon_long_trigger(weekday):
         play_sound(SOUNDS['s_fridayhowsmusic_m'])
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     elif weekday == 5:  # longer than 150min, is it saturday?
 
@@ -296,7 +298,7 @@ def afternoon_long_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     else:  # longer than 150min
 
@@ -319,7 +321,7 @@ def afternoon_long_trigger(weekday):
         play_sound(SOUNDS['s_productiveday_m'])
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 
@@ -343,7 +345,7 @@ def evening_short_trigger():
     time.sleep(1.0)
     play_sound(SOUNDS['s_lightson'])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()
 
 
@@ -373,7 +375,7 @@ def evening_medium_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     else:
         evening_phrases = ["s_howwasyourafternoon",
@@ -392,7 +394,7 @@ def evening_medium_trigger(weekday):
         time.sleep(1.0)
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 def evening_long_trigger(weekday):
@@ -425,7 +427,7 @@ def evening_long_trigger(weekday):
         play_sound(SOUNDS['s_fridayheresmusic_m'])
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     if weekday == 5:  # is it saturday?
         evening_phrases = ["s_toosieslide",
@@ -445,7 +447,7 @@ def evening_long_trigger(weekday):
         play_sound(SOUNDS['s_saturdaysequence_m'])
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
     if 0 <= weekday <= 3 or weekday == 6:  # between sunday - thursday
         evening_phrases = ["s_withoutyou",
@@ -465,7 +467,7 @@ def evening_long_trigger(weekday):
         play_sound(SOUNDS['s_howssomemusic_m'])
         play_sound(SOUNDS[path])
         time.sleep(0.5)
-        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
         turnoff_outlet()
 
 
@@ -492,5 +494,5 @@ def latenight_trigger(weekday):
     play_sound(SOUNDS['s_lightson'])
     play_sound(SOUNDS['s_welcomeback_g'])
     time.sleep(0.5)
-    play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
     turnoff_outlet()

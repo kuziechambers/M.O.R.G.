@@ -5,19 +5,21 @@ from os import path
 from struct import pack
 from sys import byteorder
 
-import pyaudio
+# import pyaudio
 from pysndfx import AudioEffectsChain
 
 from utils import play_sound
 
 THRESHOLD = 500
 CHUNK_SIZE = 2*1024
-FORMAT = pyaudio.paInt16
+# FORMAT = pyaudio.paInt16
 RATE = 44100
+
 
 def is_silent(snd_data):
     # Returns 'True' if below the 'silent' threshold
     return max(snd_data) < THRESHOLD
+
 
 def normalize(snd_data):
     # Average the volume out
@@ -28,6 +30,7 @@ def normalize(snd_data):
     for i in snd_data:
         r.append(int(i*times))
     return r
+
 
 def trim(snd_data):
     #Trim the blank spots at the start and end
@@ -53,6 +56,7 @@ def trim(snd_data):
     snd_data.reverse()
     return snd_data
 
+
 def add_silence(snd_data, seconds):
     # Add silence to the start and end of 'snd_data' of length 'seconds' (float)
     silence = [0] * int(seconds * RATE)
@@ -61,83 +65,89 @@ def add_silence(snd_data, seconds):
     r.extend(silence)
     return r
 
-def record():
-    """
-    Record a word or words from the microphone and
-    return the data as an array of signed shorts.
 
-    Normalizes the audio, trims silence from the
-    start and end, and pads with 0.5 seconds of
-    blank sound to make sure VLC et al can play
-    it without getting chopped off.
-    """
-    p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=1, rate=RATE,
-        input=True, output=True,
-        frames_per_buffer=CHUNK_SIZE)
+# def record():
+#     """
+#     Record a word or words from the microphone and
+#     return the data as an array of signed shorts.
+#
+#     Normalizes the audio, trims silence from the
+#     start and end, and pads with 0.5 seconds of
+#     blank sound to make sure VLC et al can play
+#     it without getting chopped off.
+#     """
+#     p = pyaudio.PyAudio()
+#     stream = p.open(
+#         format=FORMAT, channels=1, rate=RATE,
+#         input=True, output=True,
+#         frames_per_buffer=CHUNK_SIZE
+#     )
+#
+#     num_silent = 0
+#     snd_started = False
+#
+#     r = array('h')
+#
+#     while num_silent < 3:
+#         # little endian, signed short
+#         snd_data = array('h', stream.read(CHUNK_SIZE))
+#         if byteorder == 'big':
+#             snd_data.byteswap()
+#         r.extend(snd_data)
+#
+#         silent = is_silent(snd_data)
+#
+#         if silent and snd_started:
+#             num_silent += 1
+#         elif not silent and not snd_started:
+#             snd_started = True
+#
+#         if snd_started and num_silent > 30:
+#             break
+#
+#     sample_width = p.get_sample_size(FORMAT)
+#     stream.stop_stream()
+#     stream.close()
+#     p.terminate()
+#
+#     r = normalize(r)
+#     r = trim(r)
+#     r = add_silence(r, 0.5)
+#     return sample_width, r
 
-    num_silent = 0
-    snd_started = False
 
-    r = array('h')
+# def record_to_file(output_path):
+#     # Records from the microphone and outputs the resulting data to 'path'
+#     if path.exists(output_path):
+#         os.remove(output_path)
+#     # send_text("Listening...\n\n-M.O.R.G.")
+#     # play_sound('/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listening.wav')
+#     sample_width, data = record()
+#     data = pack('<' + ('h'*len(data)), *data)
+#     wf = wave.open(output_path, 'wb')
+#     wf.setnchannels(1)
+#     wf.setsampwidth(sample_width)
+#     wf.setframerate(RATE)
+#     wf.writeframes(data)
+#     wf.close()
+#     # send_text("Stopped Listening.\n\n-M.O.R.G.")
+#     print(".wav File saved.")
 
-    while num_silent < 3:
-        # little endian, signed short
-        snd_data = array('h', stream.read(CHUNK_SIZE))
-        if byteorder == 'big':
-            snd_data.byteswap()
-        r.extend(snd_data)
 
-        silent = is_silent(snd_data)
+# def record_to_file_wosir(output_path):
+#     # Records from the microphone and outputs the resulting data to 'path'
+#     if path.exists(output_path):
+#         os.remove(output_path)
+#     sample_width, data = record()
+#     data = pack('<' + ('h'*len(data)), *data)
+#     wf = wave.open(output_path, 'wb')
+#     wf.setnchannels(1)
+#     wf.setsampwidth(sample_width)
+#     wf.setframerate(RATE)
+#     wf.writeframes(data)
+#     wf.close()
+#     print(".wav File saved.")
 
-        if silent and snd_started:
-            num_silent += 1
-        elif not silent and not snd_started:
-            snd_started = True
-
-        if snd_started and num_silent > 30:
-            break
-
-    sample_width = p.get_sample_size(FORMAT)
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-
-    r = normalize(r)
-    r = trim(r)
-    r = add_silence(r, 0.5)
-    return sample_width, r
-
-def record_to_file(output_path):
-    # Records from the microphone and outputs the resulting data to 'path'
-    if path.exists(output_path):
-        os.remove(output_path)
-    #send_text("Listening...\n\n-M.O.R.G.")
-    #play_sound('/home/pi/M.O.R.G./stt_files/listening.wav')
-    sample_width, data = record()
-    data = pack('<' + ('h'*len(data)), *data)
-    wf = wave.open(output_path, 'wb')
-    wf.setnchannels(1)
-    wf.setsampwidth(sample_width)
-    wf.setframerate(RATE)
-    wf.writeframes(data)
-    wf.close()
-    #send_text("Stopped Listening.\n\n-M.O.R.G.")
-    print(".wav File saved.")
-
-def record_to_file_wosir(output_path):
-    # Records from the microphone and outputs the resulting data to 'path'
-    if path.exists(output_path):
-        os.remove(output_path)
-    sample_width, data = record()
-    data = pack('<' + ('h'*len(data)), *data)
-    wf = wave.open(output_path, 'wb')
-    wf.setnchannels(1)
-    wf.setsampwidth(sample_width)
-    wf.setframerate(RATE)
-    wf.writeframes(data)
-    wf.close()
-    print(".wav File saved.")
 
 def fx_to_file(inpath, outpath):
     fx = (
@@ -154,6 +164,4 @@ def fx_to_file(inpath, outpath):
 
 
 def play_fx_file():
-    play_sound("/home/pi/M.O.R.G./stt_files/_temp_response_fx.wav")
-
-#fx_to_file()
+    play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/_temp_response_fx.wav")

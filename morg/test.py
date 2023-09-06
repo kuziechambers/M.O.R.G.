@@ -12,7 +12,7 @@ tts_read_play_ssml("x_weatherreport_3", "weatherreport3")
 
 
 #tts_read_play_ssml("x_morningwelcomeback2", "morningwelcomeback2")
-#fx_to_file("/home/pi/M.O.R.G./ssml_files/morninghadfun.wav", "/home/pi/M.O.R.G./ssml_files/morninghadfun.wav")
+#fx_to_file("/Users/kuchambers/PycharmProjects/M.O.R.G./ssml_files/morninghadfun.wav", "/Users/kuchambers/PycharmProjects/M.O.R.G./ssml_files/morninghadfun.wav")
 
 # p = pyaudio.PyAudio()
 #

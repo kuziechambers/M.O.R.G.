@@ -13968,3 +13968,19 @@ OFFICE GREETING TRIGGERED
 (<class 'KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x7fd21c4939c8>)
 (<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fd21c0bd2c8>)
 (<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fd21c0bd408>)
+(<class 'NameError'>, NameError("name 'lastline' is not defined"), <traceback object at 0x7fc5feacfbe0>)
+(<class 'SystemExit'>, SystemExit(), <traceback object at 0x7fc5feafb820>)
+2021-12-07  |  14:46:08.226020 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221462.69,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:10.280873 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221464.744,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:12.336674 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221466.8,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:14.394502 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221468.858,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:16.459318 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221470.923,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:18.521982 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221472.986,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:20.579495 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221475.043,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:22.684635 ----- motionstatus: False,  switchstatus: outside,  secondsaway: 21221477.148,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:27.816393 ----- motionstatus: False,  switchstatus: outside,  secondsaway: 21221482.28,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:32.932264 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221487.396,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:34.990813 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221489.454,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:37.052394 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221491.516,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:39.112036 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221493.576,  lastmotion: 2021-04-05 | 23:55:05.536473
+2021-12-07  |  14:46:41.172627 ----- motionstatus: False,  switchstatus: inside,  secondsaway: 21221495.636,  lastmotion: 2021-04-05 | 23:55:05.536473

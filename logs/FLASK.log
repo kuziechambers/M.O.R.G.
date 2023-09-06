@@ -129,3 +129,6 @@
 2021-06-11 | 14:06:35.976054-----TTS------------: Done synthesizing. Closing the connection
 2021-07-07 | 10:41:20.535375-----TTS------------: Connection was successful
 2021-07-07 | 10:41:25.130768-----TTS------------: Done synthesizing. Closing the connection
+2021-12-07 | 14:48:54.721452-----TTS------------: Error received: Handshake status 403 Forbidden
+2021-12-07 | 14:50:08.563716-----TTS------------: Error received: Handshake status 403 Forbidden
+2021-12-07 | 14:54:20.687470-----TTS------------: Error received: Handshake status 403 Forbidden

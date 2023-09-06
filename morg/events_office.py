@@ -42,7 +42,7 @@ def check_for_recent_trigger():
     """
     try:
         linecount = 0
-        fname = "/home/pi/M.O.R.G./logs/MORG.log"
+        fname = "/Users/kuchambers/PycharmProjects/M.O.R.G./logs/MORG.log"
         with open(fname, 'r') as f:
             for line in f:
                 linecount += 1
@@ -54,7 +54,7 @@ def check_for_recent_trigger():
             linetoread = linecount - count
             lines_to_read.append(linetoread)
             count = count + 1
-        a_file = open("/home/pi/M.O.R.G./logs/MORG.log")
+        a_file = open("/Users/kuchambers/PycharmProjects/M.O.R.G./logs/MORG.log")
         for position, line in enumerate(a_file):
             if position in lines_to_read:
                 if "DOOR GREETING TRIGGERED" in line:
@@ -87,7 +87,7 @@ def since_office_motion_init():
         last_motion_update = dt.datetime.strptime(last_motion_update, '%Y-%m-%d %H:%M:%S')
         last_motion_update = last_motion_update - dt.timedelta(hours=5)
 
-        file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
+        file = open("/Users/kuchambers/PycharmProjects/M.O.R.G./logs/office_motion.log", "w+")
         file.write(str(last_motion_update))
         file.close()
     except:
@@ -114,7 +114,7 @@ def since_office_motion_update():
         last_motion_update = dt.datetime.strptime(last_motion_update, '%Y-%m-%d %H:%M:%S')
         last_motion_update = last_motion_update - dt.timedelta(hours=5)
 
-        a_file = open("/home/pi/M.O.R.G./logs/office_motion.log", "r")
+        a_file = open("/Users/kuchambers/PycharmProjects/M.O.R.G./logs/office_motion.log", "r")
         line = a_file.read()
         a_file.close()
 
@@ -125,7 +125,7 @@ def since_office_motion_update():
                 if check_for_recent_trigger() is True:
                     morg_log.info("Office state: " + str(get_office_motion_state()) + "  | difference between " + str(line) + " and " + str(last_motion_update) + " was: " + str(seconds_away))
                     morg_log.info("OFFICE GREETING TRIGGERED")
-                    file = open("/home/pi/M.O.R.G./logs/office_motion.log", "w+")
+                    file = open("/Users/kuchambers/PycharmProjects/M.O.R.G./logs/office_motion.log", "w+")
                     file.write(str(last_motion_update))
                     file.close()
 
@@ -143,7 +143,7 @@ def since_office_motion_update():
                         time.sleep(1.0)
                         play_sound(SOUNDS['s_mondaymorning'])
                         time.sleep(0.5)
-                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 1:
@@ -165,7 +165,7 @@ def since_office_motion_update():
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
                         time.sleep(0.5)
-                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 2:
@@ -187,7 +187,7 @@ def since_office_motion_update():
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
                         time.sleep(0.5)
-                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 3:
@@ -209,7 +209,7 @@ def since_office_motion_update():
                         time.sleep(1.0)
                         play_sound(SOUNDS[path])
                         time.sleep(0.5)
-                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
                     if weekday == 4:
@@ -224,7 +224,7 @@ def since_office_motion_update():
                         time.sleep(1.0)
                         play_sound(SOUNDS['s_fridaymorning'])
                         time.sleep(0.5)
-                        play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                        play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                         turnoff_outlet()
 
     except:

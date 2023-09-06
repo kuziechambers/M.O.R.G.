@@ -16,7 +16,7 @@ from events_ibm import tts_transcribe_play
 from events_office import since_office_motion_init, since_office_motion_update
 from events_sports import get_mavs_game
 from events_text import send_text
-from events_weather import get_weekend_temp, weekend_weather_update
+from events_weather import get_weekend_temp, weekend_weather_update, weather_update
 from logger import morg_log
 from utils import (play_sound, play_weather_report_sound, turnoff_outlet,
                    turnon_outlet)
@@ -31,7 +31,6 @@ try:
     send_text('Script booted sir.\n\n-M.O.R.G.')
     print("Script booted sir.")
 
-
     # Initiate times and dates variables
     last_motion = grab_last_motion_line()
     since_office_motion_init()
@@ -42,11 +41,13 @@ except:
     morg_log.error(str(ex))
     try:
         os.remove("/tmp/morg.pid")
-    except FileNotFoundError as e:
-        e = sys.exc_info()
-        send_text('ERROR!\n\n' + str(e) + '\n\n-M.O.R.G.')
-        morg_log.error(str(e))
+    except:
+        err = sys.exc_info()
+        send_text('ERROR!\n\n' + str(err) + '\n\n-M.O.R.G.')
+        morg_log.error(str(err))
     sys.exit()
+
+weather_update()
 
 
 while True:
@@ -95,10 +96,10 @@ while True:
                         text = ""
                         true_or_false, text = get_mavs_game()
                         if true_or_false is True and text != "":
-                            play_sound("/home/pi/M.O.R.G./stt_files/speak.wav")
+                            play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/speak.wav")
                             tts_transcribe_play(text)
                             time.sleep(0.5)
-                            play_sound("/home/pi/M.O.R.G./stt_files/listen_stop.wav")
+                            play_sound("/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listen_stop.wav")
                             mavs_date = now_date
 
             if motion is True:  # Inside - True
@@ -139,7 +140,6 @@ while True:
                         if seconds_away > 9000:  # longer than 150min
                             morning_long_trigger()
 
-
                     elif TIME_FRAMES['afternoon_start'] <= now_time <= TIME_FRAMES['afternoon_end']:  # AFTERNOON
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             afternoon_short_trigger()
@@ -150,7 +150,6 @@ while True:
                         elif seconds_away > 9000:  # longer than 150min
                             afternoon_long_trigger(weekday)
 
-
                     elif TIME_FRAMES['evening_start'] <= now_time <= TIME_FRAMES['evening_end']:  # EVENING
                         if 600 < seconds_away < 2400:  # between 10min - 40min
                             evening_short_trigger()
@@ -160,7 +159,6 @@ while True:
 
                         if seconds_away > 9000:  # longer than 150min
                             evening_long_trigger(weekday)
-
 
                     elif TIME_FRAMES['latenight_start'] <= now_time <= TIME_FRAMES['latenight_end']:  # LATE NIGHT
                         if seconds_away > 3600:  # longer than 60min
