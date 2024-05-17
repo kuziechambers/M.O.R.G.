@@ -16,8 +16,8 @@ from utils import (bright_lights_on, concentrate_lights_on, dim_lights_on,
                    morning_lights_on, play_sound, play_weather_report_sound,
                    turnoff_outlet, turnon_outlet)
 
-PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
-SWITCH_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/4'
+PIR_URL = os.getenv("PIR_URL")
+SWITCH_URL = os.getenv("SWITCH_URL")
 
 
 # -----------------------

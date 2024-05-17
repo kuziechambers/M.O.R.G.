@@ -17,28 +17,28 @@ from logger import flask_log
 from utils import play_sound
 
 # KEYS & URLS
-watson_api_key = "Oam6wIYU5kg59U3JJiOGUztOTSoF1lk0RMXgvVyOiSCW"
-watson_url = "https://api.us-south.assistant.watson.cloud.ibm.com/instances/7ddf978f-efef-40d0-a79c-ac0d9d58a377"
-watson_id = "3f934fcc-26e7-4859-9ca8-9295241370c2"
-stt_api_key = "k1m0jszudJwIwrpwtUAT50OHK0E8Kdbi6WR5NpPVrkbI"
-stt_url = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/74a3c1c6-e299-40a4-8c20-84da0ea7c27f"
-tts_api_key = "xd5WDO7vtjDEf5v9jzmYbdbRG6zLm2AK4PBmk8y6PxCV"
-tts_wss_url = "wss://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/ba47dae7-3648-4a3c-9df9-679f789c4fd2"
+WATSON_API_KEY = os.getenv("WATSON_API_KEY")
+WATSON_URL = os.getenv("WATSON_URL")
+WATSON_ID = os.getenv("WATSON_ID")
+STT_API_KEY = os.getenv("STT_API_KEY")
+STT_URL = os.getenv("STT_URL")
+TTS_API_KEY = os.getenv("TTS_API_KEY")
+TTS_WSS_URL = os.getenv("TTS_WSS_URL")
 
 
 
 # INIT AUTHENTICATORS
-authenticator = IAMAuthenticator(watson_api_key)
+authenticator = IAMAuthenticator(WATSON_API_KEY)
 assistant = AssistantV2(version='2020-04-01',authenticator=authenticator)
-assistant.set_service_url(watson_url)
+assistant.set_service_url(WATSON_URL)
 
-stt_authenticator = IAMAuthenticator(stt_api_key)
+stt_authenticator = IAMAuthenticator(STT_API_KEY)
 stt = SpeechToTextV1(authenticator=stt_authenticator)
-stt.set_service_url(stt_url)
+stt.set_service_url(STT_URL)
 
-tts_authenticator = IAMAuthenticator(tts_api_key)
+tts_authenticator = IAMAuthenticator(TTS_API_KEY)
 tts = TextToSpeechV1(authenticator=tts_authenticator)
-tts.set_service_url(tts_wss_url)
+tts.set_service_url(TTS_WSS_URL)
 
 #
 # Functions are in order of: TTS functions, STT functions, Watson functions
@@ -171,14 +171,14 @@ def start_recording():
 
 # WATSON FUNCTIONS
 def watson_create_session():
-    response = assistant.create_session(assistant_id=watson_id).get_result()
+    response = assistant.create_session(assistant_id=WATSON_ID).get_result()
     sesh_id = response['session_id']
     return sesh_id
 
 
 def watson_init_session():
     response = assistant.create_session(
-        assistant_id=watson_id
+        assistant_id=WATSON_ID
     ).get_result()
     sesh_id = response['session_id']
     # Create IBM Watson Assistant session
@@ -186,9 +186,9 @@ def watson_init_session():
 
 
 def watson_delete_session(sesh_id):
-    assistant.set_service_url(watson_url)
+    assistant.set_service_url(WATSON_URL)
     response = assistant.delete_session(
-        assistant_id=watson_id,
+        assistant_id=WATSON_ID,
         session_id=sesh_id
     ).get_result()
     return json.dumps(response, indent=2)

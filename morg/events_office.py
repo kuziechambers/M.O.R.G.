@@ -15,7 +15,7 @@ from logger import morg_log
 from utils import (morning_lights_on, play_sound, play_weather_report_sound,
                    turnoff_outlet, turnon_outlet)
 
-OFFICE_PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/39'
+OFFICE_PIR_URL = os.getenv("OFFICE_PIR_URL")
 
 def get_office_motion_state():
     try:

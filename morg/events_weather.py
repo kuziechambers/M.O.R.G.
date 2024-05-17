@@ -1,4 +1,5 @@
 import datetime as dt
+import os
 import time
 from datetime import datetime as datetime
 
@@ -13,10 +14,10 @@ base_url = "https://api.openweathermap.org/data/2.5/onecall?"
 lat = "32.844021"
 lon = "-97.143066"
 city_id = "4673094"
-api_key = "fb3cc780290172e22840d597abea0445"
+OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
 
 # updating the URL
-URL = base_url + "lat=" + lat + "&lon=" + lon + "&units=imperial" + "&exclude=minutely" + "&appid=" + api_key
+URL = base_url + "lat=" + lat + "&lon=" + lon + "&units=imperial" + "&exclude=minutely" + "&appid=" + OPEN_WEATHER_API_KEY
 
 # # HTTP request
 # response = requests.get(URL)

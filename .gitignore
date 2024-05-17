@@ -1,1 +1,19 @@
+PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/18'
+SWITCH_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/4'
+
+WATSON_API_KEY = "Oam6wIYU5kg59U3JJiOGUztOTSoF1lk0RMXgvVyOiSCW"
+WATSON_URL = "https://api.us-south.assistant.watson.cloud.ibm.com/instances/7ddf978f-efef-40d0-a79c-ac0d9d58a377"
+WATSON_ID = "3f934fcc-26e7-4859-9ca8-9295241370c2"
+STT_API_KEY = "k1m0jszudJwIwrpwtUAT50OHK0E8Kdbi6WR5NpPVrkbI"
+STT_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/74a3c1c6-e299-40a4-8c20-84da0ea7c27f"
+TTS_API_KEY = "xd5WDO7vtjDEf5v9jzmYbdbRG6zLm2AK4PBmk8y6PxCV"
+TTS_WSS_URL = "wss://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/ba47dae7-3648-4a3c-9df9-679f789c4fd2"
+
+OFFICE_PIR_URL = 'http://192.168.50.205/api/NPrGKaa9jAUUxTkgEywjfapFxy3417zfM81TKZd1/sensors/39'
+
+TWILIO_ACCOUNT_ID = 'AC145373d940dc7db98d51d95f0e012e49'
+TWILIO_AUTH_TOKEN = 'b90e491eda918a4565101c38573f9fd9'
+
+OPEN_WEATHER_API_KEY = "fb3cc780290172e22840d597abea0445"
+
 

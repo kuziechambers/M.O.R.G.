@@ -15,12 +15,12 @@ from logger import flask_log
 ##########################################################
 ################## TEXT-TO-SPEECH CLASS ##################
 ##########################################################
-tts_api_key = "xd5WDO7vtjDEf5v9jzmYbdbRG6zLm2AK4PBmk8y6PxCV"
-tts_wss_url = "wss://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/ba47dae7-3648-4a3c-9df9-679f789c4fd2"
+TTS_API_KEY = os.getenv("TTS_API_KEY")
+TTS_WSS_URL = os.getenv("TTS_WSS_URL")
 
-tts_authenticator = IAMAuthenticator(tts_api_key)
+tts_authenticator = IAMAuthenticator(TTS_API_KEY)
 tts = TextToSpeechV1(authenticator=tts_authenticator)
-tts.set_service_url(tts_wss_url)
+tts.set_service_url(TTS_WSS_URL)
 
 f_path = "/Users/kuchambers/PycharmProjects/M.O.R.G./stt_files/listening_b.wav"
 

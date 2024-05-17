@@ -1,8 +1,10 @@
+import os
 from twilio.rest import Client
 
-account_sid = 'AC145373d940dc7db98d51d95f0e012e49'
-auth_token = 'b90e491eda918a4565101c38573f9fd9'
-client = Client(account_sid, auth_token)
+
+TWILIO_ACCOUNT_ID = os.getenv("TWILIO_ACCOUNT_ID")
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+client = Client(TWILIO_ACCOUNT_ID, TWILIO_AUTH_TOKEN)
 
 
 def send_text(body):
